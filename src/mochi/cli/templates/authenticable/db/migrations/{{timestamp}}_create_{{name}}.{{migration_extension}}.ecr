@@ -1,0 +1,24 @@
+<% if @orm == "granite" -%>
+-- +micrate Up
+<%= create_table_sql %>
+<%= create_index_for_reference_fields_sql %>
+
+-- +micrate Down
+<%= drop_table_sql %>
+<% end -%>
+<% if @orm == "jennifer" -%>
+class Create<% class_name %> < Jennifer::Migration::Base
+  def up
+    create_table(:<%= @name %>s) do |t|
+      t.string :email
+      t.string :password_digest
+      t.timestamp :created_at
+      t.timestamp :updated_at
+    end
+  end
+
+  def down
+    drop_table(:<%= @name %>s)
+  end
+end
+<% end -%>

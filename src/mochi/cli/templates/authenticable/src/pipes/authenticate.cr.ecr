@@ -1,0 +1,38 @@
+class HTTP::Server::Context
+  property current_<%= @name %> : <%= class_name %>?
+end
+
+class Current<%= class_name %> < Amber::Pipe::Base
+  def call(context)
+    <%= @name %>_id = context.session["<%= @name %>_id"]?
+    call_next(context) if <%= @name %>_id.nil?
+
+    <%= @name %> = <%= class_name %>.find <%= @name %>_id
+
+    # Omniauthable
+    if User.new.responds_to?(:uid)
+<% if @orm == "granite" -%>
+    <%= @name %> ||= <%= class_name %>.find_by(uid: user_id)
+<% else -%>
+    <%= @name %> ||= <%= class_name %>.where { _uid == <%= @name %>_id }.first
+<% end -%>
+    end
+
+    if <%= @name %>
+      context.current_<%= @name %> = <%= @name %>
+    end
+    call_next(context)
+  end
+end
+
+class Authenticate < Amber::Pipe::Base
+  def call(context)
+    if context.current_<%= @name %>
+      call_next(context)
+    else
+      context.flash[:warning] = "Please Sign In"
+      context.response.headers.add "Location", "/signin"
+      context.response.status_code = 302
+    end
+  end
+end

@@ -1,0 +1,22 @@
+<% if @orm == "granite" -%>
+-- +micrate Up
+ALTER TABLE <%= @name %>s ADD COLUMN uid VARCHAR NULL;
+
+-- +micrate Down
+ALTER TABLE <%= @name %>s DROP COLUMN uid VARCHAR NULL;
+<% end -%>
+<% if @orm == "jennifer" -%>
+class AddOmniauthableTo<%= class_name %> < Jennifer::Migration::Base
+  def up
+    change_table(:users) do |t|
+      t.add_column(:uid, :string)
+    end
+  end
+
+  def down
+    change_table(:users) do |t|
+      t.drop_column :uid
+    end
+  end
+end
+<% end -%>

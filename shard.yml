@@ -1,0 +1,53 @@
+name: mochi
+version: 0.1.0
+
+authors:
+  - andrewc910 <awcrotwell@gmail.com>
+
+dependencies:
+  quartz_mailer:
+    github: amberframework/quartz-mailer
+    version: ~> 0.5.3
+
+  cli:
+    github: drujensen/cli
+
+  teeplate:
+    github: mosop/teeplate
+  
+  inflector:
+    github: phoffer/inflector.cr
+    # version: "~> 0.1.8"
+  
+  liquid:
+    github: TechMagister/liquid.cr
+
+development_dependencies:
+  granite:
+    github: amberframework/granite
+    version: ~> 0.19.0
+
+  jennifer:
+    github: imdrasil/jennifer.cr
+    branch: master
+
+  jennifer_sqlite3_adapter:
+    github: imdrasil/jennifer_sqlite3_adapter
+    branch: master
+
+  sam:
+    github: imdrasil/sam.cr
+    version: 0.3.2
+
+  jasper_helpers:
+    github: amberframework/jasper-helpers
+    version: ~> 0.2.5
+
+  amber:
+    github: amberframework/amber
+    branch: master
+    version: 0.32.0
+
+crystal: 0.32.1
+
+license: MIT

@@ -1,0 +1,38 @@
+<% if @orm == "granite" -%>
+-- +micrate Up
+ALTER TABLE <%= @name %>s ADD COLUMN sign_in_count INTEGER NULL;
+ALTER TABLE <%= @name %>s ADD COLUMN current_sign_in_ip VARCHAR NULL;
+ALTER TABLE <%= @name %>s ADD COLUMN last_sign_in_ip VARCHAR NULL;
+ALTER TABLE <%= @name %>s ADD COLUMN current_sign_in_at TIMESTAMP NULL;
+ALTER TABLE <%= @name %>s ADD COLUMN last_sign_in_at TIMESTAMP NULL;
+
+-- +micrate Down
+ALTER TABLE <%= @name %>s DROP COLUMN sign_in_count INTEGER NULL;
+ALTER TABLE <%= @name %>s DROP COLUMN current_sign_in_ip VARCHAR NULL;
+ALTER TABLE <%= @name %>s DROP COLUMN last_sign_in_ip VARCHAR NULL;
+ALTER TABLE <%= @name %>s DROP COLUMN current_sign_in_at TIMESTAMP NULL;
+ALTER TABLE <%= @name %>s DROP COLUMN last_sign_in_at TIMESTAMP NULL;
+<% end -%>
+<% if @orm == "jennifer" -%>
+class AddTrackableTo<%= class_name %> < Jennifer::Migration::Base
+  def up
+    change_table(:<%= @name %>s) do |t|
+      t.add_column(:sign_in_count, :integer)
+      t.add_column(:current_sign_in_ip, :string)
+      t.add_column(:last_sign_in_ip, :string)
+      t.add_column(:current_sign_in_at, :timestamp)
+      t.add_column(:last_sign_in_at, :timestamp)
+    end
+  end
+
+  def down
+    change_table(:<%= @name %>s) do |t|
+      t.drop_column :sign_in_count
+      t.drop_column :current_sign_in_ip
+      t.drop_column :last_sign_in_ip
+      t.drop_column :current_sign_in_at
+      t.drop_column :last_sign_in_at
+    end
+  end
+end
+<% end -%>

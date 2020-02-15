@@ -1,0 +1,9 @@
+class Omniauthable::SessionController < Mochi::Controllers::Omniauthable::<%= @orm.capitalize %>::SessionController
+  def create
+    super
+  end
+
+  def callback
+    super
+  end
+end

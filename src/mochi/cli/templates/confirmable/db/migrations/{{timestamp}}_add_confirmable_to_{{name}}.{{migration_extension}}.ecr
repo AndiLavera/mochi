@@ -1,0 +1,39 @@
+<% if @orm == "granite" -%>
+-- +micrate Up
+ALTER TABLE <%= @name %>s ADD COLUMN confirmation_token VARCHAR NULL;
+ALTER TABLE <%= @name %>s ADD COLUMN confirmed BOOL NULL;
+ALTER TABLE <%= @name %>s ADD COLUMN confirmed_at TIMESTAMP NULL;
+ALTER TABLE <%= @name %>s ADD COLUMN confirmation_sent_at TIMESTAMP NULL;
+ALTER TABLE <%= @name %>s ADD COLUMN unconfirmed_email VARCHAR NULL;
+
+-- +micrate Down
+ALTER TABLE <%= @name %>s DROP COLUMN confirmation_token VARCHAR NULL;
+ALTER TABLE <%= @name %>s DROP COLUMN confirmed BOOL NULL;
+ALTER TABLE <%= @name %>s DROP COLUMN confirmed_at TIMESTAMP NULL;
+ALTER TABLE <%= @name %>s DROP COLUMN confirmation_sent_at TIMESTAMP NULL;
+ALTER TABLE <%= @name %>s DROP COLUMN unconfirmed_email VARCHAR NULL;
+<% end -%>
+<% if @orm == "jennifer" -%>
+class AddConfirmableTo<%= class_name %> < Jennifer::Migration::Base
+  def up
+    change_table(:<%= @name %>s) do |t|
+      t.add_column(:confirmed, :bool)
+      t.add_column(:confirmed_at, :timestamp)
+      t.add_column(:confirmation_token, :string)
+      t.add_column(:confirmation_sent_at, :timestamp)
+      t.add_column(:unconfirmed_email, :string)
+    end
+  end
+
+  def down
+    change_table(:<%= @name %>s) do |t|
+      t.drop_column(:confirmed)
+      t.drop_column(:confirmed_at)
+      t.drop_column(:confirmation_token)
+      t.drop_column(:confirmation_sent_at)
+      t.drop_column(:unconfirmed_email)
+    end
+  end
+end
+
+<% end -%>
