@@ -1,6 +1,6 @@
 # Mochi
 
-![Image of Mochi](https://image.shutterstock.com/image-vector/mochi-character-design-wallpaper-free-260nw-1572610879.jpg)
+<!-- ![Image of Mochi](https://image.shutterstock.com/image-vector/mochi-character-design-wallpaper-free-260nw-1572610879.jpg) -->
 
 Mochi is a shard inspired by devise for ruby. Mochi handles everything authentication. Currently amber is the only supported framework with both granite and jennifer orms being supported. I am open to other frameworks being supported, such as lucky, but there is a lot to do before that. If you want this to work with lucky asap, you'll have to open a pull request right now.
 
