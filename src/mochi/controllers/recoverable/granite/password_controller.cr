@@ -26,11 +26,11 @@ class Mochi::Controllers::Recoverable::Granite::PasswordController < Mochi::Cont
 
   # Used to confirm & reactive a user account
   def update
-    user = User.where { _reset_password_token == recovery_params["reset_token"].to_s }.first
-    
+    user = User.find_by(reset_password_token: recovery_params.validate!["reset_token"].to_s)
+
     unless user
       user = User.new
-      return render("recovery/new.ecr"), flash: { "danger" => "Invalid authenticity token." }
+      return redirect_to "/reset/password", flash: { "danger" => "Invalid authenticity token." }
     end
 
     if user.reset_password_by_token!(recovery_params["reset_token"]) && user.errors.empty?

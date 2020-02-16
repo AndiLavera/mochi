@@ -22,7 +22,7 @@ module Mochi::Models
     # Update password saving the record and clearing token. Returns true if
     # the passwords are valid and the record was saved, false otherwise.
     def reset_password(new_password : String)
-      if new_password.present?
+      if !new_password.empty?
         self.password = new_password
         save
       else
