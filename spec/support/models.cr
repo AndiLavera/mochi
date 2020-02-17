@@ -33,17 +33,6 @@ class JenniferUser < Jennifer::Model::Base
   )
 end
 
-# Some tests require a ConfirmationMailer class
-# This is just an empty class to prevent undefined errors
-class ConfirmationMailer
-  def initialize(name, email, token)
-  end
-
-  def deliver
-    true
-  end
-end
-
 # User class for testing Granite ORM
 # Should be identical to JenniferUser
 class User < Granite::Base
@@ -78,3 +67,21 @@ class User < Granite::Base
   column password_reset_in_progress : Bool = false
   timestamps
 end
+
+# Some tests require a ConfirmationMailer class
+# This is just an empty class to prevent undefined errors
+macro define_mailer_classes(mailers)
+  {% for name in mailers %}
+  class {{name.id}}
+    def initialize(name : String, email : String, token : String)
+    end
+
+    def deliver
+      true
+    end
+  end
+  {% end %}
+end
+
+# Create all the required mailer classes
+define_mailer_classes([ConfirmationMailer, RecoveryMailer])
