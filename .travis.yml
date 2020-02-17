@@ -27,5 +27,5 @@ deploy:
   github_token: $ACCESS_TOKEN
   project_name: mochi
   on:
-    branch: docs
+    branch: pages
   local_dir: docs
