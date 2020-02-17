@@ -10,9 +10,9 @@ class ConfirmationMailer < Quartz::Composer
     @token = token
     to email: email, name: name # Can be called multiple times to add more recipients
 
-    subject "Welcome to Amber"
+    subject "Reset Your Password"
 
-    text render("../mailers/confirmation_mailer.text.ecr")
+    text render("../mailers/recovery_mailer.text.ecr")
     # html render("mailers/welcome_mailer.html.slang", "mailer-layout.html.slang")
   end
 end

@@ -13,7 +13,7 @@ class Mochi::Mailer
 
   def reset_password_instructions(record : User, token : String, *opts)
     @token = token
-    ConfirmationMailer.new(
+    RecoveryMailer.new(
       (record.responds_to?(:name) ? record.name : "friend"),
       record.email,
       @token
