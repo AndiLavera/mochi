@@ -3,7 +3,7 @@ require "uuid"
 module Mochi::Models
   # Recoverable takes care of resetting the user password and send reset instructions.
   #
-  # ==Options
+  # Options
   #
   # Recoverable adds the following options:
   #
