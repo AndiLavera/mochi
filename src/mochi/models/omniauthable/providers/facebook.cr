@@ -15,7 +15,7 @@ class Mochi::Omniauthable::Provider::Facebook < Mochi::Omniauthable::Provider
     property provider : String = "facebook"
 
     JSON.mapping(
-      uid: { type: String, key: "id" },
+      uid: {type: String, key: "id"},
       name: String,
       last_name: String?,
       first_name: String?,

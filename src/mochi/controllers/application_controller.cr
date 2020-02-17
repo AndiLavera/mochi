@@ -1,4 +1,5 @@
 require "jasper_helpers"
+require "amber"
 class Mochi::Controllers::ApplicationController < Amber::Controller::Base
   include JasperHelpers
   LAYOUT = "application.ecr"

@@ -1,5 +1,5 @@
 class Mochi::Mailer
-  #include Mochi::Helpers::Mailer
+  # include Mochi::Helpers::Mailer
 
   def confirmation_instructions(record : User, token : String, *opts)
     @token = token
@@ -8,7 +8,7 @@ class Mochi::Mailer
       record.email,
       @token
     ).deliver
-    #mochi_mail(record, :confirmation_instructions, opts)
+    # mochi_mail(record, :confirmation_instructions, opts)
   end
 
   def reset_password_instructions(record : User, token : String, *opts)

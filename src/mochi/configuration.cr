@@ -32,7 +32,7 @@ module Mochi
     # otherwise you will recieve errors
     getter mailer_class
 
-    def mailer_class()
+    def mailer_class
       @mailer_class
     end
 

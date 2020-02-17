@@ -1,11 +1,11 @@
 class Mochi::Omniauthable::Engine
   def initialize(provider : String, redirect_uri : String)
     provider_class = case provider
-                     #when "google"   then Mochi::Omniauthable::Provider::Google
+                     # when "google"   then Mochi::Omniauthable::Provider::Google
                      when "github"   then Mochi::Omniauthable::Provider::Github
                      when "facebook" then Mochi::Omniauthable::Provider::Facebook
-                     #when "vk"       then Mochi::Omniauthable::Provider::Vk
-                     when "twitter"  then Mochi::Omniauthable::Provider::Twitter
+                       # when "vk"       then Mochi::Omniauthable::Provider::Vk
+                     when "twitter" then Mochi::Omniauthable::Provider::Twitter
                      else
                        raise "Provider #{provider} not implemented"
                      end

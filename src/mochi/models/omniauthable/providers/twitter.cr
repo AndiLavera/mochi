@@ -14,14 +14,14 @@ class Mochi::Omniauthable::Provider::Twitter < Mochi::Omniauthable::Provider
     property provider : String = "twitter"
 
     JSON.mapping(
-      uid: { type: String, converter: String::RawConverter, key: "id" },
+      uid: {type: String, converter: String::RawConverter, key: "id"},
       name: String,
       screen_name: String,
       location: String?,
       description: String?,
       url: String?,
       profile_image_url: String?,
-      email: { type: String, default: "" }
+      email: {type: String, default: ""}
     )
 
     def nickname

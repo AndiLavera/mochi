@@ -7,5 +7,4 @@ require "./models/omniauthable/user"
 require "./models/omniauthable/providers/**"
 require "./controllers/omniauthable/**"
 
-
 module Mochi::Omniauthable; end

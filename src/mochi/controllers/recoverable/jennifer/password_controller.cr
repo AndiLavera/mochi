@@ -29,7 +29,7 @@ class Mochi::Controllers::Recoverable::Jennifer::PasswordController < Mochi::Con
 
     unless user
       user = User.new
-      return redirect_to "/reset/password", flash: { "danger" => "Invalid authenticity token." }
+      return redirect_to "/reset/password", flash: {"danger" => "Invalid authenticity token."}
     end
 
     if user.reset_password_by_token!(recovery_params["reset_token"]) && user.errors.empty?

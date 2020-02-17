@@ -71,14 +71,14 @@ module Mochi::Models
 
     # Removes reset_password token
     def clear_reset_password_token
-      self.reset_password_token       = nil
-      self.reset_password_sent_at     = nil
+      self.reset_password_token = nil
+      self.reset_password_sent_at = nil
       self.password_reset_in_progress = false
     end
 
     def set_reset_password_token!
-      self.reset_password_token       = UUID.random.to_s
-      self.reset_password_sent_at     = Time.utc
+      self.reset_password_token = UUID.random.to_s
+      self.reset_password_sent_at = Time.utc
       self.password_reset_in_progress = true
       save
 

@@ -4,7 +4,6 @@ require "./commands/*"
 require "../version"
 
 module Mochi::CLI
-
   class MainCommand < ::Cli::Supercommand
     command_name "mochi"
     version "Mochi CLI - v#{Mochi::VERSION}"

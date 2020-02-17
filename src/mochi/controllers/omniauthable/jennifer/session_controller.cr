@@ -7,7 +7,7 @@ class Mochi::Controllers::Omniauthable::Jennifer::SessionController < Mochi::Con
     url = "#{Amber.settings.host}/omniauth/#{params[:provider]}/callback"
     fakeuser = Mochi::Omniauthable::Provider.user(params[:provider], {"code" => params[:code]}, url)
 
-    user = User.where { _uid ==  fakeuser.uid }.first
+    user = User.where { _uid == fakeuser.uid }.first
     if user
       session[:user_id] = user.uid
       flash[:info] = "Successfully logged in"

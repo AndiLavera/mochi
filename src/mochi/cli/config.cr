@@ -7,7 +7,6 @@ module Mochi::CLI
     SHARD_YML    = "shard.yml"
     DEFAULT_NAME = "[process_name]"
 
-
     property database : String = "sqlite"
     property language : String = "ecr"
     property model : String = "jennifer"

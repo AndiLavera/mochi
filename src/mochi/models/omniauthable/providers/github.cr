@@ -16,7 +16,7 @@ class Mochi::Omniauthable::Provider::Github < Mochi::Omniauthable::Provider
     JSON.mapping(
       uid: {type: String, converter: String::RawConverter, key: "id"},
       name: String?,
-      email: { type: String, default: "" },
+      email: {type: String, default: ""},
       login: String,
       location: String?,
       bio: String?,

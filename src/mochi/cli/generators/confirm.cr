@@ -18,7 +18,7 @@ module Mochi::CLI
 
     def pre_render(directory, **args)
       add_routes
-      #inject_require_confirmable
+      # inject_require_confirmable
     end
 
     private def add_routes

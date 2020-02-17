@@ -7,8 +7,8 @@ module Mochi::CLI
     command "g", aliased: "generate"
 
     ACCEPTABLE_ORMS = ["g", "granite", "j", "jennifer"]
-    ORM_FULL_NAME = {"g" => "granite",
-                     "j" => "jennifer"}
+    ORM_FULL_NAME   = {"g" => "granite",
+                       "j" => "jennifer"}
 
     class Generate < Command
       class Options

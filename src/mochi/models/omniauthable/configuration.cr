@@ -1,6 +1,5 @@
 module Mochi
   module Omniauthable
-
     @@configuration = Mochi::Omniauthable::Configuration.new
 
     def self.make(provider, redirect_uri)
