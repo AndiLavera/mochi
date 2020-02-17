@@ -11,4 +11,4 @@
 /.editorconfig
 /.vscode
 /jennifer_test.db
-/db/
+/db/structure.sql
