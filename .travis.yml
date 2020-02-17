@@ -16,7 +16,5 @@ env:
   - TEST_SUITE=./spec/mochi
 
 script:
-  - bin/ameba
   - crystal spec/sam.cr -- db:migrate
-  - crystal tool format --check
   - crystal spec
