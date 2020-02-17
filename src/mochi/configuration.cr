@@ -1,24 +1,30 @@
 module Mochi
   # Main configuration class for mochi
   # Holds all variables for configuration (excluding omniauthable)
+  #
   # Usage:
+  #
+  # ```
   # Mochi.setup do |config|
   #   config.property = X
   # end
+  # ```
   class Configuration
-    # Set the view extension
+    # Set the view extension.
     # Useful if you use slang or someother
-    # templating engine
+    # templating engine.
+    #
     # Default is `"ecr"`
     property view_language : String = "ecr"
 
-    # Confirmable Module
-    # Allow/prevent users to reconfirm
+    # Allow/prevent users to reconfirm with the confirmable module
+    #
     # Default is `false`
     property reconfirmable : Bool = false
 
     # Allow account access for X number of days
     # without confirming email
+    #
     # `Nil` will give indefinite access
     property allow_unconfirmed_access_for : Nil | Int64
 
@@ -26,8 +32,10 @@ module Mochi
     # Default is `7`
     property confirm_within : Int64 = 7
 
-    # Configure which class recieves the call to all emails
+    # Configure which class recieves the call to all emails.
+    #
     # Default is `Mochi::Mailer`
+    #
     # If you change this, make sure to implment all public methods
     # otherwise you will recieve errors
     getter mailer_class

@@ -11,40 +11,28 @@ module Mochi::Models
   # * confirmation_token   - A unique random token
   # * confirmed_at         - A timestamp when the user clicked the confirmation link
   # * confirmation_sent_at - A timestamp when the confirmation_token was generated (not sent)
-  # * unconfirmed_email    - An email address copied from the email attr. After confirmation
-  #                          this value is copied to the email attr then cleared
+  # * unconfirmed_email    - An email address copied from the email attr after confirmation. This value is copied to the email attr then cleared
   #
   # == Options
   #
-  # Confirmable adds the following options to +devise+:
+  # Confirmable adds the following options to mochi:
   #
-  #   * +allow_unconfirmed_access_for+: the time you want to allow the user to access their account
-  #     before confirming it. After this period, the user access is denied. You can
-  #     use this to let your user access some features of your application without
-  #     confirming the account, but blocking it after a certain period (ie 7 days).
-  #     By default allow_unconfirmed_access_for is zero, it means users always have to confirm to sign in.
-  #   * +reconfirmable+: requires any email changes to be confirmed (exactly the same way as
-  #     initial account confirmation) to be applied. Requires additional unconfirmed_email
-  #     db field to be set up (t.reconfirmable in migrations). Until confirmed, new email is
-  #     stored in unconfirmed email column, and copied to email column on successful
-  #     confirmation. Also, when used in conjunction with `send_email_changed_notification`,
-  #     the notification is sent to the original email when the change is requested,
-  #     not when the unconfirmed email is confirmed.
-  #   * +confirm_within+: the time before a sent confirmation token becomes invalid.
-  #     You can use this to force the user to confirm within a set period of time.
-  #     Confirmable will not generate a new token if a repeat confirmation is requested
-  #     during this time frame, unless the user's email changed too.
+  #   * `allow_unconfirmed_access_for`: the time you want to allow the user to access their account before confirming it. After this period, the user access is denied. You can use this to let your user access some features of your application without confirming the account, but blocking it after a certain period (ie 7 days). By default `allow_unconfirmed_access_for` is zero, it means users always have to confirm to sign in.
+  #   * `reconfirmable`: requires any email changes to be confirmed (exactly the same way as initial account confirmation) to be applied. Requires additional unconfirmed_email db field to be set up (t.reconfirmable in migrations). Until confirmed, new email is stored in unconfirmed email column, and copied to email column on successful confirmation. Also, when used in conjunction with `send_email_changed_notification`, the notification is sent to the original email when the change is requested,  not when the unconfirmed email is confirmed.
+  #   * `confirm_within`: the time before a sent confirmation token becomes invalid. You can use this to force the user to confirm within a set period of time. Confirmable will not generate a new token if a repeat confirmation is requested during this time frame, unless the user's email changed too.
   #
-  # == Examples
+  # Examples
   #
-  #   User.find(1).confirm       # returns true unless it's already confirmed
-  #   User.find(1).confirmed?    # true/false
-  #   User.find(1).send_confirmation_instructions # manually send instructions
+  #  `User.find(1).confirm       # returns true unless it's already confirmed`
+  #
+  #  `User.find(1).confirmed?    # true/false`
+  #
+  #  `User.find(1).send_confirmation_instructions # manually send instructions`
   #
   module Confirmable
     # Adds methods to set token & send confirmation email.
-    # - 'before_create' - generates token and saves it to user;
-    # - 'after_create' - sends out user email
+    # - `before_create` - generates token and saves it to user;
+    # - `after_create` - sends out user email
     macro with_confirmation(skip_validation = false)
       {% if !skip_validation %}
         before_create :generate_confirmation_token
@@ -92,20 +80,25 @@ module Mochi::Models
     #
     # Example:
     #
-    #   # allow_unconfirmed_access_for = 1.day and confirmation_sent_at = today
-    #   confirmation_period_valid?   # returns true
+    #   - `allow_unconfirmed_access_for = 1.day and confirmation_sent_at = today`
     #
-    #   # allow_unconfirmed_access_for = 5.days and confirmation_sent_at = 4.days.ago
-    #   confirmation_period_valid?   # returns true
+    #     `confirmation_period_valid?   # returns true`
     #
-    #   # allow_unconfirmed_access_for = 5.days and confirmation_sent_at = 5.days.ago
-    #   confirmation_period_valid?   # returns false
+    #   - `allow_unconfirmed_access_for = 5.days and confirmation_sent_at = 4.days.ago`
     #
-    #   # allow_unconfirmed_access_for = 0.days
-    #   confirmation_period_valid?   # will always return false
+    #     `confirmation_period_valid?   # returns true`
     #
-    #   # allow_unconfirmed_access_for = nil
-    #   confirmation_period_valid?   # will always return true
+    #   - `allow_unconfirmed_access_for = 5.days and confirmation_sent_at = 5.days.ago`
+    #
+    #     `confirmation_period_valid?   # returns false`
+    #
+    #   - `allow_unconfirmed_access_for = 0.days`
+    #
+    #     `confirmation_period_valid?   # will always return false`
+    #
+    #   - `allow_unconfirmed_access_for = nil`
+    #
+    #     `confirmation_period_valid?   # will always return true`
     #
     def confirmation_period_valid?
       return true if Mochi.configuration.allow_unconfirmed_access_for.nil?
@@ -123,14 +116,17 @@ module Mochi::Models
     # Checks if the user confirmation happens before the token becomes invalid
     # Examples:
     #
-    #   # confirm_within = 3.days and confirmation_sent_at = 2.days.ago
-    #   confirmation_period_expired?  # returns false
+    #   - `confirm_within = 3.days and confirmation_sent_at = 2.days.ago`
     #
-    #   # confirm_within = 3.days and confirmation_sent_at = 4.days.ago
-    #   confirmation_period_expired?  # returns true
+    #       `confirmation_period_expired?  # returns false`
     #
-    #   # confirm_within = nil
-    #   confirmation_period_expired?  # will always return false
+    #   - `confirm_within = 3.days and confirmation_sent_at = 4.days.ago`
+    #
+    #       `confirmation_period_expired?  # returns true`
+    #
+    #   - `confirm_within = nil`
+    #
+    #       `confirmation_period_expired?  # will always return false`
     #
     private def confirmation_period_expired?
       sent_at = confirmation_sent_at if confirmation_sent_at
@@ -139,6 +135,13 @@ module Mochi::Models
       (Time.utc > sent_at + Mochi.configuration.confirm_within.days)
     end
 
+    # Send confirmation email.
+    #
+    # Mutating Method.
+    # Examples:
+    #
+    #   - `user.send_confirmation_instructions # returns true/false`
+    #
     def send_confirmation_instructions
       (mailer_class = Mochi.configuration.mailer_class) ? (return unless mailer_class) : return
 
