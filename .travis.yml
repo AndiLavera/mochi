@@ -24,7 +24,7 @@ script:
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: $ACCESS_TOKEN
+  github_token: $GITHUB_TOKEN
   project_name: mochi
   on:
     branch: gh-pages
