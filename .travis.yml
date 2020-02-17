@@ -18,3 +18,14 @@ env:
 script:
   - crystal spec/sam.cr -- db:migrate
   - crystal spec
+  - crystal docs
+
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $ACCESS_TOKEN
+  project_name: mochi
+  on:
+    branch: docs
+  local_dir: docs
