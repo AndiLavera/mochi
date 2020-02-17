@@ -6,7 +6,7 @@ describe Mochi::Models::Recoverable do
   describe Jennifer do
     it "should generate reset_password_token" do
       user = JenniferUser.new
-      user.email = "test#{rand(0..500)}@email.com"
+      user.email = "jr0_test#{rand(0..500)}@email.com"
       user.password = "password123"
       user.set_reset_password_token!
 
@@ -17,7 +17,7 @@ describe Mochi::Models::Recoverable do
 
     it "should change user password" do
       user = JenniferUser.new
-      user.email = "test#{rand(0..500)}@email.com"
+      user.email = "jr1_test#{rand(0..500)}@email.com"
       user.password = "password123"
       password_digest = user.password_digest
 
@@ -27,7 +27,7 @@ describe Mochi::Models::Recoverable do
 
     it "should send reset password email" do
       user = JenniferUser.new
-      user.email = "test#{rand(0..500)}@email.com"
+      user.email = "jr2_test#{rand(0..500)}@email.com"
       user.password = "password123"
       token = user.send_reset_password_instructions
 
@@ -42,7 +42,7 @@ describe Mochi::Models::Recoverable do
 
     it "should send reset password email" do
       user = JenniferUser.new
-      user.email = "test#{rand(0..500)}@email.com"
+      user.email = "jr3_test#{rand(0..500)}@email.com"
       user.password = "password123"
       user.send_reset_password_instructions
 
@@ -56,7 +56,7 @@ describe Mochi::Models::Recoverable do
   describe Granite do
     it "should generate reset_password_token" do
       user = User.new
-      user.email = "test#{rand(0..500)}@email.com"
+      user.email = "gr0_test#{rand(0..500)}@email.com"
       user.password = "password123"
       user.set_reset_password_token!
 
@@ -67,7 +67,7 @@ describe Mochi::Models::Recoverable do
 
     it "should change user password" do
       user = User.new
-      user.email = "test#{rand(0..500)}@email.com"
+      user.email = "gr1_test#{rand(0..500)}@email.com"
       user.password = "password123"
       password_digest = user.password_digest
 
@@ -77,7 +77,7 @@ describe Mochi::Models::Recoverable do
 
     it "should send reset password email" do
       user = User.new
-      user.email = "test#{rand(0..500)}@email.com"
+      user.email = "gr2_test#{rand(0..500)}@email.com"
       user.password = "password123"
       token = user.send_reset_password_instructions
 
@@ -92,7 +92,7 @@ describe Mochi::Models::Recoverable do
 
     it "should send reset password email" do
       user = User.new
-      user.email = "test#{rand(0..500)}@email.com"
+      user.email = "gr3_test#{rand(0..500)}@email.com"
       user.password = "password123"
       user.send_reset_password_instructions
 
