@@ -50,6 +50,8 @@ Currently, Mochi has 4 modules:
   - Users may now sign in with new password, token is cleared for future use
 
 ## Documentation
+### API Docs
+[API Documentation](https://sundaecr.github.io/mochi/)
 
 ### Gitbook
 [Gitbook](https://awcrotwell.gitbook.io/mochi/)
