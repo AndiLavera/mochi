@@ -6,6 +6,9 @@ Mochi is a shard inspired by devise for ruby. Mochi handles everything authentic
 
 The Mochi CLI makes installation easy. Please give a thanks to the amber core team for their CLI. I have pulled it out of amber to use as a base. 
 
+[![Build Status](https://travis-ci.org/sundaecr/mochi.svg?branch=master)](https://travis-ci.org/sundaecr/mochi)
+
+
 > **Note:** Only the class 'User' is supported right now. This may change in future releases.
 
 Currently, Mochi has 4 modules:  
