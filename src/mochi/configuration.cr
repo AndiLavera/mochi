@@ -53,12 +53,24 @@ module Mochi
     end
 
     # The time period within which the password
-    # must be reset or the token expires.
+    # must be reset or the token expires. Number
+    # is measured in days
     property reset_password_within : Int64 = 7
 
     # Whether or not to sign in the user
     # automatically after a password reset.
     property sign_in_after_reset_password : Bool = true
+
+    # Number of attempts a user has until their
+    # account is locked
+    property maximum_attempts : Int32 = 3
+
+    # Number of days until the account is automatically
+    # unlocked
+    property unlock_in : Int32 = 1
+
+    # The message users recieve when they are on their final login attempt
+    property last_attempt_warning : String = "This is your final attempty"
   end
 end
 

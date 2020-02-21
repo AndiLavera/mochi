@@ -24,3 +24,11 @@ require "./support/mailers/*"
 require "../src/mochi/controllers/**"
 
 Mochi.configuration.mailer_class = Mochi::Mailer::Custom
+
+# Used for test names
+# Returns the orm based on the class
+def name_formatter(name : User.class | JenniferUser.class)
+  name == User ? "Granite ORM" : "Jennifer ORM"
+end
+
+USER_CLASSES = [User, JenniferUser]
