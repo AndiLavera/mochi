@@ -36,10 +36,7 @@ module Mochi
     #
     # Default is `Mochi::Mailer`
     #
-    # If you change this, make sure to implment all public methods
-    # otherwise you will recieve errors
-    getter mailer_class
-
+    # Feel free to inherit from `Mochi::Mailer` and implement your own
     def mailer_class
       @mailer_class
     end
@@ -48,9 +45,9 @@ module Mochi
       @mailer_class = mailer_class
     end
 
-    def mailer_class=(mailer_class = Mochi::Mailer::Custom)
-      @mailer_class = mailer_class
-    end
+    # def mailer_class=(mailer_class = Mochi::Mailer::Custom)
+    #   @mailer_class = mailer_class
+    # end
 
     # The time period within which the password
     # must be reset or the token expires. Number
@@ -71,6 +68,12 @@ module Mochi
 
     # The message users recieve when they are on their final login attempt
     property last_attempt_warning : String = "This is your final attempty"
+
+    # Whether or not to sign in the user
+    # automatically after a unlocking account.
+    property sign_in_after_unlocking : Bool = true
+
+    property paranoid : Bool = false
   end
 end
 
@@ -78,6 +81,7 @@ require "./models/authenticable"
 require "./models/confirmable"
 require "./models/trackable"
 require "./models/recoverable"
+require "./models/lockable"
 
 require "./mailers/*"
 require "./controllers/application_controller"

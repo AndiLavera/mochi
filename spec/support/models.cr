@@ -71,7 +71,7 @@ end
 # Some tests require a ConfirmationMailer class
 # This is just an empty class to prevent undefined errors
 macro define_mailer_classes(mailers)
-  {% for name in mailers %}
+  {% for name in mailers.resolve %}
   class {{name.id}}
     def initialize(name : String, email : String, token : String)
     end
@@ -84,4 +84,4 @@ macro define_mailer_classes(mailers)
 end
 
 # Create all the required mailer classes
-define_mailer_classes([ConfirmationMailer, RecoveryMailer])
+define_mailer_classes(MAILER_CLASSES)

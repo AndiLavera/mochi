@@ -12,37 +12,28 @@ module Mochi::CLI
 
     class Generate < Command
       class Options
-        arg "type", desc: "auth, omniauth, error", required: true
-        arg "name", desc: "name of resource", required: false
+        arg "type", desc: "authenticable, omniauthable, etc", required: true
         arg "orm", desc: "select orm (jennifer, granite)", required: true
-        arg_array "fields", desc: "user:reference name:string body:text age:integer published:bool"
+        arg_array "fields", desc: "DO NOT USE. Not Availble, will be removed"
         bool "--no-color", desc: "disable colored output", default: false
         bool ["-y", "--assume-yes"], desc: "Assume yes to disable interactive mode", default: false
         help
       end
 
       class Help
-        header "Generates application based on templates"
-        caption "Generates application based on templates"
+        header "Generates application based on templates. The following templates are available:\n- authenticable\n- confirmable\n- trackable\n- lockable\n- invitable\n- omniauthable"
+        caption "Generates application based on templates. The following templates are available:\n- authenticable\n- confirmable\n- trackable\n- lockable\n- invitable\n- omniauthable"
       end
 
       def run
-        ensure_name_argument!
         ensure_orm_argument!
         full_orm_name = modify_orm_name
-        generator = Generators.new(args.name, ".", args.fields, full_orm_name)
+        generator = Generators.new("user", ".", args.fields, full_orm_name)
         generator.generate(args.type, options)
       end
 
       def recipe
         CLI.config.recipe
-      end
-
-      private def ensure_name_argument!
-        unless args.name?
-          error "Parsing Error: The NAME argument is required."
-          exit! help: true, error: true
-        end
       end
 
       private def ensure_orm_argument!

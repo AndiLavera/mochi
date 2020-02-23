@@ -1,8 +1,6 @@
 require "./spec_helper"
 
 describe Mochi do
-  # TODO: Write tests
-
   it "mochi configurations should be true" do
     Mochi.setup do |config|
       config.confirm_within = 7

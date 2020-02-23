@@ -1,3 +1,4 @@
+require "uuid"
 module Mochi
   module Models
     # Handles blocking a user access after a certain number of attempts.
@@ -17,39 +18,39 @@ module Mochi
     #
     module Lockable
       # Lock a user setting its locked_at to actual time.
-      # * +opts+: Hash options if you don't want to send email
+      # * `opts`: Hash options if you don't want to send email
       #   when you lock access, you could pass the next hash
       #   `{ send_instructions: false } as option`.
-      def lock_access!(opts = Hash(String, String))
-        self.locked_at = Time.now.utc
+      def lock_access!(skip_email : Bool = false)
+        self.locked_at = Time.utc
 
-        if unlock_strategy_enabled?(:email) && opts.fetch(:send_instructions, true)
+        if !skip_email
           send_unlock_instructions
-        else
-          save(validate: false)
         end
+        save #(validate: false)
       end
 
       # Unlock a user by cleaning locked_at and failed_attempts.
       def unlock_access!
         self.locked_at = nil
-        self.failed_attempts = 0 if respond_to?(:failed_attempts=)
-        self.unlock_token = nil  if respond_to?(:unlock_token=)
-        save(validate: false)
+        self.failed_attempts = 0 # if responds_to?(:failed_attempts=)
+        self.unlock_token = nil  # if responds_to?(:unlock_token=)
+        save #(validate: false)
       end
 
       # Verifies whether a user is locked or not.
       def access_locked?
-        !!locked_at && !lock_expired?
+        !!(locked_at) && !lock_expired?
       end
 
       # Send unlock instructions by email
       def send_unlock_instructions
-        raw, enc = Devise.token_generator.generate(self.class, :unlock_token)
-        self.unlock_token = enc
-        save(validate: false)
-        send_devise_notification(:unlock_instructions, raw, Hash(String, String))
-        raw
+        self.unlock_token = UUID.random.to_s
+        (mailer_class = Mochi.configuration.mailer_class) ? (return unless mailer_class) : return
+
+        (token = unlock_token) ? (return unless token) : return
+
+        mailer_class.new.reset_password_instructions(self, token)
       end
 
       # Resend the unlock instructions if the user is locked.
@@ -57,75 +58,51 @@ module Mochi
         if_access_locked { send_unlock_instructions }
       end
 
-      # Overwrites active_for_authentication? from Devise::Models::Activatable for locking purposes
-      # by verifying whether a user is active to sign in or not based on locked?
-      def active_for_authentication?
-        super && !access_locked?
-      end
-
-      # Overwrites invalid_message from Devise::Models::Authenticatable to define
-      # the correct reason for blocking the sign in.
-      def inactive_message
-        access_locked? ? :locked : super
-      end
-
       # Overwrites valid_for_authentication? from Devise::Models::Authenticatable
       # for verifying whether a user is allowed to sign in or not. If the user
       # is locked, it should never be allowed.
       def valid_for_authentication?
-        return super unless persisted? && lock_strategy_enabled?(:failed_attempts)
-
         # Unlock the user if the lock is expired, no matter
         # if the user can login or not (wrong password, etc)
         unlock_access! if lock_expired?
 
-        if super && !access_locked?
-          true
-        else
-          increment_failed_attempts
-          if attempts_exceeded?
-            lock_access! unless access_locked?
-          else
-            save(validate: false)
-          end
-          false
-        end
+        return true unless access_locked?
+        false
       end
 
-      def increment_failed_attempts
-        self.class.increment_counter(:failed_attempts, id)
-        reload
+      def increment_failed_attempts!
+        self.failed_attempts += 1
+        save
       end
 
       def unauthenticated_message
         # If set to paranoid mode, do not show the locked message because it
         # leaks the existence of an account.
-        if Devise.paranoid
-          super
-        elsif access_locked? || (lock_strategy_enabled?(:failed_attempts) && attempts_exceeded?)
-          :locked
-        elsif lock_strategy_enabled?(:failed_attempts) && last_attempt? && self.class.last_attempt_warning
+        if Mochi.configuration.paranoid
+          return
+        elsif access_locked? || attempts_exceeded?
+          :increment_counter
+        elsif last_attempt? && Mochi.configuration.last_attempt_warning
           :last_attempt
         else
           super
         end
       end
 
-      protected def attempts_exceeded?
-        self.failed_attempts >= self.class.maximum_attempts
+      def attempts_exceeded?
+        self.failed_attempts >= Mochi.configuration.maximum_attempts
       end
 
       protected def last_attempt?
-        self.failed_attempts == self.class.maximum_attempts - 1
+        self.failed_attempts == Mochi.configuration.maximum_attempts - 1
       end
 
       # Tells if the lock is expired if :time unlock strategy is active
       protected def lock_expired?
-        if unlock_strategy_enabled?(:time)
-          locked_at && locked_at < self.class.unlock_in.ago
-        else
-          false
-        end
+        time_locked = self.locked_at
+        return false unless time_locked
+
+        time_locked < Time.utc - Mochi.configuration.unlock_in.days
       end
 
       # Checks whether the record is locked or not, yielding to the block
@@ -133,9 +110,6 @@ module Mochi
       protected def if_access_locked
         if access_locked?
           yield
-        else
-          self.errors.add(Devise.unlock_keys.first, :not_locked)
-          false
         end
       end
 
@@ -153,26 +127,15 @@ module Mochi
       # If no user is found, returns a new user with an error.
       # If the user is not locked, creates an error for the user
       # Options must have the unlock_token
-      def self.unlock_access_by_token(unlock_token)
-        original_token = unlock_token
-        unlock_token   = Devise.token_generator.digest(self, :unlock_token, unlock_token)
+      # def self.unlock_access_by_token(unlock_token)
+      #   original_token = unlock_token
+      #   unlock_token   = Devise.token_generator.digest(self, :unlock_token, unlock_token)
 
-        lockable = find_or_initialize_with_error_by(:unlock_token, unlock_token)
-        lockable.unlock_access! if lockable.persisted?
-        lockable.unlock_token = original_token
-        lockable
-      end
-
-      # Is the unlock enabled for the given unlock strategy?
-      def self.unlock_strategy_enabled?(strategy)
-        self.unlock_strategy == strategy ||
-          (self.unlock_strategy == :both && BOTH_STRATEGIES.include?(strategy))
-      end
-
-      # Is the lock enabled for the given lock strategy?
-      def self.lock_strategy_enabled?(strategy)
-        self.lock_strategy == strategy
-      end
+      #   lockable = find_or_initialize_with_error_by(:unlock_token, unlock_token)
+      #   lockable.unlock_access! if lockable.persisted?
+      #   lockable.unlock_token = original_token
+      #   lockable
+      # end
     end
   end
 end

@@ -33,6 +33,10 @@ module Mochi
         include Mochi::Models::Recoverable
       {% end %}
 
+      {% if i.id == :lockable %}
+        include Mochi::Models::Lockable
+      {% end %}
+
       {% if i.id == :omniauthable %}
         #include Mochi::Omniauthable::Providers
       {% end %}
@@ -58,6 +62,10 @@ module Mochi
 
       {% if i.id == :recoverable %}
         include Mochi::Models::Recoverable
+      {% end %}
+
+      {% if i.id == :lockable %}
+        include Mochi::Models::Lockable
       {% end %}
 
       {% if i.id == :omniauthable %}

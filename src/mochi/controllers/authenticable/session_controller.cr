@@ -11,23 +11,33 @@ class Mochi::Controllers::Authenticable::SessionController < Mochi::Controllers:
       return render("session/new.ecr")
     end
 
-    return redirect_to "/", flash: {"warning" => "Please finish resetting your password. You should of recieved an email."} if user.responds_to?(:password_reset_in_progress) && user.password_reset_in_progress
+    if user.responds_to?(:password_reset_in_progress) &&
+      user.password_reset_in_progress
 
-    if user.is_a? Mochi::Models::Confirmable
-      if !user.confirmation_period_valid? && !user.confirmed?
-        flash[:warning] = "Please activate your account"
-        return redirect_to "/"
-      end
+      flash[:warning] = "Please finish resetting your password"
+      return render("session/new.ecr")
+    end
+
+    if user.is_a? Mochi::Models::Confirmable &&
+      !user.confirmation_period_valid? &&
+      !user.confirmed?
+
+      flash[:warning] = "Please activate your account"
+      return render("session/new.ecr")
+    end
+
+    if user.is_a? Mochi::Models::Lockable && !user.valid_for_authentication?
+      return locked
     end
 
     if user.valid_password?(user_params[:password])
       session[:user_id] = user.id
       flash[:info] = "Successfully logged in"
-      if user.is_a? Mochi::Models::Trackable
-        user.update_tracked_fields!(request)
-      end
+      user.update_tracked_fields!(request) if user.is_a? Mochi::Models::Trackable
       redirect_to "/"
     else
+      failed_sign_in(user) if user.is_a? Mochi::Models::Lockable
+
       flash[:danger] = "Invalid email or password"
       render("session/new.ecr")
     end
@@ -44,5 +54,15 @@ class Mochi::Controllers::Authenticable::SessionController < Mochi::Controllers:
       required :email
       required :password
     end
+  end
+
+  private def failed_sign_in(user)
+    user.increment_failed_attempts!
+    user.lock_access! if user.attempts_exceeded?
+  end
+
+  private def locked
+    flash[:warning] = "Your account is locked. Please unlock it before signing in"
+    render("session/new.ecr")
   end
 end

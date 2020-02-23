@@ -11,7 +11,7 @@ describe Mochi::Models::Confirmable do
 
     it "should confirm user for #{name_formatter(user_class)}" do
       user = user_class.new
-      user.email = "co_test#{rand(0..500)}@email.com"
+      user.email = "co0_test#{rand(0..500)}@email.com"
       user.password = "password123"
       user.confirmation_sent_at = Time.utc - 6.days
       user.confirm!
@@ -23,7 +23,7 @@ describe Mochi::Models::Confirmable do
 
     it "should not confirm user for #{name_formatter(user_class)}" do
       user = user_class.new
-      user.email = "co_test#{rand(0..500)}@email.com"
+      user.email = "co1_test#{rand(0..500)}@email.com"
       user.password = "password123"
       user.confirmation_sent_at = Time.utc - 8.days
       user.confirm!
@@ -37,7 +37,7 @@ describe Mochi::Models::Confirmable do
       Mochi.configuration.allow_unconfirmed_access_for = nil
 
       user = user_class.new
-      user.email = "co_test#{rand(0..500)}@email.com"
+      user.email = "co2_test#{rand(0..500)}@email.com"
       user.password = "password123"
       user.save
 
@@ -49,7 +49,7 @@ describe Mochi::Models::Confirmable do
       Mochi.configuration.allow_unconfirmed_access_for = 1
 
       user = user_class.new
-      user.email = "co_test#{rand(0..500)}@email.com"
+      user.email = "co3_test#{rand(0..500)}@email.com"
       user.password = "password123"
       user.save
 
