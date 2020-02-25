@@ -1,5 +1,5 @@
 require "logger"
-
+# :nodoc:
 abstract class Command < Cli::Command
   def info(msg)
     # Mochi::CLI.logger.info msg, Class.name, :light_cyan

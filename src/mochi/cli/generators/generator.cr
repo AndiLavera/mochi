@@ -3,6 +3,7 @@ require "../helpers/jennifer/migration"
 require "./field.cr"
 
 module Mochi::CLI
+  # :nodoc:
   abstract class Generator < Teeplate::FileTree
     class_getter registered_commands = Hash(String, Mochi::CLI::Generator.class).new
 

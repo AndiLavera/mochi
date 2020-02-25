@@ -14,7 +14,7 @@ module Mochi
     #
     #   - `maximum_attempts`: how many attempts should be accepted before blocking the user.
     #   - `unlock_in`: the time you want to lock the user after to lock happens. Only available when unlock_strategy is :time or :both.
-    #   - `last_attempt_warning`: The message users recieve when they are on their final login attempt
+    #   - `last_attempt_warning`: The message users recieve when they are on their final login attempt - WIP
     #
     module Lockable
       # Lock a user setting its locked_at to actual time.

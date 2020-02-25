@@ -107,23 +107,9 @@ module Mochi::Models
       invited_to_sign_up? && invitation_period_valid?
     end
 
-    # Only verify password when is not invited
-    def valid_password?(password)
-      super unless !accepting_invitation? && block_from_invitation?
-    end
-
-    # Prevent password changed email when accepting invitation
-    def send_password_change_notification?
-      super && !accepting_invitation?
-    end
-
     # Enforce password when invitation is being accepted
     def password_required?
-      (accepting_invitation? && self.class.require_password_on_accepting) || super
-    end
-
-    def unauthenticated_message
-      block_from_invitation? ? :invited : super
+      true
     end
 
     def clear_reset_password_token
@@ -285,23 +271,6 @@ module Mochi::Models
       invitable = find_or_initialize_with_error_by(:invitation_token, invitation_token)
       invitable.errors.add(:invitation_token, :invalid) if invitable.invitation_token && invitable.persisted? && !invitable.valid_invitation?
       invitable unless only_valid && invitable.errors.present?
-    end
-
-    # Callback convenience methods
-    def self.before_invitation_created(*args, &blk)
-      set_callback(:invitation_created, :before, *args, &blk)
-    end
-
-    def self.after_invitation_created(*args, &blk)
-      set_callback(:invitation_created, :after, *args, &blk)
-    end
-
-    def self.before_invitation_accepted(*args, &blk)
-      set_callback(:invitation_accepted, :before, *args, &blk)
-    end
-
-    def self.after_invitation_accepted(*args, &blk)
-      set_callback(:invitation_accepted, :after, *args, &blk)
     end
   end
 end
