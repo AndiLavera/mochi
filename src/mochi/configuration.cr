@@ -71,7 +71,7 @@ module Mochi
 
     # Whether or not to sign in the user
     # automatically after a unlocking account.
-    property sign_in_after_unlock : Bool = true
+    property sign_in_after_unlocking : Bool = true
 
     property paranoid : Bool = false
   end

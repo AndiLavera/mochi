@@ -22,7 +22,7 @@ module Mochi::CLI
 
       class Help
         header "Generates application based on templates. The following templates are available:\n- authenticable\n- confirmable\n- trackable\n- lockable\n- invitable\n- omniauthable"
-        caption "Generates application based on templates. The following templates are available:\n- authenticable\n- confirmable\n- trackable\n- lockable\n- invitable\n- omniauthable"
+        caption "Generates application based on templates. The following templates are available:\n- authenticable\n- confirmable\n- trackable\n- lockable\n- invitable\n- lockable\n- omniauthable"
       end
 
       def run

@@ -22,6 +22,7 @@ module Mochi
       #   `skip_email: true` as an option.
       def lock_access!(skip_email : Bool = false)
         self.locked_at = Time.utc
+        self.unlock_token = UUID.random.to_s
 
         if !skip_email
           send_unlock_instructions
@@ -44,7 +45,6 @@ module Mochi
 
       # Send unlock instructions by email
       def send_unlock_instructions
-        self.unlock_token = UUID.random.to_s
         (mailer_class = Mochi.configuration.mailer_class) ? (return unless mailer_class) : return
 
         (token = self.unlock_token) ? (return unless token) : return
@@ -74,25 +74,25 @@ module Mochi
         save
       end
 
-      def unauthenticated_message
-        # If set to paranoid mode, do not show the locked message because it
-        # leaks the existence of an account.
-        if Mochi.configuration.paranoid
-          return
-        elsif access_locked? || attempts_exceeded?
-          :increment_counter
-        elsif last_attempt? && Mochi.configuration.last_attempt_warning
-          :last_attempt
-        else
-          super
-        end
-      end
+      # def unauthenticated_message
+      #   # If set to paranoid mode, do not show the locked message because it
+      #   # leaks the existence of an account.
+      #   if Mochi.configuration.paranoid
+      #     return
+      #   elsif access_locked? || attempts_exceeded?
+      #     :increment_counter
+      #   elsif last_attempt? && Mochi.configuration.last_attempt_warning
+      #     :last_attempt
+      #   else
+      #     super
+      #   end
+      # end
 
       def attempts_exceeded?
         self.failed_attempts >= Mochi.configuration.maximum_attempts
       end
 
-      protected def last_attempt?
+      def last_attempt?
         self.failed_attempts == Mochi.configuration.maximum_attempts - 1
       end
 
@@ -110,16 +110,6 @@ module Mochi
         if access_locked?
           yield
         end
-      end
-
-      # Attempt to find a user by its unlock keys. If a record is found, send new
-      # unlock instructions to it. If not user is found, returns a new user
-      # with an email not found error.
-      # Options must contain the user's unlock keys
-      def self.send_unlock_instructions(attributes = Hash(String, String))
-        lockable = find_or_initialize_with_errors(unlock_keys, attributes, :not_found)
-        lockable.resend_unlock_instructions if lockable.persisted?
-        lockable
       end
     end
   end

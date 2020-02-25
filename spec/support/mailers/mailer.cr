@@ -17,10 +17,9 @@ class Mochi::Mailer::Custom
     true
   end
 
-  # def unlock_instructions(record, token, opts : Hash(String, String))
-  #   @token = token
-  #   mochi_mail(record, :unlock_instructions, opts)
-  # end
+  def unlock_instructions(record : JenniferUser | User, token : String, *opts)
+    true
+  end
 
   # def email_changed(record, opts : Hash(String, String))
   #   mochi_mail(record, :email_changed, opts)
