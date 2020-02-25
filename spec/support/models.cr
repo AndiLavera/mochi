@@ -6,7 +6,8 @@ class JenniferUser < Jennifer::Model::Base
     :confirmable,
     :trackable,
     :omniauthable,
-    :recoverable
+    :recoverable,
+    :lockable
   )
 
   with_timestamps
@@ -29,7 +30,10 @@ class JenniferUser < Jennifer::Model::Base
     last_sign_in_at: { type: Time?, null: true },
     reset_password_sent_at: { type: Time? },
     reset_password_token: { type: String? },
-    password_reset_in_progress: { type: Bool, default: false }
+    password_reset_in_progress: { type: Bool, default: false },
+    locked_at: { type: Time? },
+    failed_attempts: { type: Int32, default: 0, null: false  },
+    unlock_token: { type: String? },
   )
 end
 
@@ -42,7 +46,8 @@ class User < Granite::Base
     :confirmable,
     :trackable,
     :omniauthable,
-    :recoverable
+    :recoverable,
+    :lockable
   )
 
   connection sqlite
@@ -65,6 +70,9 @@ class User < Granite::Base
   column reset_password_sent_at : Time?
   column reset_password_token : String?
   column password_reset_in_progress : Bool = false
+  column locked_at : Time?
+  column failed_attempts : Int32 = 0
+  column unlock_token : String?
   timestamps
 end
 

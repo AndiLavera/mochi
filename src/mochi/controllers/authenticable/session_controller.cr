@@ -27,7 +27,8 @@ class Mochi::Controllers::Authenticable::SessionController < Mochi::Controllers:
     end
 
     if user.is_a? Mochi::Models::Lockable && !user.valid_for_authentication?
-      return locked
+      flash[:warning] = "Your account is locked. Please unlock it before signing in"
+      return render("session/new.ecr")
     end
 
     if user.valid_password?(user_params[:password])
@@ -59,10 +60,5 @@ class Mochi::Controllers::Authenticable::SessionController < Mochi::Controllers:
   private def failed_sign_in(user)
     user.increment_failed_attempts!
     user.lock_access! if user.attempts_exceeded?
-  end
-
-  private def locked
-    flash[:warning] = "Your account is locked. Please unlock it before signing in"
-    render("session/new.ecr")
   end
 end

@@ -21,7 +21,7 @@ class Mochi::Mailer
 
   def unlock_instructions(record : User, token : String, *opts)
     @token = token
-    ConfirmationMailer.new(
+    UnlockMailer.new(
       (record.responds_to?(:name) ? record.name : "friend"),
       record.email,
       @token

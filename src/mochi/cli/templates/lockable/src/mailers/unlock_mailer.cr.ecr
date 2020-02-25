@@ -1,4 +1,4 @@
-class RecoveryMailer < Quartz::Composer
+class UnlockMailer < Quartz::Composer
   getter token
   getter name
 
@@ -10,9 +10,9 @@ class RecoveryMailer < Quartz::Composer
     @token = token
     to email: email, name: name # Can be called multiple times to add more recipients
 
-    subject "Reset Your Password"
+    subject "Unlock your account"
 
-    text render("../mailers/recovery_mailer.text.ecr")
-    # html render("mailers/welcome_mailer.html.slang", "mailer-layout.html.slang")
+    text render("../mailers/unlock_mailer.text.ecr")
+    # html render("mailers/unlock_mailer.html.slang", "mailer-layout.html.slang")
   end
 end

@@ -45,9 +45,9 @@ module Mochi
       @mailer_class = mailer_class
     end
 
-    # def mailer_class=(mailer_class = Mochi::Mailer::Custom)
-    #   @mailer_class = mailer_class
-    # end
+    def mailer_class=(mailer_class = Mochi::Mailer::Custom)
+      @mailer_class = mailer_class
+    end
 
     # The time period within which the password
     # must be reset or the token expires. Number
@@ -71,7 +71,7 @@ module Mochi
 
     # Whether or not to sign in the user
     # automatically after a unlocking account.
-    property sign_in_after_unlocking : Bool = true
+    property sign_in_after_unlock : Bool = true
 
     property paranoid : Bool = false
   end
@@ -88,3 +88,4 @@ require "./controllers/application_controller"
 require "./controllers/authenticable/**"
 require "./controllers/confirmable/**"
 require "./controllers/recoverable/**"
+require "./controllers/lockable/**"

@@ -18,9 +18,8 @@ module Mochi
     #
     module Lockable
       # Lock a user setting its locked_at to actual time.
-      # * `opts`: Hash options if you don't want to send email
-      #   when you lock access, you could pass the next hash
-      #   `{ send_instructions: false } as option`.
+      #   when you lock access, you could pass the
+      #   `skip_email: true` as an option.
       def lock_access!(skip_email : Bool = false)
         self.locked_at = Time.utc
 
@@ -48,9 +47,9 @@ module Mochi
         self.unlock_token = UUID.random.to_s
         (mailer_class = Mochi.configuration.mailer_class) ? (return unless mailer_class) : return
 
-        (token = unlock_token) ? (return unless token) : return
+        (token = self.unlock_token) ? (return unless token) : return
 
-        mailer_class.new.reset_password_instructions(self, token)
+        mailer_class.new.unlock_instructions(self, token)
       end
 
       # Resend the unlock instructions if the user is locked.
@@ -122,20 +121,6 @@ module Mochi
         lockable.resend_unlock_instructions if lockable.persisted?
         lockable
       end
-
-      # Find a user by its unlock token and try to unlock it.
-      # If no user is found, returns a new user with an error.
-      # If the user is not locked, creates an error for the user
-      # Options must have the unlock_token
-      # def self.unlock_access_by_token(unlock_token)
-      #   original_token = unlock_token
-      #   unlock_token   = Devise.token_generator.digest(self, :unlock_token, unlock_token)
-
-      #   lockable = find_or_initialize_with_error_by(:unlock_token, unlock_token)
-      #   lockable.unlock_access! if lockable.persisted?
-      #   lockable.unlock_token = original_token
-      #   lockable
-      # end
     end
   end
 end
