@@ -37,6 +37,10 @@ module Mochi
         include Mochi::Models::Lockable
       {% end %}
 
+      {% if i.id == :invitable %}
+        include Mochi::Models::Invitable
+      {% end %}
+
       {% if i.id == :omniauthable %}
         #include Mochi::Omniauthable::Providers
       {% end %}
@@ -66,6 +70,10 @@ module Mochi
 
       {% if i.id == :lockable %}
         include Mochi::Models::Lockable
+      {% end %}
+
+      {% if i.id == :invitable %}
+        include Mochi::Models::Invitable
       {% end %}
 
       {% if i.id == :omniauthable %}

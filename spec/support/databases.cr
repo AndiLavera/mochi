@@ -10,3 +10,7 @@ Jennifer::Config.configure do |conf|
   conf.host = "."
   conf.db = "./jennifer_test.db"
 end
+
+Jennifer::Config.configure do |conf|
+  conf.logger.level = Logger::WARN
+end

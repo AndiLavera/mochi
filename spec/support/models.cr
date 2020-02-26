@@ -7,8 +7,10 @@ class JenniferUser < Jennifer::Model::Base
     :trackable,
     :omniauthable,
     :recoverable,
-    :lockable
+    :lockable,
+    :invitable
   )
+  include Mochi::Models::Authenticable::Validations::Jennifer
 
   with_timestamps
   mapping(
@@ -34,6 +36,11 @@ class JenniferUser < Jennifer::Model::Base
     locked_at: { type: Time? },
     failed_attempts: { type: Int32, default: 0, null: false  },
     unlock_token: { type: String? },
+    invitation_accepted_at: { type: Time? },
+    invitation_created_at: { type: Time? },
+    invitation_token: { type: String? },
+    invited_by: { type: Int64? },
+    invitation_sent_at: { type: Time? },
   )
 end
 
@@ -47,8 +54,10 @@ class User < Granite::Base
     :trackable,
     :omniauthable,
     :recoverable,
-    :lockable
+    :lockable,
+    :invitable
   )
+  include Mochi::Models::Authenticable::Validations::Granite
 
   connection sqlite
   table jennifer_users
@@ -73,6 +82,11 @@ class User < Granite::Base
   column locked_at : Time?
   column failed_attempts : Int32 = 0
   column unlock_token : String?
+  column invitation_accepted_at : Time?
+  column invitation_created_at : Time?
+  column invitation_token : String?
+  column invited_by : Int64?
+  column invitation_sent_at : Time?
   timestamps
 end
 

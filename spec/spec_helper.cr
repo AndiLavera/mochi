@@ -1,5 +1,6 @@
 USER_CLASSES = [User, JenniferUser]
 MAILER_CLASSES = [ConfirmationMailer, RecoveryMailer, UnlockMailer]
+Mochi.configuration.mailer_class = Mochi::TestMailer
 
 TEST_APP_NAME     = "test_app"
 TESTING_APP       = "./tmp/#{TEST_APP_NAME}"
@@ -18,7 +19,7 @@ require "../src/mochi/omniauth"
 require "./support/models"
 require "./support/helpers"
 require "./support/mailers/*"
-Mochi.configuration.mailer_class = Mochi::Mailer::Custom
+
 
 require "../src/mochi/controllers/**"
 

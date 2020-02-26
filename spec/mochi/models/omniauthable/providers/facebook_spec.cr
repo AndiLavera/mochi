@@ -1,4 +1,4 @@
-require "../../../spec_helper"
+require "../../../../spec_helper"
 
 FACEBOOK_RAW_JSON = "{\"id\":\"1047667689746652\",\"name\":\"con trive\",\"last_name\":\"trive\",\"first_name\":\"con\",\"email\":\"test\\u0040gmail.com\"}"
 

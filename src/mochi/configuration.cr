@@ -34,20 +34,22 @@ module Mochi
 
     # Configure which class recieves the call to all emails.
     #
-    # Default is `Mochi::Mailer`
+    # Default is `Mochi::DefaultMailer`
     #
     # Feel free to inherit from `Mochi::Mailer` and implement your own
     def mailer_class
       @mailer_class
     end
 
-    def mailer_class=(mailer_class = Mochi::Mailer)
+    def mailer_class=(mailer_class : Mochi::Mailer.class = Mochi::DefaultMailer)
       @mailer_class = mailer_class
     end
 
-    def mailer_class=(mailer_class = Mochi::Mailer::Custom)
-      @mailer_class = mailer_class
-    end
+    # property mailer_class : Mochi::Mailer = Mochi::DefaultMailer.new
+
+    # def mailer_class=(mailer_class = Mochi::Mailer::Custom)
+    #   @mailer_class = mailer_class
+    # end
 
     # The time period within which the password
     # must be reset or the token expires. Number
@@ -74,6 +76,8 @@ module Mochi
     property sign_in_after_unlocking : Bool = true
 
     property paranoid : Bool = false
+
+    property accept_invitation_within : Int32 = 7
   end
 end
 
@@ -82,6 +86,7 @@ require "./models/confirmable"
 require "./models/trackable"
 require "./models/recoverable"
 require "./models/lockable"
+require "./models/invitable"
 
 require "./mailers/*"
 require "./controllers/application_controller"

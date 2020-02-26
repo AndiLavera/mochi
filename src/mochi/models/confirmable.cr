@@ -53,6 +53,10 @@ module Mochi::Models
       self.confirmed
     end
 
+    def confirmation_required?
+      !confirmed?
+    end
+
     # Confirm a user by setting it's confirmed_at to actual time. If the user
     # is already confirmed, add an error to email field. If the user is invalid
     # add errors

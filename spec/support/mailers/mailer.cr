@@ -1,19 +1,11 @@
-class Mochi::Mailer::Custom
+class Mochi::TestMailer < Mochi::Mailer
   #include Mochi::Helpers::Mailer
 
-  def confirmation_instructions(record : User, token : String, *opts)
+  def confirmation_instructions(record : User | JenniferUser, token : String, *opts)
     true
   end
 
-  def reset_password_instructions(record : User, token : String, *opts)
-    true
-  end
-
-  def confirmation_instructions(record : JenniferUser, token : String, *opts)
-    true
-  end
-
-  def reset_password_instructions(record : JenniferUser, token : String, *opts)
+  def reset_password_instructions(record : User | JenniferUser, token : String, *opts)
     true
   end
 
@@ -28,4 +20,7 @@ class Mochi::Mailer::Custom
   # def password_change(record, opts : Hash(String, String))
   #   mochi_mail(record, :password_change, opts)
   # end
+
+  def invitation_instructions()
+  end
 end
