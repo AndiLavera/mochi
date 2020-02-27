@@ -1,67 +1,59 @@
-class Mochi::Controllers::Authenticable::UserController < Mochi::Controllers::ApplicationController
-  getter user = User.new
+require "../../helpers/contract"
 
-  before_action do
-    only [:show, :edit, :update, :destroy] { set_user }
+module Mochi::Controllers::Authenticable::UserController
+  include Mochi::Helpers
+
+  macro show_macro
+    contract = Contract.new(self, :amber)
+    contract.render.user_show
   end
 
-  def show
-    render("user/show.ecr")
+  macro new_macro
+    contract = Contract.new(self, :amber)
+    contract.render.user_new
   end
 
-  def new
-    render("user/new.ecr")
+  macro edit_macro
+    contract = Contract.new(self, :amber)
+    contract.render.user_edit
   end
 
-  def edit
-    render("user/edit.ecr")
-  end
+  macro create_macro
+    contract = Contract.new(self, :amber)
+    user = User.new(contract.params.validate)
+    password = contract.params.find_param("password")
 
-  def create
-    user = User.new user_params.validate!
-    user.password = params[:password]
+    user.password = password if password
 
-    if user.is_a? Mochi::Models::Confirmable
-      if user.valid? && user.save
-        return redirect_to "/", flash: {"success" => "Please Check Your Email For The Activation Link"}
-      else
-        flash[:danger] = "Could not create Resource!"
-        return render("user/new.ecr")
-      end
+    if user.valid? && user.save
+      contract.flash.success(success_message(user))
+      contract.redirect.to("/")
     else
-      if user.valid? && user.save
-        session[:user_id] = user.id
-        return redirect_to "/", flash: {"success" => "Created resource successfully."}
-      else
-        flash[:danger] = "Could not create Resource!"
-        return render("user/new.ecr")
-      end
+      contract.flash.danger("Could not create Resource!")
+      contract.render.user_new
     end
   end
 
-  def update
-    user.set_attributes user_params.validate!
+  macro update_macro
+    contract = Contract.new(self, :amber)
+    user.set_attributes resource_params.validate!
     if user.save
-      redirect_to "/", flash: {"success" => "User has been updated."}
+      contract.flash.success("User has been updated.")
+      contract.redirect.to("/")
     else
-      flash[:danger] = "Could not update User!"
-      render "user/edit.ecr"
+      contract.flash.danger("Could not update User!")
+      contract.render.user_new
     end
   end
 
-  def destroy
+  macro destroy_macro
+    contract = Contract.new(self, :amber)
     user.destroy
-    redirect_to "/", flash: {"success" => "User has been deleted."}
+    contract.flash.success("User has been deleted.")
+    contract.redirect.to("/")
   end
 
-  private def set_user
-    @user = current_user.not_nil!
-  end
-
-  private def user_params
-    params.validation do
-      required :email
-      optional :password
-    end
+  private def success_message(user)
+    user.is_a?(Mochi::Models::Confirmable) ? "Please Check Your Email For The Activation Link" : "Created resource successfully."
   end
 end
