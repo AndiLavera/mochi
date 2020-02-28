@@ -1,22 +1,22 @@
 module Mochi::Controllers::Authenticable::UserController
   include Mochi::Helpers
 
-  macro show_macro
+  macro user_show
     contract = Contract.new(self)
     contract.render.user_show
   end
 
-  macro new_macro
+  macro user_new
     contract = Contract.new(self)
     contract.render.user_new
   end
 
-  macro edit_macro
+  macro user_edit
     contract = Contract.new(self)
     contract.render.user_edit
   end
 
-  macro create_macro
+  macro user_create
     contract = Contract.new(self)
     user = User.new(contract.params.validate)
     password = contract.params.find_param("password")
@@ -32,7 +32,7 @@ module Mochi::Controllers::Authenticable::UserController
     end
   end
 
-  macro update_macro
+  macro user_update
     contract = Contract.new(self)
     user.set_attributes resource_params.validate!
     if user.save
@@ -44,7 +44,7 @@ module Mochi::Controllers::Authenticable::UserController
     end
   end
 
-  macro destroy_macro
+  macro user_destroy
     contract = Contract.new(self)
     user.destroy
     contract.flash.success("User has been deleted.")
