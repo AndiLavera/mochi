@@ -1,25 +1,23 @@
-require "../../helpers/contract"
-
 module Mochi::Controllers::Authenticable::UserController
   include Mochi::Helpers
 
   macro show_macro
-    contract = Contract.new(self, :amber)
+    contract = Contract.new(self)
     contract.render.user_show
   end
 
   macro new_macro
-    contract = Contract.new(self, :amber)
+    contract = Contract.new(self)
     contract.render.user_new
   end
 
   macro edit_macro
-    contract = Contract.new(self, :amber)
+    contract = Contract.new(self)
     contract.render.user_edit
   end
 
   macro create_macro
-    contract = Contract.new(self, :amber)
+    contract = Contract.new(self)
     user = User.new(contract.params.validate)
     password = contract.params.find_param("password")
 
@@ -35,7 +33,7 @@ module Mochi::Controllers::Authenticable::UserController
   end
 
   macro update_macro
-    contract = Contract.new(self, :amber)
+    contract = Contract.new(self)
     user.set_attributes resource_params.validate!
     if user.save
       contract.flash.success("User has been updated.")
@@ -47,7 +45,7 @@ module Mochi::Controllers::Authenticable::UserController
   end
 
   macro destroy_macro
-    contract = Contract.new(self, :amber)
+    contract = Contract.new(self)
     user.destroy
     contract.flash.success("User has been deleted.")
     contract.redirect.to("/")
