@@ -12,7 +12,7 @@ class SessionController < Mochi::Authenticable::Controllers::SessionController
     super
   end
 
-  def delete
+  def destroy
     super
   end
 end

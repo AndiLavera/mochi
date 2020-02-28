@@ -1,11 +1,11 @@
 module Mochi::Helpers
   class Params < BaseParams
     def validate
-      resource_params.validate!
+      resource_params
     end
 
     def find_param(param)
-      resource_params.validate![param]
+      validate[param]
     end
   end
 end

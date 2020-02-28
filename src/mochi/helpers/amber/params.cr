@@ -5,7 +5,7 @@ module Mochi::Helpers
     end
 
     def find_param(param)
-      resource_params.validate![param]
+      validate[param]
     end
   end
 end
