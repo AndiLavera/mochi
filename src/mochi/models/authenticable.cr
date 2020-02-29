@@ -31,7 +31,8 @@ module Mochi::Models
     end
 
     # Verifies whether a password (ie from sign in) is the user password.
-    def valid_password?(password : String)
+    def valid_password?(password : String?)
+      return if password.is_a?(Nil)
       (bcrypt_pass = password_hash) ? bcrypt_pass.verify(password) : false
     end
 

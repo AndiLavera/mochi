@@ -1,5 +1,5 @@
 module Mochi::Helpers
-  class Redirector < BaseRedirector
+  class RedirectHandler < Redirect
     def to(path)
       redirect_to path
     end

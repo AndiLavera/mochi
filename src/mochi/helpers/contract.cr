@@ -4,12 +4,14 @@ module Mochi::Helpers
     getter params
     getter flash
     getter redirect
+    getter session
 
     def initialize(controller)
-      @render = Renderer.new(controller)
-      @params = Params.new(controller)
-      @flash = Flasher.new(controller)
-      @redirect = Redirector.new(controller)
+      @render = RenderHandler.new(controller)
+      @params = ParamsHandler.new(controller)
+      @flash = FlashHandler.new(controller)
+      @redirect = RedirectHandler.new(controller)
+      @session = SessionHandler.new(controller)
     end
   end
 end

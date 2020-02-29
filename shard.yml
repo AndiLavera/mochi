@@ -17,10 +17,9 @@ dependencies:
   
   inflector:
     github: phoffer/inflector.cr
-    # version: "~> 0.1.8"
   
-  liquid:
-    github: TechMagister/liquid.cr
+  kilt:
+    github: jeromegn/kilt
 
 development_dependencies:
   granite:

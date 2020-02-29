@@ -19,7 +19,7 @@ module Mochi::Controllers::Authenticable::UserController
   macro user_create
     contract = Contract.new(self)
     user = User.new(contract.params.validate)
-    password = contract.params.find_param("password")
+    password = contract.params.fetch("password")
 
     user.password = password if password
 
