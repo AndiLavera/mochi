@@ -34,7 +34,7 @@ module Mochi::Models
 
       self.invitation_accepted_at = Time.utc
       self.invitation_token = nil
-      if self.responds_to?(:confirmation_required?) && self.confirmation_required?
+      if confirmation_required_for_invited?
         self.confirmed_at = self.invitation_accepted_at
         @confirmation_set = true
       else
@@ -91,7 +91,6 @@ module Mochi::Models
     # Main method for inviting
     # Reset invitation token and send invitation again
     def invite!(invited_by = nil, skip_invitation = false)
-      # This is an order-dependant assignment, this can't be moved
       was_invited = invited_to_sign_up?
 
       self.invitation_created_at = Time.utc
@@ -124,12 +123,7 @@ module Mochi::Models
       invited_to_sign_up? && invitation_period_valid?
     end
 
-    # Enforce password when invitation is being accepted
-    def password_required?
-      true
-    end
-
-    def confirmation_required_for_invited?
+    private def confirmation_required_for_invited?
       responds_to?(:confirmation_required?) && confirmation_required?
     end
 

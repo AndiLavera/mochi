@@ -31,7 +31,7 @@ describe Mochi::Models::Invitable do
         user.invitation_accepted?.should be_true
       end
 
-      it "should accept invite & rollback properly" do
+      it "should failt to accept invite & rollback properly" do
         user = user_class.new
         user.email = "l1_test#{UUID.random}@email.com"
 
