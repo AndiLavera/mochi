@@ -1,0 +1,18 @@
+class UnlockMailer < Quartz::Composer
+  getter token
+  getter name
+
+  def sender
+    address email: "dev@mochi.com", name: "Mochi"
+  end
+
+  def initialize(name : String, email : String, token : String)
+    @token = token
+    to email: email, name: name # Can be called multiple times to add more recipients
+
+    subject "Unlock your account"
+
+    text render("../mailers/unlock_mailer.text.ecr")
+    # html render("mailers/unlock_mailer.html.slang", "mailer-layout.html.slang")
+  end
+end
