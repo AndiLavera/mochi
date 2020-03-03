@@ -37,15 +37,15 @@ module Mochi
     # Default is `Mochi::DefaultMailer`
     #
     # Feel free to inherit from `Mochi::Mailer` and implement your own
-    def mailer_class
-      @mailer_class
-    end
+    # def mailer_class
+    #   @mailer_class
+    # end
 
-    def mailer_class=(mailer_class : Mochi::Mailer.class = Mochi::DefaultMailer)
-      @mailer_class = mailer_class
-    end
+    # def mailer_class=(mailer_class : Mochi::Mailer.class = Mochi::DefaultMailer)
+    #   @mailer_class = mailer_class
+    # end
 
-    # property mailer_class : Mochi::Mailer = Mochi::DefaultMailer.new
+    property mailer_class : Mochi::Mailer.class = Mochi::DefaultMailer
 
     # def mailer_class=(mailer_class = Mochi::Mailer::Custom)
     #   @mailer_class = mailer_class

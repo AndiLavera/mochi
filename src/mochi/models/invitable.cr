@@ -34,7 +34,7 @@ module Mochi::Models
 
       self.invitation_accepted_at = Time.utc
       self.invitation_token = nil
-      if confirmation_required_for_invited?
+      if confirmation_required_for_invited? && self.is_a?(Mochi::Models::Confirmable)
         self.confirmed_at = self.invitation_accepted_at
         @confirmation_set = true
       else
@@ -59,7 +59,7 @@ module Mochi::Models
     def rollback_accepted_invitation
       self.invitation_token = @invitation_token_was
       self.invitation_accepted_at = nil
-      if @confirmation_set && self.responds_to?(:confirmed_at=)
+      if @confirmation_set && self.is_a?(Mochi::Models::Confirmable)
         self.confirmed_at = nil
       end
     end
@@ -124,7 +124,7 @@ module Mochi::Models
     end
 
     private def confirmation_required_for_invited?
-      responds_to?(:confirmation_required?) && confirmation_required?
+      self.is_a?(Mochi::Models::Confirmable) ? self.confirmation_required? : false
     end
 
     def invitation_due_at

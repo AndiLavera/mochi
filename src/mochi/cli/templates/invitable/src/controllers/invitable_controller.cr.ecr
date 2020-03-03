@@ -1,0 +1,19 @@
+class InvitableController < Mochi::Controllers::Invitable::Jennifer::InvitableController
+  def new
+    super
+  end
+
+  def edit
+    user = User.where { _invitation_token == params[:invite_token] }.first
+    super(user)
+  end
+
+  def create
+    super
+  end
+
+  def update
+    user = User.where { _unlock_token == params[:unlock_token] }.first
+    super(user)
+  end
+end

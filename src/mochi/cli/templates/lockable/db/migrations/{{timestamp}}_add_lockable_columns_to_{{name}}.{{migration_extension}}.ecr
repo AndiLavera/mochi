@@ -21,9 +21,9 @@ class AddLockableToUser < Jennifer::Migration::Base
 
   def down
     change_table(:users) do |t|
-      t.drop_column(:locked_at, :timestamp)
-      t.drop_column(:failed_attempts, :integer)
-      t.drop_column(:unlock_token, :string)
+      t.drop_column(:locked_at)
+      t.drop_column(:failed_attempts)
+      t.drop_column(:unlock_token)
     end
   end
 end

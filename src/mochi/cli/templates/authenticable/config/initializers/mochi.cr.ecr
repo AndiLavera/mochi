@@ -1,4 +1,9 @@
 require "mochi"
+
+# Uncomment this is you plan to use a custom mailing class
+# 
+# Make sure to comment out `require "mailers/**"` in the amber mailer initializer
+#require "../../src/mailers/**"
 Mochi.setup do |config|
   # Set the view extension
   # Useful if you use slang or someother

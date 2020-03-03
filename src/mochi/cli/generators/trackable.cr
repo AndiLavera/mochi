@@ -2,7 +2,7 @@ require "./generator"
 require "./field"
 
 module Mochi::CLI
-  class Track < Generator
+  class Trackable < Generator
     command :trackable
     directory "#{__DIR__}/../templates/trackable"
 
