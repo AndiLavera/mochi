@@ -1,5 +1,5 @@
 class Mochi::DefaultMailer < Mochi::Mailer
-  #include Mochi::Helpers::Mailer
+  # include Mochi::Helpers::Mailer
 
   def confirmation_instructions(record : User | JenniferUser, token : String, *opts)
     true

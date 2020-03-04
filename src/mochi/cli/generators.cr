@@ -281,6 +281,7 @@ class Teeplate::RenderingEntry
     log.info(s.to_s + local_path)
   end
 end
+
 # :nodoc:
 module Teeplate
   abstract class FileTree

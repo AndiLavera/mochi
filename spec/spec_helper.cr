@@ -1,6 +1,6 @@
-USER_CLASSES = [User, JenniferUser]
+USER_CLASSES   = [User, JenniferUser]
 MAILER_CLASSES = [ConfirmationMailer, RecoveryMailer, UnlockMailer, InviteMailer]
-#Mochi.configuration.mailer_class = Mochi::TestMailer
+# Mochi.configuration.mailer_class = Mochi::TestMailer
 
 TEST_APP_NAME     = "test_app"
 TESTING_APP       = "./tmp/#{TEST_APP_NAME}"
@@ -13,7 +13,6 @@ require "amber"
 
 require "./support/databases"
 
-
 require "../src/mochi"
 require "../src/mochi/omniauth"
 require "./support/mailers/*"
@@ -22,7 +21,7 @@ require "./support/helpers"
 
 require "../src/mochi/controllers/**"
 
-#require "../src/mochi/cli"
+# require "../src/mochi/cli"
 
 # Used to name tests
 def name_formatter(name : Granite::Base.class | Jennifer::Model::Base.class)

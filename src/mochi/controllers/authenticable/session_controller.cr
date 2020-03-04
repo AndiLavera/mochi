@@ -12,16 +12,14 @@ class Mochi::Controllers::Authenticable::SessionController < Mochi::Controllers:
     end
 
     if user.responds_to?(:password_reset_in_progress) &&
-      user.password_reset_in_progress
-
+       user.password_reset_in_progress
       flash[:warning] = "Please finish resetting your password"
       return render("session/new.ecr")
     end
 
     if user.is_a? Mochi::Models::Confirmable &&
-      !user.confirmation_period_valid? &&
-      !user.confirmed?
-
+       !user.confirmation_period_valid? &&
+       !user.confirmed?
       flash[:warning] = "Please activate your account"
       return render("session/new.ecr")
     end

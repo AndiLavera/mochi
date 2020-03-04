@@ -1,4 +1,5 @@
 require "uuid"
+
 module Mochi
   module Models
     # Handles blocking a user access after a certain number of attempts.
@@ -27,7 +28,7 @@ module Mochi
         if !skip_email
           send_unlock_instructions
         end
-        save #(validate: false)
+        save # (validate: false)
       end
 
       # Unlock a user by cleaning locked_at and failed_attempts.
@@ -35,7 +36,7 @@ module Mochi
         self.locked_at = nil
         self.failed_attempts = 0 # if responds_to?(:failed_attempts=)
         self.unlock_token = nil  # if responds_to?(:unlock_token=)
-        save #(validate: false)
+        save                     # (validate: false)
       end
 
       # Verifies whether a user is locked or not.

@@ -2,7 +2,6 @@ require "../../spec_helper"
 require "http/request"
 
 describe Mochi::Models::Trackable do
-
   USER_CLASSES.each do |user_class|
     it "should update tracked fields" do
       user = user_class.new
