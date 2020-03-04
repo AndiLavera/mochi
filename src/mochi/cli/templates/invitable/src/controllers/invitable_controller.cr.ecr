@@ -4,7 +4,12 @@ class InvitableController < Mochi::Controllers::Invitable::Jennifer::InvitableCo
   end
 
   def edit
+<% if @orm == "granite" -%>
+    user = User.find_by(invitation_token: params[:invite_token])
+<% end -%>
+<% if @orm == "jennifer" -%>
     user = User.where { _invitation_token == params[:invite_token] }.first
+<% end -%>
     super(user)
   end
 
@@ -13,7 +18,12 @@ class InvitableController < Mochi::Controllers::Invitable::Jennifer::InvitableCo
   end
 
   def update
-    user = User.where { _unlock_token == params[:unlock_token] }.first
+<% if @orm == "granite" -%>
+    user = User.find_by(email: params["email"].to_s)
+<% end -%>
+<% if @orm == "jennifer" -%>
+    user = User.where { _email == params["email"].to_s }.first
+<% end -%>
     super(user)
   end
 end

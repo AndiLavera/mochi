@@ -9,7 +9,7 @@ describe Mochi::Models::Confirmable do
       user.confirmation_token.should_not be_nil
     end
 
-    it "should confirm user for #{name_formatter(user_class)}" do
+    it "should confirm user for #{user_cname_formatter(user_class)lass}" do
       user = user_class.new
       user.email = "co0_test#{rand(0..500)}@email.com"
       user.password = "password123"

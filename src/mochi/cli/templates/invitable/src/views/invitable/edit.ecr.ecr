@@ -1,4 +1,4 @@
-<h1>Recover Password</h1>
+<h1>Accept Invite</h1>
 
 <%="<"%>%- if <%= @name %>.errors %>
   <ul class="errors">
@@ -8,15 +8,15 @@
   </ul>
 <%="<"%>%- end %>
 
-<form action="/invite" method="patch">
+<form action="/invite" method="post">
   <%="<"%>%= csrf_tag %>
   <input type="hidden" name="_method" value="patch" />
   <div class="form-group">
-    <input class="form-control" type="email" name="email" value="<%= user.email %>" placeholder="<%= user.email %>"/>
+    <input class="form-control" type="email" name="email" value="<%="<"%>%= <%= @name %>.email %>" placeholder="<%="<"%>%= <%= @name %>.email %>"/>
   </div>
   <div class="form-group">
     <input class="form-control" type="password" name="password" placeholder="Password"/>
   </div>
-  <button class="btn btn-success btn-sm" type="submit">Invite</button>
+  <button class="btn btn-success btn-sm" type="submit">Accept</button>
 </form>
 <hr/>

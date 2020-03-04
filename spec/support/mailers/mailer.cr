@@ -1,4 +1,4 @@
-class Mochi::TestMailer < Mochi::Mailer
+class Mochi::DefaultMailer < Mochi::Mailer
   #include Mochi::Helpers::Mailer
 
   def confirmation_instructions(record : User | JenniferUser, token : String, *opts)
@@ -21,6 +21,7 @@ class Mochi::TestMailer < Mochi::Mailer
   #   mochi_mail(record, :password_change, opts)
   # end
 
-  def invitation_instructions()
+  def invitation_instructions(record : JenniferUser | User, token : String, *opts)
+    true
   end
 end

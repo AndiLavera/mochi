@@ -65,7 +65,7 @@ class User < Granite::Base
   column id : Int64, primary: true
   column email : String?
   column password_digest : String?
-  column confirmation_token : String
+  column confirmation_token : String?
   column confirmed : Bool = false
   column confirmed_at : Time?
   column confirmation_sent_at : Time?

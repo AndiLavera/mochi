@@ -19,12 +19,6 @@ module Mochi::CLI
     def pre_render(directory, **args)
       # add_plugs
       # inherit_plug :web, :auth
-<<<<<<< HEAD
-      # add_routes
-      # add_dependencies
-      # inject_application_controller_methods
-    end
-=======
       add_routes
       # add_dependencies
       # inject_application_controller_methods
@@ -38,6 +32,5 @@ module Mochi::CLI
         patch "/invite", InvitableController, :update
       ROUTES
     end
->>>>>>> 606d222... Invitable CLI with a few unlockable cli edits
   end
 end

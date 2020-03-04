@@ -1,6 +1,0 @@
-class UnlockableController < Mochi::Controllers::Lockable::UnlockController
-  def confirm
-    user = User.where { _unlock_token == params[:unlock_token] }.first
-    super(user)
-  end
-end

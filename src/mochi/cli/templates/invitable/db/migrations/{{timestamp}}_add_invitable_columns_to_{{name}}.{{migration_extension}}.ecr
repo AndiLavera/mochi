@@ -14,7 +14,7 @@ ALTER TABLE users DROP COLUMN invited_by INTEGER NULL;
 ALTER TABLE users DROP COLUMN invitation_token VARCHAR NULL;
 <% end -%>
 <% if @orm == "jennifer" -%>
-class AddInviableToUser < Jennifer::Migration::Base
+class AddInvitableToUser < Jennifer::Migration::Base
   def up
     change_table(:users) do |t|
       t.add_column(:invitation_accepted_at, :timestamp)

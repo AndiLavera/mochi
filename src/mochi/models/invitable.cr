@@ -98,12 +98,13 @@ module Mochi::Models
       self.invited_by = invited_by if invited_by
       self.invitation_token = generate_invitation_token
 
-      if save #(validate: false)
+      if save! #(validate: false)
         (token = invitation_token) ? (return unless token) : return
 
         (mailer_class = Mochi.configuration.mailer_class) ? (return unless mailer_class) : return
 
-        mailer_class.new.confirmation_instructions(self, token) unless skip_invitation
+        mailer_class.new.invitation_instructions(self, token) unless skip_invitation
+        true
       else
         rollback_invitation
       end
