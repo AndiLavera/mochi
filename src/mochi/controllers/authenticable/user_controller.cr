@@ -20,21 +20,21 @@ class Mochi::Controllers::Authenticable::UserController < Mochi::Controllers::Ap
   def create
     user = User.new user_params.validate!
     user.password = params[:password]
-
+    # TODO: Refactor
     if user.is_a? Mochi::Models::Confirmable
       if user.valid? && user.save
-        return redirect_to "/", flash: {"success" => "Please Check Your Email For The Activation Link"}
+        redirect_to "/", flash: {"success" => "Please Check Your Email For The Activation Link"}
       else
         flash[:danger] = "Could not create Resource!"
-        return render("user/new.ecr")
+        render("user/new.ecr")
       end
     else
       if user.valid? && user.save
         session[:user_id] = user.id
-        return redirect_to "/", flash: {"success" => "Created resource successfully."}
+        redirect_to "/", flash: {"success" => "Created resource successfully."}
       else
         flash[:danger] = "Could not create Resource!"
-        return render("user/new.ecr")
+        render("user/new.ecr")
       end
     end
   end

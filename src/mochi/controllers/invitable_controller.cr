@@ -7,7 +7,6 @@ class Mochi::Controllers::Invitable::Jennifer::InvitableController < Mochi::Cont
 
   def edit(user)
     unless user
-      user = User.new
       return redirect_to "/", flash: {"danger" => "Invalid authenticity token."}
     end
     render("invitable/edit.ecr")

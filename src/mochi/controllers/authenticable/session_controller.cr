@@ -1,17 +1,18 @@
 class Mochi::Controllers::Authenticable::SessionController < Mochi::Controllers::ApplicationController
+  getter user = User.new
+
   def new
-    user = User.new
     render("session/new.ecr")
   end
 
-  def create(user)
+  def create(user) # ameba:disable Metrics/CyclomaticComplexity
     unless user
       flash[:danger] = "Invalid email or password"
       user = User.new
       return render("session/new.ecr")
     end
 
-    if user.responds_to?(:password_reset_in_progress) &&
+    if user.is_a? Mochi::Models::Recoverable &&
        user.password_reset_in_progress
       flash[:warning] = "Please finish resetting your password"
       return render("session/new.ecr")

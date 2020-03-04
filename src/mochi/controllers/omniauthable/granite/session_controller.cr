@@ -14,7 +14,6 @@ class Mochi::Controllers::Omniauthable::Granite::SessionController < Mochi::Cont
       redirect_to "/"
     else
       flash[:danger] = "Invalid. It doesn't look like you have registered"
-      user = User.new
       redirect_to "/"
     end
   end
