@@ -1,5 +1,5 @@
 /lib/
-/bin/mochi
+/bin/
 /.shards/
 *.dwarf
 

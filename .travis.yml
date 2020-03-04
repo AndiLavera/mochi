@@ -17,7 +17,7 @@ env:
 
 script:
   - crystal tool format --check
-  - ./bin/ameba
+  - crystal bin/ameba.cr
   - crystal spec/sam.cr -- db:migrate
   - crystal spec --order random --error-on-warnings
   - crystal docs
