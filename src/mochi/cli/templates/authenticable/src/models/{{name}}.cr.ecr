@@ -6,7 +6,9 @@ class <%= class_name %> < Granite::Base
     # :confirmable,
     # :trackable,
     # :omniauthable,
-    # :recoverable
+    # :recoverable,
+    # :lockable,
+    # :invitable
   )
 
   connection <%= config.database %>
@@ -61,7 +63,9 @@ class <%= class_name %> < Jennifer::Model::Base
     # :confirmable,
     # :trackable,
     # :omniauthable,
-    # :recoverable
+    # :recoverable,
+    # :lockable,
+    # :invitable
   )
 
   with_timestamps

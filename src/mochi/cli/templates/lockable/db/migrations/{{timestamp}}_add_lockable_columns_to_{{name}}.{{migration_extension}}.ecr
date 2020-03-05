@@ -1,7 +1,7 @@
 <% if @orm == "granite" -%>
 -- +micrate Up
 ALTER TABLE users ADD COLUMN locked_at TIMESTAMP NULL;
-ALTER TABLE users ADD COLUMN failed_attempts INTEGER NULL;
+ALTER TABLE users ADD COLUMN failed_attempts INTEGER NULL DEFAULT 0;
 ALTER TABLE users ADD COLUMN unlock_token VARCHAR NULL;
 
 -- +micrate Down
@@ -14,7 +14,7 @@ class AddLockableToUser < Jennifer::Migration::Base
   def up
     change_table(:users) do |t|
       t.add_column(:locked_at, :timestamp)
-      t.add_column(:failed_attempts, :integer)
+      t.add_column(:failed_attempts, :integer, { :default => 0 })
       t.add_column(:unlock_token, :string)
     end
   end

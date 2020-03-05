@@ -1,4 +1,4 @@
-class Mochi::Controllers::Invitable::Jennifer::InvitableController < Mochi::Controllers::ApplicationController
+class Mochi::Controllers::Invitable::InvitableController < Mochi::Controllers::ApplicationController
   getter user = User.new
 
   def new
