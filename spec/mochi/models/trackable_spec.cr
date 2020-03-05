@@ -15,7 +15,7 @@ describe Mochi::Models::Trackable do
       user.last_sign_in_at.should eq(user.current_sign_in_at)
 
       request.remote_address = "127.0.98.16"
-
+      sleep(1) # Tests go too fast. Time will be identical without sleep
       user.update_tracked_fields(request)
       user.sign_in_count.should eq(2)
       user.last_sign_in_ip.should eq("127.0.98.15")
