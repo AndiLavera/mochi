@@ -9,7 +9,7 @@ The Mochi CLI makes installation easy. Please give a thanks to the amber core te
 
 ## Documentation
 ### API Docs
-[API Documentation](https://sundaecr.github.io/mochi/)
+[API Documentation](https://gitlato.github.io/mochi/)
 
 ### Gitbook
 [Gitbook](https://awcrotwell.gitbook.io/mochi/)
