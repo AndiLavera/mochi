@@ -75,7 +75,7 @@ module Mochi::Models
 
     # Verifies whether a user has been invited or not
     def invited_to_sign_up?
-      accepting_invitation? || (persisted? && invitation_token.present?)
+      accepting_invitation? || (persisted? && invitation_token)
     end
 
     # Verifies whether a user accepted an invitation (false when user is accepting it)

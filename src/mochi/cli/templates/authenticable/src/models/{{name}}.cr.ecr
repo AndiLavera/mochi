@@ -15,9 +15,8 @@ class <%= class_name %> < Granite::Base
   <%= "table #{table_name}" %>
 
   column id : Int64, primary: true
-<% @fields.reject{|f| f.hidden }.each do |field| -%>
-  column <%= field.name %> : <%= field.cr_type %>?
-<% end -%>
+  column email : String = ""
+  column password_digest : String?
 
   # Uncomment these for the Confirmable
   # column confirmation_token : String
