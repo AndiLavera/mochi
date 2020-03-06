@@ -34,7 +34,7 @@ module Mochi::Models
 
       self.invitation_accepted_at = Time.utc
       self.invitation_token = nil
-      if self.responds_to?(:confirmation_required?) && self.confirmation_required?
+      if confirmation_required_for_invited? && self.is_a?(Mochi::Models::Confirmable)
         self.confirmed_at = self.invitation_accepted_at
         @confirmation_set = true
       else
@@ -59,7 +59,7 @@ module Mochi::Models
     def rollback_accepted_invitation
       self.invitation_token = @invitation_token_was
       self.invitation_accepted_at = nil
-      if @confirmation_set && self.responds_to?(:confirmed_at=)
+      if @confirmation_set && self.is_a?(Mochi::Models::Confirmable)
         self.confirmed_at = nil
       end
     end
@@ -75,7 +75,7 @@ module Mochi::Models
 
     # Verifies whether a user has been invited or not
     def invited_to_sign_up?
-      accepting_invitation? || (persisted? && invitation_token.present?)
+      accepting_invitation? || (persisted? && invitation_token)
     end
 
     # Verifies whether a user accepted an invitation (false when user is accepting it)
@@ -91,20 +91,20 @@ module Mochi::Models
     # Main method for inviting
     # Reset invitation token and send invitation again
     def invite!(invited_by = nil, skip_invitation = false)
-      # This is an order-dependant assignment, this can't be moved
-      was_invited = invited_to_sign_up?
+      # was_invited = invited_to_sign_up?
 
       self.invitation_created_at = Time.utc
       self.invitation_sent_at = self.invitation_created_at unless skip_invitation
       self.invited_by = invited_by if invited_by
       self.invitation_token = generate_invitation_token
 
-      if save #(validate: false)
+      if save! # (validate: false)
         (token = invitation_token) ? (return unless token) : return
 
         (mailer_class = Mochi.configuration.mailer_class) ? (return unless mailer_class) : return
 
-        mailer_class.new.confirmation_instructions(self, token) unless skip_invitation
+        mailer_class.new.invitation_instructions(self, token) unless skip_invitation
+        true
       else
         rollback_invitation
       end
@@ -124,13 +124,8 @@ module Mochi::Models
       invited_to_sign_up? && invitation_period_valid?
     end
 
-    # Enforce password when invitation is being accepted
-    def password_required?
-      true
-    end
-
-    def confirmation_required_for_invited?
-      responds_to?(:confirmation_required?) && confirmation_required?
+    private def confirmation_required_for_invited?
+      self.is_a?(Mochi::Models::Confirmable) ? self.confirmation_required? : false
     end
 
     def invitation_due_at

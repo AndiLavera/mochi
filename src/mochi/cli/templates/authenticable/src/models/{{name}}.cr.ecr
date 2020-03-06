@@ -6,16 +6,17 @@ class <%= class_name %> < Granite::Base
     # :confirmable,
     # :trackable,
     # :omniauthable,
-    # :recoverable
+    # :recoverable,
+    # :lockable,
+    # :invitable
   )
 
   connection <%= config.database %>
   <%= "table #{table_name}" %>
 
   column id : Int64, primary: true
-<% @fields.reject{|f| f.hidden }.each do |field| -%>
-  column <%= field.name %> : <%= field.cr_type %>?
-<% end -%>
+  column email : String = ""
+  column password_digest : String?
 
   # Uncomment these for the Confirmable
   # column confirmation_token : String
@@ -38,6 +39,18 @@ class <%= class_name %> < Granite::Base
   # column reset_password_sent_at : Time?
   # column reset_password_token : String?
   # column password_reset_in_progress : Bool = false
+
+  # Uncomment for lockable
+  # column locked_at : Time?
+  # column failed_attempts : Int32 = 0
+  # column unlock_token : String?
+
+  # Uncomment for Invitable
+  # column invitation_accepted_at : Time?
+  # column invitation_created_at : Time?
+  # column invitation_token : String?
+  # column invited_by : Int64?
+  # column invitation_sent_at : Time?
   timestamps
 end
 <% end -%>
@@ -49,7 +62,9 @@ class <%= class_name %> < Jennifer::Model::Base
     # :confirmable,
     # :trackable,
     # :omniauthable,
-    # :recoverable
+    # :recoverable,
+    # :lockable,
+    # :invitable
   )
 
   with_timestamps
@@ -80,7 +95,19 @@ class <%= class_name %> < Jennifer::Model::Base
     # Uncomment for recoverable
     # reset_password_sent_at: { type: Time? },
     # reset_password_token: { type: String? },
-    # password_reset_in_progress: { type: Bool?, default: false }
+    # password_reset_in_progress: { type: Bool?, default: false },
+
+    # Uncomment for lockable
+    # locked_at: { type: Time? },
+    # failed_attempts: { type: Int32, default: 0, null: false  },
+    # unlock_token: { type: String? },
+
+    # Uncomment for Invitable
+    # invitation_accepted_at: { type: Time? },
+    # invitation_created_at: { type: Time? },
+    # invitation_token: { type: String? },
+    # invited_by: { type: Int64? },
+    # invitation_sent_at: { type: Time? },
   )
 end
 <% end -%>

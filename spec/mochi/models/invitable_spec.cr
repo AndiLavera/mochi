@@ -2,10 +2,11 @@ require "../../spec_helper"
 
 describe Mochi::Models::Invitable do
   USER_CLASSES.each do |user_class|
-    describe "#{name_formatter(user_class)}" do
+    describe "#{user_class}" do
       it "should invite new user & rollback" do
         user = user_class.new
         user.email = "l0_test#{UUID.random}@email.com"
+
         user.invite!
         user.invitation_created_at.should_not be_nil
         user.invitation_sent_at.should_not be_nil
@@ -27,11 +28,13 @@ describe Mochi::Models::Invitable do
         user.accept_invitation!
         user.invitation_accepted_at.should_not be_nil
         user.invitation_token.should be_nil
-        user.confirmed_at.should eq(user.invitation_accepted_at)
+        if user.is_a? Mochi::Models::Confirmable
+          user.confirmed_at.should eq(user.invitation_accepted_at)
+        end
         user.invitation_accepted?.should be_true
       end
 
-      it "should accept invite & rollback properly" do
+      it "should fail to accept invite & rollback properly" do
         user = user_class.new
         user.email = "l1_test#{UUID.random}@email.com"
 
@@ -42,7 +45,9 @@ describe Mochi::Models::Invitable do
 
         user.invitation_accepted_at.should be_nil
         user.invitation_token.should eq(token)
-        user.confirmed_at.should be_nil
+        if user.is_a? Mochi::Models::Confirmable
+          user.confirmed_at.should be_nil
+        end
       end
 
       it "should be an expired invite token" do

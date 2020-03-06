@@ -50,6 +50,10 @@ development_dependencies:
     github: luckyframework/lucky
     branch: master
 
+  ameba:
+    github: crystal-ameba/ameba
+    version: ~> 0.11.0
+
 crystal: 0.33.0
 
 license: MIT

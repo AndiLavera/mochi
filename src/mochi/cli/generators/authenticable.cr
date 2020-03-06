@@ -2,7 +2,7 @@ require "./generator"
 require "./field"
 
 module Mochi::CLI
-  class Auth < Generator
+  class Authenticable < Generator
     command :authenticable
     directory "#{__DIR__}/../templates/authenticable"
 

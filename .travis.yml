@@ -16,8 +16,10 @@ env:
   - TEST_SUITE=./spec/mochi
 
 script:
+  - crystal tool format --check
+  - crystal bin/ameba.cr
   - crystal spec/sam.cr -- db:migrate
-  - crystal spec
+  - crystal spec --order random --error-on-warnings
   - crystal docs
 
 

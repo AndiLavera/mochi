@@ -1,5 +1,5 @@
 require "jennifer"
-require "./database"
+require "./support/databases"
 
 require "./db/jennifer_migrations/*"
 require "sam"

@@ -19,9 +19,15 @@ module Mochi::CLI
     def pre_render(directory, **args)
       # add_plugs
       # inherit_plug :web, :auth
-      # add_routes
+      add_routes
       # add_dependencies
       # inject_application_controller_methods
+    end
+
+    private def add_routes
+      add_routes :web, <<-ROUTES
+        get "/unlock", UnlockableController, :update
+      ROUTES
     end
   end
 end

@@ -1,4 +1,9 @@
 require "mochi"
+# Uncomment this is you plan to use a custom mailing class
+#
+# Make sure to comment out `require "mailers/**"` in the amber mailer initializer
+# require "../../src/mailers/**"
+require "mochi/mailers/default_mailer"
 Mochi.setup do |config|
   # Set the view extension
   # Useful if you use slang or someother
@@ -20,10 +25,10 @@ Mochi.setup do |config|
   config.confirm_within = 7
 
   # Configure which class recieves the call to all emails
-  # Default is `Mochi::Mailer`
-  # If you change this, make sure to implment all methods
-  # otherwise you will recieve errors
-  config.mailer_class = Mochi::Mailer
+  # Default is `Mochi::DefaultMailer`
+  # If you change this, make sure to implment all abstract methods
+  # & make sure to comment out the require mailer at the top of this file
+  config.mailer_class = Mochi::DefaultMailer
 
   # How many days a password_reset_token lasts
   # Default is `7`

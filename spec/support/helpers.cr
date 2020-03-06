@@ -1,7 +1,9 @@
 require "./helpers/controller_helper"
-#require "./helpers/cli_helper"
+require "./helpers/render_helper"
+
+# require "./helpers/cli_helper"
 
 module Helpers
   include ControllerHelper
-  #include CLIHelper
+  # include CLIHelper
 end

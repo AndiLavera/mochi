@@ -2,7 +2,7 @@
 -- +micrate Up
 ALTER TABLE <%= @name %>s ADD COLUMN reset_password_token VARCHAR NULL;
 ALTER TABLE <%= @name %>s ADD COLUMN reset_password_sent_at TIMESTAMP NULL;
-ALTER TABLE <%= @name %>s ADD COLUMN password_reset_in_progress BOOL NULL;
+ALTER TABLE <%= @name %>s ADD COLUMN password_reset_in_progress BOOL NULL DEFAULT false;
 
 -- +micrate Down
 ALTER TABLE <%= @name %>s DROP COLUMN reset_password_token VARCHAR NULL;
@@ -15,7 +15,7 @@ class AddRecoverableTo<%= class_name %> < Jennifer::Migration::Base
     change_table(:<%= @name %>s) do |t|
       t.add_column(:reset_password_sent_at, :timestamp)
       t.add_column(:reset_password_token, :string)
-      t.add_column(:password_reset_in_progress, :bool)
+      t.add_column(:password_reset_in_progress, :bool, { :default => false })
     end
   end
 

@@ -8,7 +8,6 @@ module Mochi::Controllers::Authenticable::SessionController
   end
 
   macro session_create
-    # QUERY USER
     contract = Contract.new(self)
     unless user
       contract.flash.danger("Invalid email or password")

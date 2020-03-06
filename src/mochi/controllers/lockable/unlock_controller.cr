@@ -1,5 +1,5 @@
 class Mochi::Controllers::Lockable::UnlockController < Mochi::Controllers::ApplicationController
-  def confirm(user)
+  def update(user)
     return redirect_to "/", flash: {"error" => "Invalid authenticity token."} if user.nil?
 
     if user.unlock_access!

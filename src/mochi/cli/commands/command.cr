@@ -1,4 +1,5 @@
 require "logger"
+
 # :nodoc:
 abstract class Command < Cli::Command
   def info(msg)

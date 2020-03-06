@@ -1,9 +1,14 @@
 module ControllerHelper
-  def build_controller(referer = "")
+  def build_get_request(referer = "")
     request = HTTP::Request.new("GET", "/")
     request.headers.add("Referer", referer)
-    context = create_context(request)
-    HelloController.new(context)
+    create_context(request)
+  end
+
+  def build_post_request(route = "/", referer = "")
+    request = HTTP::Request.new("POST", route)
+    request.headers.add("Referer", referer)
+    create_context(request)
   end
 
   def create_context(request)

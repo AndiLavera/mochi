@@ -1,0 +1,29 @@
+class InvitableController < Mochi::Controllers::Invitable::InvitableController
+  def new
+    super
+  end
+
+  def edit
+<% if @orm == "granite" -%>
+    user = User.find_by(invitation_token: params[:invite_token])
+<% end -%>
+<% if @orm == "jennifer" -%>
+    user = User.where { _invitation_token == params[:invite_token] }.first
+<% end -%>
+    super(user)
+  end
+
+  def create
+    super
+  end
+
+  def update
+<% if @orm == "granite" -%>
+    user = User.find_by(email: params["email"].to_s)
+<% end -%>
+<% if @orm == "jennifer" -%>
+    user = User.where { _email == params["email"].to_s }.first
+<% end -%>
+    super(user)
+  end
+end

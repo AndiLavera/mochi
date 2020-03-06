@@ -2,7 +2,7 @@ require "./generator"
 require "./field"
 
 module Mochi::CLI
-  class Confirm < Generator
+  class Confirmable < Generator
     command :confirmable
     directory "#{__DIR__}/../templates/confirmable"
 

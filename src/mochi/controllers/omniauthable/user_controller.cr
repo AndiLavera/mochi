@@ -16,7 +16,6 @@ class Mochi::Controllers::Omniauthable::UserController < Mochi::Controllers::App
       redirect_to "/"
     else
       flash[:danger] = "Invalid email or password"
-      user = User.new
       redirect_to "/"
     end
   end

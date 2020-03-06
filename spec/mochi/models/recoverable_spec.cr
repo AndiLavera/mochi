@@ -1,7 +1,6 @@
 require "../../spec_helper"
 
 describe Mochi::Models::Recoverable do
-  Mochi.configuration.mailer_class = Mochi::TestMailer
   Mochi.configuration.reset_password_within = 1
 
   USER_CLASSES.each do |user_class|
