@@ -2,8 +2,8 @@ USER_CLASSES   = [User, JenniferUser]
 MAILER_CLASSES = [ConfirmationMailer, RecoveryMailer, UnlockMailer, InviteMailer]
 # Mochi.configuration.mailer_class = Mochi::TestMailer
 
-TEST_APP_NAME     = "test_app"
-CURRENT_DIR       = Dir.current
+TEST_APP_NAME = "test_app"
+CURRENT_DIR   = Dir.current
 
 require "uuid"
 require "spec"
@@ -13,6 +13,7 @@ require "./support/databases"
 
 require "../src/mochi"
 require "../src/mochi/omniauth"
+
 require "./support/mailers/*"
 require "./support/models"
 require "./support/helpers"

@@ -23,7 +23,7 @@ module Mochi::Helpers
     end
 
     def session_edit
-      render("ussessioner/edit.ecr")
+      render("session/edit.ecr")
     end
   end
 end

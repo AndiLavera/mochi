@@ -54,8 +54,4 @@ module Mochi::Controllers::Authenticable::UserController
   private def success_message(user)
     user.is_a?(Mochi::Models::Confirmable) ? "Please Check Your Email For The Activation Link" : "Created resource successfully."
   end
-
-  private def success_message(user)
-    user.is_a?(Mochi::Models::Confirmable) ? "Please Check Your Email For The Activation Link" : "Created resource successfully."
-  end
 end

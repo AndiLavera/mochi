@@ -1,7 +1,39 @@
 require "../../../spec_helper"
+require "../../../../src/mochi/helpers/amber"
 
-class Mochi::Controllers::Authenticable::UserController
-  include RenderHelper
+class UserController < Amber::Controller::Base
+  include Mochi::Controllers::Authenticable::UserController
+
+  def new
+    user_new
+  end
+
+  def show
+    user_show
+  end
+
+  def edit
+    user_edit
+  end
+
+  def create
+    user_create
+  end
+
+  def update
+    user_update
+  end
+
+  def destroy
+    user_destroy
+  end
+
+  def resource_params
+    params.validation do
+      required :email
+      required :password
+    end
+  end
 end
 
 module Mochi::Authenticable::Controllers
@@ -12,7 +44,7 @@ module Mochi::Authenticable::Controllers
       email = "test#{UUID.random}@email.xyz"
       context = build_post_request("/?email=#{email}&password=password123")
 
-      Mochi::Controllers::Authenticable::UserController.new(context).create
+      UserController.new(context).create
 
       user = User.find_by(email: email)
       if user.nil?
@@ -30,7 +62,7 @@ module Mochi::Authenticable::Controllers
       email = "test#{UUID.random}@email.xyz"
       context = build_post_request("/?email=#{email}&password=p")
 
-      Mochi::Controllers::Authenticable::UserController.new(context).create
+      UserController.new(context).create
 
       user = User.find_by(email: email)
       user.should be_nil
