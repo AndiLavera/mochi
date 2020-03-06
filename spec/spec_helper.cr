@@ -3,8 +3,6 @@ MAILER_CLASSES = [ConfirmationMailer, RecoveryMailer, UnlockMailer, InviteMailer
 # Mochi.configuration.mailer_class = Mochi::TestMailer
 
 TEST_APP_NAME     = "test_app"
-TESTING_APP       = "./tmp/#{TEST_APP_NAME}"
-APP_TEMPLATE_PATH = "../../src/amber/cli/templates/app"
 CURRENT_DIR       = Dir.current
 
 require "uuid"
