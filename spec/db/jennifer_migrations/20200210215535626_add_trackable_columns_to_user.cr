@@ -1,7 +1,7 @@
 class AddTrackableToUser < Jennifer::Migration::Base
   def up
     change_table(:jennifer_users) do |t|
-      t.add_column(:sign_in_count, :integer, { :default => 0 })
+      t.add_column(:sign_in_count, :integer, {:default => 0})
       t.add_column(:current_sign_in_ip, :string)
       t.add_column(:last_sign_in_ip, :string)
       t.add_column(:current_sign_in_at, :timestamp)

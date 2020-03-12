@@ -1,7 +1,7 @@
 class AddConfirmableToUser < Jennifer::Migration::Base
   def up
     change_table(:jennifer_users) do |t|
-      t.add_column(:confirmed, :bool)
+      t.add_column(:confirmed, :bool, {:default => false})
       t.add_column(:confirmed_at, :timestamp)
       t.add_column(:confirmation_token, :string)
       t.add_column(:confirmation_sent_at, :timestamp)
