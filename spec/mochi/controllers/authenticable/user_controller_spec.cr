@@ -6,6 +6,8 @@ end
 
 module Mochi::Authenticable::Controllers
   describe Mochi::Controllers::Authenticable::UserController do
+    # TODO: Fails for unrelated reasons of the controller - something to do with db
+
     # it "should make a new user" do
     #   # Setup controller info
     #   user_count = User.all.size
