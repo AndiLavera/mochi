@@ -88,7 +88,7 @@ module Mochi::Models
     def send_reset_password_instructions_notification
       (mailer_class = Mochi.configuration.mailer_class) ? (return unless mailer_class) : return
 
-      (token = confirmation_token) ? (return unless token) : return
+      (token = reset_password_token) ? (return unless token) : return
 
       mailer_class.new.reset_password_instructions(self, token)
     end

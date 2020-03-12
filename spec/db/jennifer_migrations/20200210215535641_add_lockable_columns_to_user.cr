@@ -3,7 +3,7 @@ class AddLockableToJenniferUser < Jennifer::Migration::Base
     change_table(:jennifer_users) do |t|
       t.add_column(:locked_at, :timestamp)
       t.add_column(:unlock_token, :string)
-      t.add_column(:failed_attempts, :integer)
+      t.add_column(:failed_attempts, :integer, {:default => 0})
     end
   end
 
