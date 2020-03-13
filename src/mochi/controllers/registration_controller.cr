@@ -1,4 +1,5 @@
-module Mochi::Controllers::Confirmable::RegistrationController
+# Confirmable
+module Mochi::Controllers::RegistrationController
   macro registration_update
     contract = Contract.new(self)
     unless user

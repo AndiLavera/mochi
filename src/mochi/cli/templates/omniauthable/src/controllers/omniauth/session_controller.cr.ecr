@@ -1,9 +1,26 @@
-class Omniauthable::SessionController < Mochi::Controllers::Omniauthable::<%= @orm.capitalize %>::SessionController
+class Omniauthable::SessionController < ApplicationController
+  include Mochi::Controllers::Omniauthable::SessionController
+
   def create
-    super
+    omniauth_session_create
   end
 
   def callback
-    super
+    url = "#{Amber.settings.host}/omniauth/#{params[:provider]}/callback"
+    fakeuser = Mochi::Omniauthable::Provider.user(params[:provider], {"code" => params[:code]}, url)
+<% if @orm == "granite" -%>
+    user = User.find_by(uid: fakeuser.uid)
+<% end -%>
+<% if @orm == "jennifer" -%>
+    user = User.where { _uid == fakeuser.uid }.first
+<% end -%>
+    omniauth_session_callback
+  end
+
+  def resource_params
+    params.validation do
+      required :provider
+      optional :code
+    end
   end
 end

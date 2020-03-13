@@ -1,6 +1,5 @@
-module Mochi::Controllers::Recoverable::PasswordController
-  getter user = User.new
-
+# Recoverable
+module Mochi::Controllers::PasswordController
   macro recovery_new
     contract = Contract.new(self)
     contract.render.recovery_new
@@ -51,14 +50,6 @@ module Mochi::Controllers::Recoverable::PasswordController
     else
       contract.flash.danger("Invalid authenticity token.")
       contract.render.recovery_new
-    end
-  end
-
-  private def resource_params
-    params.validation do
-      optional :email
-      optional :new_password
-      optional :reset_token
     end
   end
 end

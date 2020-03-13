@@ -1,4 +1,5 @@
-module Mochi::Controllers::Authenticable::UserController
+# Authenticable
+module Mochi::Controllers::UserController
   include Mochi::Helpers
 
   macro user_show

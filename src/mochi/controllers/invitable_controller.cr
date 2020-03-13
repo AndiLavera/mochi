@@ -1,6 +1,5 @@
-module Mochi::Controllers::Invitable::InvitableController
-  getter user = User.new
-
+# Invitable
+module Mochi::Controllers::InvitableController
   macro invite_new
     Contract.new.render.invite_new
   end
@@ -50,14 +49,6 @@ module Mochi::Controllers::Invitable::InvitableController
     else
       contract.flash.danger("Could accept invite. Please try again.")
       contract.render.invite_edit
-    end
-  end
-
-  def resource_params
-    params.validation do
-      optional :email
-      optional :invite_token
-      optional :password
     end
   end
 end

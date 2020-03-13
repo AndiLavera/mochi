@@ -1,4 +1,5 @@
-module Mochi::Controllers::Lockable::UnlockController
+# Lockable
+module Mochi::Controllers::UnlockController
   macro unlock_update
     contract = Contract.new(self)
 
@@ -14,12 +15,6 @@ module Mochi::Controllers::Lockable::UnlockController
     else
       contract.flash.danger("Token has expired.")
       contract.redirect.to("/")
-    end
-  end
-
-  private def resource_params
-    params.validation do
-      required :unlock_token
     end
   end
 end

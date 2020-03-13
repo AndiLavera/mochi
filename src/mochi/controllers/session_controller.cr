@@ -1,8 +1,8 @@
-module Mochi::Controllers::Authenticable::SessionController
+# Authenticable
+module Mochi::Controllers::SessionController
   include Mochi::Helpers
 
   macro session_new
-    #user = User.new
     contract = Contract.new(self)
     contract.render.session_new
   end
@@ -53,13 +53,6 @@ module Mochi::Controllers::Authenticable::SessionController
     contract.session.destroy(:user_id)
     contract.flash.info("Logged out. See ya later!")
     contract.redirect.to("/")
-  end
-
-  def resource_params
-    params.validation do
-      required :email
-      required :password
-    end
   end
 
   private def failed_sign_in(user)
