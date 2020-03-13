@@ -1,19 +1,24 @@
-class Mochi::Controllers::Invitable::InvitableController < Mochi::Controllers::ApplicationController
+module Mochi::Controllers::Invitable::InvitableController
   getter user = User.new
 
-  def new
-    render("invitable/new.ecr")
+  macro invite_new
+    Contract.new.render.invite_new
   end
 
-  def edit(user)
+  macro invite_edit
+    contract = Contract.new
+
     unless user
-      return redirect_to "/", flash: {"danger" => "Invalid authenticity token."}
+      contract.flash.danger("Invalid authenticity token.")
+      return contract.redirect.to("/")
     end
-    render("invitable/edit.ecr")
+
+    contract.render.invite_edit
   end
 
   # Used to create a new password recovery
-  def create
+  macro invite_create
+    contract = Contract.new
     user = User.new
     user.email = params[:email]
 
@@ -22,30 +27,33 @@ class Mochi::Controllers::Invitable::InvitableController < Mochi::Controllers::A
     end
 
     if user.invite!(invited_by)
-      redirect_to "/", flash: {"success" => "Invite successfully created & sent."}
+      contract.flash.success("Invite successfully created & sent.")
+      contract.redirect.to("/")
     else
-      flash[:danger] = "Could not create new invite. Please try again."
-      render("invitable/new.ecr")
+      contract.flash.danger("Could not create new invite. Please try again.")
+      contract.render.invite_new
     end
   end
 
   # Used to confirm & reactive a user account
-  def update(user)
+  macro invite_update
     unless user
-      return redirect_to "/", flash: {"danger" => "Invalid."}
+      contract.flash.danger("Invalid.")
+      return contract.redirect.to("/")
     end
 
     user.password = params[:password]
 
     if user.accept_invitation!
-      redirect_to "/", flash: {"success" => "Invite accepted."}
+      contract.flash.success("Invite accepted.")
+      contract.redirect.to("/")
     else
-      flash[:danger] = "Could accept invite. Please try again."
-      render("invitable/edit.ecr")
+      contract.flash.danger("Could accept invite. Please try again.")
+      contract.render.invite_edit
     end
   end
 
-  private def recovery_params
+  def resource_params
     params.validation do
       optional :email
       optional :invite_token

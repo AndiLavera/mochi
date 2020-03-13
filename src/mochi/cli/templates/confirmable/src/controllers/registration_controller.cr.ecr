@@ -1,5 +1,13 @@
-class RegistrationController < Mochi::Controllers::Confirmable::<%= @orm.capitalize %>::RegistrationController
-  def confirm
-    super
+class RegistrationController < ApplicationController
+  include Mochi::Controllers::Confirmable::RegistrationController
+
+  def update
+<% if @orm == "granite" -%>
+    user = User.find_by(confirmation_token: params[:confirmation_token])
+<% end -%>
+<% if @orm == "jennifer" -%>
+    user = User.where { _confirmation_token == params[:confirmation_token] }.first
+<% end -%>
+    registration_update()
   end
 end

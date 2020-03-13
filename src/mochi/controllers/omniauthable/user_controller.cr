@@ -1,9 +1,10 @@
-class Mochi::Controllers::Omniauthable::UserController < Mochi::Controllers::ApplicationController
-  def create
-    redirect_to Mochi::Omniauthable::Provider.authorize_uri(params[:provider], "#{Amber.settings.host}/omniauth/user/#{params[:provider]}/callback")
+module Mochi::Controllers::Omniauthable::UserController
+  # TODO: `Amber.settings.host` - Probably need to add a settings handler
+  macro omniauth_create
+    Contract.new.redirect.to Mochi::Omniauthable::Provider.authorize_uri(params[:provider], "#{Amber.settings.host}/omniauth/user/#{params[:provider]}/callback")
   end
 
-  def callback
+  macro omniauth_callback
     callback_url = "#{Amber.settings.host}/omniauth/user/#{params[:provider]}/callback"
 
     fakeuser = Mochi::Omniauthable::Provider.user(params[:provider], {"code" => params[:code]}, callback_url)
@@ -11,16 +12,16 @@ class Mochi::Controllers::Omniauthable::UserController < Mochi::Controllers::App
     user = User.new(fakeuser)
 
     if user.save
-      session[:user_id] = user.uid
-      flash[:info] = "Successfully logged in"
-      redirect_to "/"
+      contract.session.create(:user_id, user.uid)
+      contract.flash.success("Successfully logged in")
+      contract.redirect.to("/")
     else
-      flash[:danger] = "Invalid email or password"
-      redirect_to "/"
+      contract.flash.danger("Invalid email or password")
+      contract.redirect.to("/")
     end
   end
 
-  private def oauth_params
+  def resource_params
     params.validation do
       required :provider
       optional :code

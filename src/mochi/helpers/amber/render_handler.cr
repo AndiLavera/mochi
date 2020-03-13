@@ -25,5 +25,17 @@ module Mochi::Helpers
     def session_edit
       render("session/edit.ecr")
     end
+
+    def recovery_new
+      render("recovery/new.ecr")
+    end
+
+    def invite_new
+      render("invitable/new.ecr")
+    end
+
+    def invite_edit
+      render("invitable/edit.ecr")
+    end
   end
 end
