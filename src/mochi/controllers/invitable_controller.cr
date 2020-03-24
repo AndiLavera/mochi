@@ -1,5 +1,7 @@
 # Invitable
 module Mochi::Controllers::InvitableController
+  include Mochi::Helpers
+
   macro invite_new
     Contract.new.render.invite_new
   end

@@ -11,7 +11,7 @@ class UnlockableController < ApplicationController
     unlock_update()
   end
 
-  private def resource_params
+  def resource_params
     params.validation do
       required :unlock_token
     end

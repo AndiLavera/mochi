@@ -1,6 +1,6 @@
 module Mochi::Helpers
   abstract class Render
-    def initialize(c : UserController)
+    def initialize(c : SessionController)
       @controller = c
     end
 

@@ -1,5 +1,7 @@
 # Recoverable
 module Mochi::Controllers::PasswordController
+  include Mochi::Helpers
+
   macro recovery_new
     contract = Contract.new(self)
     contract.render.recovery_new
@@ -15,7 +17,9 @@ module Mochi::Controllers::PasswordController
       return contract.render.recovery_new
     end
 
-    if user.reset_password(recovery_params["new_password"]) && user.send_reset_password_instructions
+    new_password = contract.params.fetch("new_password")
+
+    if new_password && user.reset_password(new_password) && user.send_reset_password_instructions
       contract.flash.success("Password reset. Please check your email")
       contract.redirect.to("/")
     else
@@ -34,7 +38,9 @@ module Mochi::Controllers::PasswordController
       return contract.redirect.to("/reset/password")
     end
 
-    if user.reset_password_by_token!(recovery_params["reset_token"]) && user.errors.empty?
+    reset_token = contract.params.fetch("reset_token")
+
+    if reset_token && user.reset_password_by_token!(reset_token) && user.errors.empty?
       # user.unlock_access! if user.is_a? Mochi::Models::Lockable
       if Mochi.configuration.sign_in_after_reset_password
         if user.is_a? Mochi::Models::Trackable

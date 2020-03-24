@@ -1,5 +1,7 @@
 # Confirmable
 module Mochi::Controllers::RegistrationController
+  include Mochi::Helpers
+
   macro registration_update
     contract = Contract.new(self)
     unless user
@@ -13,12 +15,6 @@ module Mochi::Controllers::RegistrationController
     else
       contract.flash.danger("Token has expired.")
       contract.redirect.to("/")
-    end
-  end
-
-  private def resource_params
-    params.validation do
-      required :confirmation_token
     end
   end
 end

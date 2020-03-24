@@ -1,5 +1,7 @@
 # Lockable
 module Mochi::Controllers::UnlockController
+  include Mochi::Helpers
+
   macro unlock_update
     contract = Contract.new(self)
 

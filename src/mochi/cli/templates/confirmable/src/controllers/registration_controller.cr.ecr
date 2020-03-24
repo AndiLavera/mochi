@@ -10,4 +10,10 @@ class RegistrationController < ApplicationController
 <% end -%>
     registration_update()
   end
+
+  def resource_params
+    params.validation do
+      required :confirmation_token
+    end
+  end
 end
