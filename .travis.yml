@@ -1,6 +1,8 @@
 dist: bionic
 sudo: required
 language: crystal
+  - latest
+  - nightly
 
 services:
   - postgresql
