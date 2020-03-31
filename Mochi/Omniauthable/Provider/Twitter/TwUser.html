@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.32.1">
+
+<link href="../../../../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../../../js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="github.com/gitlato/mochi">
+  <title>Mochi::Omniauthable::Provider::Twitter::TwUser - github.com/gitlato/mochi</title>
+  <script type="text/javascript">
+    CrystalDoc.base_path = "../../../../";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../../../../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/gitlato/mochi/Mochi" data-name="mochi">
+      <a href="../../../../Mochi.html">Mochi</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/CLI" data-name="mochi::cli">
+      <a href="../../../../Mochi/CLI.html">CLI</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/Authenticable" data-name="mochi::cli::authenticable">
+      <a href="../../../../Mochi/CLI/Authenticable.html">Authenticable</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/Config" data-name="mochi::cli::config">
+      <a href="../../../../Mochi/CLI/Config.html">Config</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/Confirmable" data-name="mochi::cli::confirmable">
+      <a href="../../../../Mochi/CLI/Confirmable.html">Confirmable</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/Field" data-name="mochi::cli::field">
+      <a href="../../../../Mochi/CLI/Field.html">Field</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/Generators" data-name="mochi::cli::generators">
+      <a href="../../../../Mochi/CLI/Generators.html">Generators</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/CLI/Helpers" data-name="mochi::cli::helpers">
+      <a href="../../../../Mochi/CLI/Helpers.html">Helpers</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/CLI/Helpers/Jennifer" data-name="mochi::cli::helpers::jennifer">
+      <a href="../../../../Mochi/CLI/Helpers/Jennifer.html">Jennifer</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/Helpers/Jennifer/Migration" data-name="mochi::cli::helpers::jennifer::migration">
+      <a href="../../../../Mochi/CLI/Helpers/Jennifer/Migration.html">Migration</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/Helpers/Migration" data-name="mochi::cli::helpers::migration">
+      <a href="../../../../Mochi/CLI/Helpers/Migration.html">Migration</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/Invitable" data-name="mochi::cli::invitable">
+      <a href="../../../../Mochi/CLI/Invitable.html">Invitable</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/Lockable" data-name="mochi::cli::lockable">
+      <a href="../../../../Mochi/CLI/Lockable.html">Lockable</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/CLI/MainCommand" data-name="mochi::cli::maincommand">
+      <a href="../../../../Mochi/CLI/MainCommand.html">MainCommand</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/CLI/MainCommand/Generate" data-name="mochi::cli::maincommand::generate">
+      <a href="../../../../Mochi/CLI/MainCommand/Generate.html">Generate</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/MainCommand/Generate/Help" data-name="mochi::cli::maincommand::generate::help">
+      <a href="../../../../Mochi/CLI/MainCommand/Generate/Help.html">Help</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/CLI/MainCommand/Generate/Options" data-name="mochi::cli::maincommand::generate::options">
+      <a href="../../../../Mochi/CLI/MainCommand/Generate/Options.html">Options</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/MainCommand/Generate/Options/Parser" data-name="mochi::cli::maincommand::generate::options::parser">
+      <a href="../../../../Mochi/CLI/MainCommand/Generate/Options/Parser.html">Parser</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/MainCommand/Help" data-name="mochi::cli::maincommand::help">
+      <a href="../../../../Mochi/CLI/MainCommand/Help.html">Help</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/CLI/MainCommand/Options" data-name="mochi::cli::maincommand::options">
+      <a href="../../../../Mochi/CLI/MainCommand/Options.html">Options</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/MainCommand/Options/Parser" data-name="mochi::cli::maincommand::options::parser">
+      <a href="../../../../Mochi/CLI/MainCommand/Options/Parser.html">Parser</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/Omniauthable" data-name="mochi::cli::omniauthable">
+      <a href="../../../../Mochi/CLI/Omniauthable.html">Omniauthable</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/Recoverable" data-name="mochi::cli::recoverable">
+      <a href="../../../../Mochi/CLI/Recoverable.html">Recoverable</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/CLI/Trackable" data-name="mochi::cli::trackable">
+      <a href="../../../../Mochi/CLI/Trackable.html">Trackable</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Configuration" data-name="mochi::configuration">
+      <a href="../../../../Mochi/Configuration.html">Configuration</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Controllers" data-name="mochi::controllers">
+      <a href="../../../../Mochi/Controllers.html">Controllers</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Controllers/ApplicationController" data-name="mochi::controllers::applicationcontroller">
+      <a href="../../../../Mochi/Controllers/ApplicationController.html">ApplicationController</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Controllers/Authenticable" data-name="mochi::controllers::authenticable">
+      <a href="../../../../Mochi/Controllers/Authenticable.html">Authenticable</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Controllers/Authenticable/SessionController" data-name="mochi::controllers::authenticable::sessioncontroller">
+      <a href="../../../../Mochi/Controllers/Authenticable/SessionController.html">SessionController</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Controllers/Authenticable/UserController" data-name="mochi::controllers::authenticable::usercontroller">
+      <a href="../../../../Mochi/Controllers/Authenticable/UserController.html">UserController</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Controllers/Confirmable" data-name="mochi::controllers::confirmable">
+      <a href="../../../../Mochi/Controllers/Confirmable.html">Confirmable</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Controllers/Confirmable/Granite" data-name="mochi::controllers::confirmable::granite">
+      <a href="../../../../Mochi/Controllers/Confirmable/Granite.html">Granite</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Controllers/Confirmable/Granite/RegistrationController" data-name="mochi::controllers::confirmable::granite::registrationcontroller">
+      <a href="../../../../Mochi/Controllers/Confirmable/Granite/RegistrationController.html">RegistrationController</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Controllers/Confirmable/Jennifer" data-name="mochi::controllers::confirmable::jennifer">
+      <a href="../../../../Mochi/Controllers/Confirmable/Jennifer.html">Jennifer</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Controllers/Confirmable/Jennifer/RegistrationController" data-name="mochi::controllers::confirmable::jennifer::registrationcontroller">
+      <a href="../../../../Mochi/Controllers/Confirmable/Jennifer/RegistrationController.html">RegistrationController</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Controllers/Helpers" data-name="mochi::controllers::helpers">
+      <a href="../../../../Mochi/Controllers/Helpers.html">Helpers</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Controllers/Helpers/TypeRestrictions" data-name="mochi::controllers::helpers::typerestrictions">
+      <a href="../../../../Mochi/Controllers/Helpers/TypeRestrictions.html">TypeRestrictions</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Controllers/Invitable" data-name="mochi::controllers::invitable">
+      <a href="../../../../Mochi/Controllers/Invitable.html">Invitable</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Controllers/Invitable/InvitableController" data-name="mochi::controllers::invitable::invitablecontroller">
+      <a href="../../../../Mochi/Controllers/Invitable/InvitableController.html">InvitableController</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Controllers/Lockable" data-name="mochi::controllers::lockable">
+      <a href="../../../../Mochi/Controllers/Lockable.html">Lockable</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Controllers/Lockable/UnlockController" data-name="mochi::controllers::lockable::unlockcontroller">
+      <a href="../../../../Mochi/Controllers/Lockable/UnlockController.html">UnlockController</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Controllers/Omniauthable" data-name="mochi::controllers::omniauthable">
+      <a href="../../../../Mochi/Controllers/Omniauthable.html">Omniauthable</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Controllers/Omniauthable/Granite" data-name="mochi::controllers::omniauthable::granite">
+      <a href="../../../../Mochi/Controllers/Omniauthable/Granite.html">Granite</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Controllers/Omniauthable/Granite/SessionController" data-name="mochi::controllers::omniauthable::granite::sessioncontroller">
+      <a href="../../../../Mochi/Controllers/Omniauthable/Granite/SessionController.html">SessionController</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Controllers/Omniauthable/Jennifer" data-name="mochi::controllers::omniauthable::jennifer">
+      <a href="../../../../Mochi/Controllers/Omniauthable/Jennifer.html">Jennifer</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Controllers/Omniauthable/Jennifer/SessionController" data-name="mochi::controllers::omniauthable::jennifer::sessioncontroller">
+      <a href="../../../../Mochi/Controllers/Omniauthable/Jennifer/SessionController.html">SessionController</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Controllers/Omniauthable/UserController" data-name="mochi::controllers::omniauthable::usercontroller">
+      <a href="../../../../Mochi/Controllers/Omniauthable/UserController.html">UserController</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Controllers/Recoverable" data-name="mochi::controllers::recoverable">
+      <a href="../../../../Mochi/Controllers/Recoverable.html">Recoverable</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Controllers/Recoverable/Granite" data-name="mochi::controllers::recoverable::granite">
+      <a href="../../../../Mochi/Controllers/Recoverable/Granite.html">Granite</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Controllers/Recoverable/Granite/PasswordController" data-name="mochi::controllers::recoverable::granite::passwordcontroller">
+      <a href="../../../../Mochi/Controllers/Recoverable/Granite/PasswordController.html">PasswordController</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Controllers/Recoverable/Jennifer" data-name="mochi::controllers::recoverable::jennifer">
+      <a href="../../../../Mochi/Controllers/Recoverable/Jennifer.html">Jennifer</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Controllers/Recoverable/Jennifer/PasswordController" data-name="mochi::controllers::recoverable::jennifer::passwordcontroller">
+      <a href="../../../../Mochi/Controllers/Recoverable/Jennifer/PasswordController.html">PasswordController</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/DefaultMailer" data-name="mochi::defaultmailer">
+      <a href="../../../../Mochi/DefaultMailer.html">DefaultMailer</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Mailer" data-name="mochi::mailer">
+      <a href="../../../../Mochi/Mailer.html">Mailer</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Models" data-name="mochi::models">
+      <a href="../../../../Mochi/Models.html">Models</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Models/Authenticable" data-name="mochi::models::authenticable">
+      <a href="../../../../Mochi/Models/Authenticable.html">Authenticable</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Models/Authenticable/Validations" data-name="mochi::models::authenticable::validations">
+      <a href="../../../../Mochi/Models/Authenticable/Validations.html">Validations</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Models/Authenticable/Validations/Granite" data-name="mochi::models::authenticable::validations::granite">
+      <a href="../../../../Mochi/Models/Authenticable/Validations/Granite.html">Granite</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Models/Authenticable/Validations/Jennifer" data-name="mochi::models::authenticable::validations::jennifer">
+      <a href="../../../../Mochi/Models/Authenticable/Validations/Jennifer.html">Jennifer</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Models/Confirmable" data-name="mochi::models::confirmable">
+      <a href="../../../../Mochi/Models/Confirmable.html">Confirmable</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Models/Invitable" data-name="mochi::models::invitable">
+      <a href="../../../../Mochi/Models/Invitable.html">Invitable</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Models/Lockable" data-name="mochi::models::lockable">
+      <a href="../../../../Mochi/Models/Lockable.html">Lockable</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Models/Recoverable" data-name="mochi::models::recoverable">
+      <a href="../../../../Mochi/Models/Recoverable.html">Recoverable</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Models/Trackable" data-name="mochi::models::trackable">
+      <a href="../../../../Mochi/Models/Trackable.html">Trackable</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/gitlato/mochi/Mochi/Omniauthable" data-name="mochi::omniauthable">
+      <a href="../../../../Mochi/Omniauthable.html">Omniauthable</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Omniauthable/Configuration" data-name="mochi::omniauthable::configuration">
+      <a href="../../../../Mochi/Omniauthable/Configuration.html">Configuration</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Omniauthable/Engine" data-name="mochi::omniauthable::engine">
+      <a href="../../../../Mochi/Omniauthable/Engine.html">Engine</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/gitlato/mochi/Mochi/Omniauthable/Provider" data-name="mochi::omniauthable::provider">
+      <a href="../../../../Mochi/Omniauthable/Provider.html">Provider</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Omniauthable/Provider/Facebook" data-name="mochi::omniauthable::provider::facebook">
+      <a href="../../../../Mochi/Omniauthable/Provider/Facebook.html">Facebook</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Omniauthable/Provider/Facebook/FbUser" data-name="mochi::omniauthable::provider::facebook::fbuser">
+      <a href="../../../../Mochi/Omniauthable/Provider/Facebook/FbUser.html">FbUser</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Omniauthable/Provider/Github" data-name="mochi::omniauthable::provider::github">
+      <a href="../../../../Mochi/Omniauthable/Provider/Github.html">Github</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Omniauthable/Provider/Github/GhUser" data-name="mochi::omniauthable::provider::github::ghuser">
+      <a href="../../../../Mochi/Omniauthable/Provider/Github/GhUser.html">GhUser</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/gitlato/mochi/Mochi/Omniauthable/Provider/Twitter" data-name="mochi::omniauthable::provider::twitter">
+      <a href="../../../../Mochi/Omniauthable/Provider/Twitter.html">Twitter</a>
+      
+        <ul>
+  
+  <li class=" current" data-id="github.com/gitlato/mochi/Mochi/Omniauthable/Provider/Twitter/TwUser" data-name="mochi::omniauthable::provider::twitter::twuser">
+      <a href="../../../../Mochi/Omniauthable/Provider/Twitter/TwUser.html">TwUser</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/gitlato/mochi/Mochi/Omniauthable/Provider/Vk" data-name="mochi::omniauthable::provider::vk">
+      <a href="../../../../Mochi/Omniauthable/Provider/Vk.html">Vk</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Omniauthable/Provider/Vk/VkResponse" data-name="mochi::omniauthable::provider::vk::vkresponse">
+      <a href="../../../../Mochi/Omniauthable/Provider/Vk/VkResponse.html">VkResponse</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Omniauthable/Provider/Vk/VkTitle" data-name="mochi::omniauthable::provider::vk::vktitle">
+      <a href="../../../../Mochi/Omniauthable/Provider/Vk/VkTitle.html">VkTitle</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Omniauthable/Provider/Vk/VkUser" data-name="mochi::omniauthable::provider::vk::vkuser">
+      <a href="../../../../Mochi/Omniauthable/Provider/Vk/VkUser.html">VkUser</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/gitlato/mochi/Mochi/Omniauthable/ReferenceUser" data-name="mochi::omniauthable::referenceuser">
+      <a href="../../../../Mochi/Omniauthable/ReferenceUser.html">ReferenceUser</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Mochi::Omniauthable::Provider::Twitter::TwUser
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../../../Mochi/Omniauthable/Provider/Twitter/TwUser.html">Mochi::Omniauthable::Provider::Twitter::TwUser</a></li><li class="superclass"><a href="../../../../Mochi/Omniauthable/ReferenceUser.html">Mochi::Omniauthable::ReferenceUser</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/gitlato/mochi/blob/855c544ad4ae804ccff9e4610b0ae46af684d1eb/src/mochi/models/omniauthable/providers/twitter.cr#L11" target="_blank">
+        mochi/models/omniauthable/providers/twitter.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(__temp_177:JSON::PullParser)-class-method" class="signature"><strong>.new</strong>(__temp_177 : JSON::PullParser)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#access_token:OAuth::AccessToken%7CNil%7COAuth2::AccessToken%7CNil-instance-method" class="signature"><strong>#access_token</strong> : OAuth::AccessToken | Nil | OAuth2::AccessToken | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#access_token=(access_token:OAuth::AccessToken%7CNil%7COAuth2::AccessToken%7CNil)-instance-method" class="signature"><strong>#access_token=</strong>(access_token : OAuth::AccessToken | Nil | OAuth2::AccessToken | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#description:::Union(String,Nil)-instance-method" class="signature"><strong>#description</strong> : ::Union(String, Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#description=(_description:::Union(String,Nil))-instance-method" class="signature"><strong>#description=</strong>(_description : ::Union(String, Nil))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#email:String-instance-method" class="signature"><strong>#email</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#email=(_email:String)-instance-method" class="signature"><strong>#email=</strong>(_email : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#image-instance-method" class="signature"><strong>#image</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#location:::Union(String,Nil)-instance-method" class="signature"><strong>#location</strong> : ::Union(String, Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#location=(_location:::Union(String,Nil))-instance-method" class="signature"><strong>#location=</strong>(_location : ::Union(String, Nil))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#name:String-instance-method" class="signature"><strong>#name</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#name=(_name:String)-instance-method" class="signature"><strong>#name=</strong>(_name : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#nickname-instance-method" class="signature"><strong>#nickname</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#profile_image_url:::Union(String,Nil)-instance-method" class="signature"><strong>#profile_image_url</strong> : ::Union(String, Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#profile_image_url=(_profile_image_url:::Union(String,Nil))-instance-method" class="signature"><strong>#profile_image_url=</strong>(_profile_image_url : ::Union(String, Nil))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#provider:String-instance-method" class="signature"><strong>#provider</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#provider=(provider:String)-instance-method" class="signature"><strong>#provider=</strong>(provider : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#raw_json:String?-instance-method" class="signature"><strong>#raw_json</strong> : String?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#raw_json=(raw_json:String?)-instance-method" class="signature"><strong>#raw_json=</strong>(raw_json : String?)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#screen_name:String-instance-method" class="signature"><strong>#screen_name</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#screen_name=(_screen_name:String)-instance-method" class="signature"><strong>#screen_name=</strong>(_screen_name : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_json(json:JSON::Builder)-instance-method" class="signature"><strong>#to_json</strong>(json : JSON::Builder)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#uid:String-instance-method" class="signature"><strong>#uid</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#uid=(_uid:String)-instance-method" class="signature"><strong>#uid=</strong>(_uid : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#url:::Union(String,Nil)-instance-method" class="signature"><strong>#url</strong> : ::Union(String, Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#url=(_url:::Union(String,Nil))-instance-method" class="signature"><strong>#url=</strong>(_url : ::Union(String, Nil))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#urls-instance-method" class="signature"><strong>#urls</strong></a>
+        
+          <div class="summary"><p>abstract def nickname abstract def image</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+  <h3>Instance methods inherited from class <code><a href="../../../../Mochi/Omniauthable/ReferenceUser.html">Mochi::Omniauthable::ReferenceUser</a></code></h3>
+  
+  
+    <a href="../../../../Mochi/Omniauthable/ReferenceUser.html#access_token-instance-method" class="tooltip">
+      <span>access_token</span>
+    access_token</a>, 
+    
+  
+    <a href="../../../../Mochi/Omniauthable/ReferenceUser.html#description-instance-method" class="tooltip">
+      <span>description</span>
+    description</a>, 
+    
+  
+    <a href="../../../../Mochi/Omniauthable/ReferenceUser.html#email-instance-method" class="tooltip">
+      <span>email</span>
+    email</a>, 
+    
+  
+    <a href="../../../../Mochi/Omniauthable/ReferenceUser.html#name-instance-method" class="tooltip">
+      <span>name</span>
+    name</a>, 
+    
+  
+    <a href="../../../../Mochi/Omniauthable/ReferenceUser.html#provider-instance-method" class="tooltip">
+      <span>provider</span>
+    provider</a>, 
+    
+  
+    <a href="../../../../Mochi/Omniauthable/ReferenceUser.html#raw_json-instance-method" class="tooltip">
+      <span>raw_json</span>
+    raw_json</a>, 
+    
+  
+    <a href="../../../../Mochi/Omniauthable/ReferenceUser.html#uid-instance-method" class="tooltip">
+      <span>uid</span>
+    uid</a>, 
+    
+  
+    <a href="../../../../Mochi/Omniauthable/ReferenceUser.html#urls-instance-method" class="tooltip">
+      <span>urls</span>
+    urls</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(__temp_177:JSON::PullParser)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(__temp_177 : JSON::PullParser)
+
+        <a class="method-permalink" href="#new(__temp_177:JSON::PullParser)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="access_token:OAuth::AccessToken|Nil|OAuth2::AccessToken|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>access_token</strong> : OAuth::AccessToken | Nil | OAuth2::AccessToken | Nil
+
+        <a class="method-permalink" href="#access_token:OAuth::AccessToken%7CNil%7COAuth2::AccessToken%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/gitlato/mochi/blob/855c544ad4ae804ccff9e4610b0ae46af684d1eb/src/mochi/models/omniauthable/providers/twitter.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="access_token=(access_token:OAuth::AccessToken|Nil|OAuth2::AccessToken|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>access_token=</strong>(access_token : OAuth::AccessToken | Nil | OAuth2::AccessToken | Nil)
+
+        <a class="method-permalink" href="#access_token=(access_token:OAuth::AccessToken%7CNil%7COAuth2::AccessToken%7CNil)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/gitlato/mochi/blob/855c544ad4ae804ccff9e4610b0ae46af684d1eb/src/mochi/models/omniauthable/providers/twitter.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="description:::Union(String,Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>description</strong> : ::Union(String, Nil)
+
+        <a class="method-permalink" href="#description:::Union(String,Nil)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="description=(_description:::Union(String,Nil))-instance-method">
+      <div class="signature">
+        
+        def <strong>description=</strong>(_description : ::Union(String, Nil))
+
+        <a class="method-permalink" href="#description=(_description:::Union(String,Nil))-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="email:String-instance-method">
+      <div class="signature">
+        
+        def <strong>email</strong> : String
+
+        <a class="method-permalink" href="#email:String-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="email=(_email:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>email=</strong>(_email : String)
+
+        <a class="method-permalink" href="#email=(_email:String)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="image-instance-method">
+      <div class="signature">
+        
+        def <strong>image</strong>
+
+        <a class="method-permalink" href="#image-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/gitlato/mochi/blob/855c544ad4ae804ccff9e4610b0ae46af684d1eb/src/mochi/models/omniauthable/providers/twitter.cr#L31" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="location:::Union(String,Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>location</strong> : ::Union(String, Nil)
+
+        <a class="method-permalink" href="#location:::Union(String,Nil)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="location=(_location:::Union(String,Nil))-instance-method">
+      <div class="signature">
+        
+        def <strong>location=</strong>(_location : ::Union(String, Nil))
+
+        <a class="method-permalink" href="#location=(_location:::Union(String,Nil))-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="name:String-instance-method">
+      <div class="signature">
+        
+        def <strong>name</strong> : String
+
+        <a class="method-permalink" href="#name:String-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="name=(_name:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>name=</strong>(_name : String)
+
+        <a class="method-permalink" href="#name=(_name:String)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="nickname-instance-method">
+      <div class="signature">
+        
+        def <strong>nickname</strong>
+
+        <a class="method-permalink" href="#nickname-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/gitlato/mochi/blob/855c544ad4ae804ccff9e4610b0ae46af684d1eb/src/mochi/models/omniauthable/providers/twitter.cr#L27" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="profile_image_url:::Union(String,Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>profile_image_url</strong> : ::Union(String, Nil)
+
+        <a class="method-permalink" href="#profile_image_url:::Union(String,Nil)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="profile_image_url=(_profile_image_url:::Union(String,Nil))-instance-method">
+      <div class="signature">
+        
+        def <strong>profile_image_url=</strong>(_profile_image_url : ::Union(String, Nil))
+
+        <a class="method-permalink" href="#profile_image_url=(_profile_image_url:::Union(String,Nil))-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="provider:String-instance-method">
+      <div class="signature">
+        
+        def <strong>provider</strong> : String
+
+        <a class="method-permalink" href="#provider:String-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/gitlato/mochi/blob/855c544ad4ae804ccff9e4610b0ae46af684d1eb/src/mochi/models/omniauthable/providers/twitter.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="provider=(provider:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>provider=</strong>(provider : String)
+
+        <a class="method-permalink" href="#provider=(provider:String)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/gitlato/mochi/blob/855c544ad4ae804ccff9e4610b0ae46af684d1eb/src/mochi/models/omniauthable/providers/twitter.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="raw_json:String?-instance-method">
+      <div class="signature">
+        
+        def <strong>raw_json</strong> : String?
+
+        <a class="method-permalink" href="#raw_json:String?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/gitlato/mochi/blob/855c544ad4ae804ccff9e4610b0ae46af684d1eb/src/mochi/models/omniauthable/providers/twitter.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="raw_json=(raw_json:String?)-instance-method">
+      <div class="signature">
+        
+        def <strong>raw_json=</strong>(raw_json : String?)
+
+        <a class="method-permalink" href="#raw_json=(raw_json:String?)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/gitlato/mochi/blob/855c544ad4ae804ccff9e4610b0ae46af684d1eb/src/mochi/models/omniauthable/providers/twitter.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="screen_name:String-instance-method">
+      <div class="signature">
+        
+        def <strong>screen_name</strong> : String
+
+        <a class="method-permalink" href="#screen_name:String-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="screen_name=(_screen_name:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>screen_name=</strong>(_screen_name : String)
+
+        <a class="method-permalink" href="#screen_name=(_screen_name:String)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_json(json:JSON::Builder)-instance-method">
+      <div class="signature">
+        
+        def <strong>to_json</strong>(json : JSON::Builder)
+
+        <a class="method-permalink" href="#to_json(json:JSON::Builder)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="uid:String-instance-method">
+      <div class="signature">
+        
+        def <strong>uid</strong> : String
+
+        <a class="method-permalink" href="#uid:String-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="uid=(_uid:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>uid=</strong>(_uid : String)
+
+        <a class="method-permalink" href="#uid=(_uid:String)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="url:::Union(String,Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>url</strong> : ::Union(String, Nil)
+
+        <a class="method-permalink" href="#url:::Union(String,Nil)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="url=(_url:::Union(String,Nil))-instance-method">
+      <div class="signature">
+        
+        def <strong>url=</strong>(_url : ::Union(String, Nil))
+
+        <a class="method-permalink" href="#url=(_url:::Union(String,Nil))-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="urls-instance-method">
+      <div class="signature">
+        
+        def <strong>urls</strong>
+
+        <a class="method-permalink" href="#urls-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from class <a href="../../../../Mochi/Omniauthable/ReferenceUser.html">Mochi::Omniauthable::ReferenceUser</a>
+            </div>
+          
+          <p>abstract def nickname
+abstract def image</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/gitlato/mochi/blob/855c544ad4ae804ccff9e4610b0ae46af684d1eb/src/mochi/models/omniauthable/providers/twitter.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
