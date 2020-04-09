@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - 'master'
+  schedule:
+    - cron: '0 21 * * *'
+
+jobs:
+  check_format:
+    runs-on: ubuntu-latest
+    container:
+      image: crystallang/crystal
+    steps:
+      - uses: actions/checkout@v1
+      - name: Format
+        run: crystal tool format --check
+  coding_standards:
+    runs-on: ubuntu-latest
+    container:
+      image: crystallang/crystal
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install Dependencies
+        run: shards install
+      - name: Ameba
+        run: ./bin/ameba
+
+  test_latest:
+    runs-on: ubuntu-latest
+    steps:
+        run: |
+          sudo snap install crystal --classic
+          sudo apt -y install libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev libz-dev libevent-dev gcc pkg-config tzdata libpcre3-dev
+      - uses: actions/checkout@v1
+      - name: Install Dependencies
+        run: shards install
+      - name: Create DB
+        run: AMBER_ENV=test crystal spec/sam.cr -- db:create
+      - name: Migrate DB
+        run: AMBER_ENV=test crystal spec/sam.cr -- db:migrate  
+      - name: Specs
+        run: crystal spec --order random --error-on-warnings
+  
+  test_nightly:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Crystal
+        run: |
+          sudo snap install crystal --classic --edge
+          sudo apt -y install libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev libz-dev libevent-dev gcc pkg-config tzdata libpcre3-dev
+      - uses: actions/checkout@v1
+      - name: Install Dependencies
+        run: shards install
+      - name: Create DB
+        run: AMBER_ENV=test crystal sam.cr -- db:create
+      - name: Migrate DB
+        run: AMBER_ENV=test crystal sam.cr -- db:migrate  
+      - name: Specs
+        run: crystal spec --order random --error-on-warnings
