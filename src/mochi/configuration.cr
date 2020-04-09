@@ -76,7 +76,6 @@ require "./models/recoverable"
 require "./models/lockable"
 require "./models/invitable"
 
-require "./helpers/base/*"
 require "./helpers/contract"
 
 require "./mailers/mochi_mailer"

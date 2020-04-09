@@ -1,19 +1,12 @@
 module Mochi::Helpers
+  # Generates 4 methods for flashing messages
+  #
+  # Generates `flash_success`, `flash_danger`, `flash_warning`, `flash_info`,
   module FlashHandler
-    def flash_danger(str)
-      flash[:danger] = str
-    end
-
-    def flash_warning(str)
-      flash[:warning] = str
-    end
-
-    def flash_info(str)
-      flash[:info] = str
-    end
-
-    def flash_success(str)
-      flash[:success] = str
-    end
+    {% for i in ["success", "danger", "warning", "info"] %}
+      macro flash_{{i.id}}(str)
+        flash[:{{i.id}}] = \{{str}}
+      end
+    {% end %}
   end
 end
