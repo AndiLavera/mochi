@@ -1,11 +1,7 @@
 # User class for testing Jennifer ORM
 class JenniferUser < Jennifer::Model::Base
   @password : String?
-
-  def password
-    @password
-  end
-
+  def password; @password; end
   include Mochi
   mochi_jennifer(
     :authenticable,
@@ -31,7 +27,7 @@ class JenniferUser < Jennifer::Model::Base
     uncomfirmed_email: {type: String?},
     confirmation_sent_at: {type: Time?},
     uid: {type: String?},
-    sign_in_count: {type: Int32?, default: 0, null: false},
+    sign_in_count: {type: Int32, default: 0, null: false},
     current_sign_in_ip: {type: String?},
     last_sign_in_ip: {type: String?},
     current_sign_in_at: {type: Time?, null: true},
@@ -40,7 +36,7 @@ class JenniferUser < Jennifer::Model::Base
     reset_password_token: {type: String?},
     password_reset_in_progress: {type: Bool?, default: false},
     locked_at: {type: Time?},
-    failed_attempts: {type: Int32?, default: 0, null: false},
+    failed_attempts: {type: Int32, default: 0, null: false},
     unlock_token: {type: String?},
     invitation_accepted_at: {type: Time?},
     invitation_created_at: {type: Time?},
@@ -54,11 +50,7 @@ end
 # Should be identical to JenniferUser
 class User < Granite::Base
   @password : String?
-
-  def password
-    @password
-  end
-
+  def password; @password; end
   include Mochi
   mochi_granite(
     :authenticable,
@@ -83,7 +75,7 @@ class User < Granite::Base
   column confirmation_sent_at : Time?
   column uncomfirmed_email : String?
   column uid : String?
-  column sign_in_count : Int32? = 0
+  column sign_in_count : Int32 = 0
   column current_sign_in_ip : String?
   column last_sign_in_ip : String?
   column current_sign_in_at : Time?
@@ -92,7 +84,7 @@ class User < Granite::Base
   column reset_password_token : String?
   column password_reset_in_progress : Bool? = false
   column locked_at : Time?
-  column failed_attempts : Int32? = 0
+  column failed_attempts : Int32 = 0
   column unlock_token : String?
   column invitation_accepted_at : Time?
   column invitation_created_at : Time?
