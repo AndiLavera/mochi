@@ -1,7 +1,11 @@
 # User class for testing Jennifer ORM
 class JenniferUser < Jennifer::Model::Base
   @password : String?
-  def password; @password; end
+
+  def password
+    @password
+  end
+
   include Mochi
   mochi_jennifer(
     :authenticable,
@@ -50,7 +54,11 @@ end
 # Should be identical to JenniferUser
 class User < Granite::Base
   @password : String?
-  def password; @password; end
+
+  def password
+    @password
+  end
+
   include Mochi
   mochi_granite(
     :authenticable,
