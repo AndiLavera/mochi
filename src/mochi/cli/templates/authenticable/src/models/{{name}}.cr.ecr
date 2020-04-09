@@ -17,6 +17,7 @@ class <%= class_name %> < Granite::Base
   column id : Int64, primary: true
   column email : String = ""
   column password_digest : String?
+  property password : String?
 
   # Uncomment these for the Confirmable
   # column confirmation_token : String
@@ -74,6 +75,7 @@ class <%= class_name %> < Jennifer::Model::Base
     updated_at: { type: Time, null: true },
     email: { type: String, default: ""},
     password_digest: { type: String? },
+    password: {type: String?, virtual: true, setter: false}
 
     # Uncomment these for the Confirmable
     # confirmation_token: { type: String?, null: true },
