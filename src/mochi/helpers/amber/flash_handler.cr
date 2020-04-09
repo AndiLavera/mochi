@@ -1,18 +1,18 @@
 module Mochi::Helpers
-  class FlashHandler < Flash
-    def danger(str)
+  module FlashHandler
+    def flash_danger(str)
       flash[:danger] = str
     end
 
-    def warning(str)
+    def flash_warning(str)
       flash[:warning] = str
     end
 
-    def info(str)
+    def flash_info(str)
       flash[:info] = str
     end
 
-    def success(str)
+    def flash_success(str)
       flash[:success] = str
     end
   end

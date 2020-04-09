@@ -1,5 +1,5 @@
 module Mochi::Helpers
-  class RenderHandler < Render
+  module RenderHandler
     macro render(template = nil, layout = true, partial = nil, path = "spec/support/views", folder = __FILE__)
       {% if !(template || partial) %}
         raise "Template or partial required!"

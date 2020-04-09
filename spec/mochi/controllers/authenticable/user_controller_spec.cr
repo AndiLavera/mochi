@@ -2,7 +2,7 @@ require "../../../spec_helper"
 require "../../../../src/mochi/helpers/amber"
 
 class UserController < Amber::Controller::Base
-  include Mochi::Controllers::Authenticable::UserController
+  include Mochi::Controllers::UserController
 
   def new
     user_new
@@ -37,7 +37,7 @@ class UserController < Amber::Controller::Base
 end
 
 module Mochi::Authenticable::Controllers
-  describe Mochi::Controllers::Authenticable::UserController do
+  describe Mochi::Controllers::UserController do
     it "should make a new user" do
       # Setup controller info
       user_count = User.all.size

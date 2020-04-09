@@ -1,5 +1,5 @@
 module Mochi::Helpers
-  class ParamsHandler < Params
+  module ParamsHandler
     def validate
       resource_params.validate!
     end

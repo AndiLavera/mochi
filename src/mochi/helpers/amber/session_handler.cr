@@ -1,10 +1,10 @@
 module Mochi::Helpers
-  class SessionHandler < Session
-    def create(key, value)
+  module SessionHandler
+    def session_create(key, value)
       session[key] = value
     end
 
-    def destroy(key)
+    def session_destroy(key)
       session.delete(key)
     end
   end

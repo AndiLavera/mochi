@@ -1,55 +1,50 @@
 # Authenticable
 module Mochi::Controllers::UserController
-  include Mochi::Helpers
+  include Mochi::Helpers::Contract
 
   macro user_show
-    contract = Contract.new(self)
-    contract.render.user_show
+    render_user_show
   end
 
   macro user_new
-    contract = Contract.new(self)
-    contract.render.user_new
+    render_user_new
   end
 
   macro user_edit
-    contract = Contract.new(self)
-    contract.render.user_edit
+    render_user_edit
   end
 
   macro user_create
-    contract = Contract.new(self)
-    user = User.new(contract.params.validate)
-    password = contract.params.fetch("password")
+    user = User.new()
+    email = fetch("email")
+    password = fetch("password")
 
+    user.email = email if email
     user.password = password if password
-
-    if user.valid? && user.save
-      contract.flash.success(success_message(user))
-      contract.redirect.to("/")
+    if user.valid? && user.save!
+      flash_success(success_message(user))
+      to("/")
     else
-      contract.flash.danger("Could not create Resource!")
-      contract.render.user_new
+      flash_danger("Could not create Resource!")
+      render_user_new
     end
   end
 
   macro user_update
-    contract = Contract.new(self)
-    user.set_attributes resource_params.validate!
+    resource_params.validate!
     if user.save
-      contract.flash.success("User has been updated.")
-      contract.redirect.to("/")
+      flash_success("User has been updated.")
+      to("/")
     else
-      contract.flash.danger("Could not update User!")
-      contract.render.user_new
+      flash_danger("Could not update User!")
+      render_user_new
     end
   end
 
   macro user_destroy
-    contract = Contract.new(self)
     user.destroy
-    contract.flash.success("User has been deleted.")
-    contract.redirect.to("/")
+    flash_success("User has been deleted.")
+    to("/")
   end
 
   private def success_message(user)

@@ -1,5 +1,5 @@
 module Mochi::Helpers
-  class FlashHandler < Flash
+  module FlashHandler
     def danger(str)
       flash[:danger] = str
     end
