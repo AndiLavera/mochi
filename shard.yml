@@ -1,5 +1,5 @@
 name: mochi
-version: 0.1.0
+version: 0.2.1
 
 authors:
   - andrewc910 <awcrotwell@gmail.com>
@@ -7,7 +7,7 @@ authors:
 dependencies:
   quartz_mailer:
     github: amberframework/quartz-mailer
-    version: ~> 0.5.3
+    version: ~> 0.6.0
 
   cli:
     github: drujensen/cli

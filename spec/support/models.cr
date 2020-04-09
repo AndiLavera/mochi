@@ -1,5 +1,11 @@
 # User class for testing Jennifer ORM
 class JenniferUser < Jennifer::Model::Base
+  @password : String?
+
+  def password
+    @password
+  end
+
   include Mochi
   mochi_jennifer(
     :authenticable,
@@ -20,8 +26,8 @@ class JenniferUser < Jennifer::Model::Base
     email: {type: String, default: ""},
     password_digest: {type: String?},
     confirmation_token: {type: String?, null: true},
-    confirmed: {type: Bool, null: true},
-    confirmed_at: {type: Time, null: true},
+    confirmed: {type: Bool, default: false},
+    confirmed_at: {type: Time?},
     uncomfirmed_email: {type: String?},
     confirmation_sent_at: {type: Time?},
     uid: {type: String?},
@@ -39,7 +45,7 @@ class JenniferUser < Jennifer::Model::Base
     invitation_accepted_at: {type: Time?},
     invitation_created_at: {type: Time?},
     invitation_token: {type: String?},
-    invited_by: {type: Int64?},
+    invited_by: {type: Int32?},
     invitation_sent_at: {type: Time?},
   )
 end
@@ -47,6 +53,12 @@ end
 # User class for testing Granite ORM
 # Should be identical to JenniferUser
 class User < Granite::Base
+  @password : String?
+
+  def password
+    @password
+  end
+
   include Mochi
   mochi_granite(
     :authenticable,
@@ -59,7 +71,7 @@ class User < Granite::Base
   )
   include Mochi::Models::Authenticable::Validations::Granite
 
-  connection sqlite
+  connection postgres
   table jennifer_users
 
   column id : Int32, primary: true

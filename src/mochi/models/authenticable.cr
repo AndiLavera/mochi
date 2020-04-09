@@ -22,7 +22,7 @@ module Mochi::Models
 
     # Checks if the records password has changed
     def password_changed?
-      new_password ? true : false
+      !!(password) || !!(new_password)
     end
 
     # Ensures the given password is atleast 6 characters

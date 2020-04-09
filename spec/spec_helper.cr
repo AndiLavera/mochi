@@ -30,3 +30,11 @@ def name_formatter(name : Granite::Base.class | Jennifer::Model::Base.class)
 end
 
 include Helpers
+
+Spec.before_each do
+  Jennifer::Adapter.adapter.begin_transaction
+end
+
+Spec.after_each do
+  Jennifer::Adapter.adapter.rollback_transaction
+end

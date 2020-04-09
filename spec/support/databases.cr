@@ -1,16 +1,11 @@
-require "granite"
-require "granite/adapter/sqlite"
-Granite::Connections << Granite::Adapter::Sqlite.new(name: "sqlite", url: "sqlite3:./jennifer_test.db")
-Granite.settings.logger.not_nil!.progname = "Granite"
-
 require "jennifer"
-require "jennifer_sqlite3_adapter"
-Jennifer::Config.configure do |conf|
-  conf.adapter = "sqlite3"
-  conf.host = "."
-  conf.db = "./jennifer_test.db"
-end
-
+require "jennifer/adapter/postgres"
+Jennifer::Config.read("./spec/support/jennifer_database.yml", "test")
 Jennifer::Config.configure do |conf|
   conf.logger.level = Logger::WARN
 end
+
+require "granite"
+require "granite/adapter/pg"
+Granite::Connections << Granite::Adapter::Pg.new(name: "postgres", url: "postgresql://postgres:@localhost/mochi_test")
+Granite.settings.logger.not_nil!.progname = "Granite"
