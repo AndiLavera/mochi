@@ -30,6 +30,7 @@ jobs:
   test_latest:
     runs-on: ubuntu-latest
     steps:
+      - name: Install Crystal
         run: |
           sudo snap install crystal --classic
           sudo apt -y install libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev libz-dev libevent-dev gcc pkg-config tzdata libpcre3-dev
