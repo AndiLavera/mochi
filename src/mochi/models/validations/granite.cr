@@ -1,5 +1,5 @@
 module Mochi::Models::Authenticable::Validations::Granite
-  macro with_validations
+  macro included
     validate :email, "is required", ->(user : User) do
       (email = user.email) ? !email.empty? : false
     end
@@ -17,7 +17,7 @@ module Mochi::Models::Authenticable::Validations::Granite
       user.valid_email?
     end
 
-    # Error handling for `valid_email?`
+    # Granite error handling for `valid_email?`
     private def invalid_email
       false
     end
