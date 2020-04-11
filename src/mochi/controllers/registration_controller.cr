@@ -1,20 +1,19 @@
 # Confirmable
-module Mochi::Controllers::RegistrationController
-  include Mochi::Helpers
+module Mochi::Controllers
+  module RegistrationController
+    macro registration_update
+      unless user
+        flash_danger("Invalid authenticity token.")
+        return to("/")
+      end
 
-  macro registration_update
-    contract = Contract.new(self)
-    unless user
-      contract.flash.danger("Invalid authenticity token.")
-      return contract.redirect.to("/")
-    end
-
-    if user.confirm! && user.save
-      contract.flash.success("User has been confirmed.")
-      contract.redirect.to("/")
-    else
-      contract.flash.danger("Token has expired.")
-      contract.redirect.to("/")
+      if user.confirm! && user.save
+        flash_success("User has been confirmed.")
+        to("/")
+      else
+        flash_danger("Token has expired.")
+        to("/")
+      end
     end
   end
 end
