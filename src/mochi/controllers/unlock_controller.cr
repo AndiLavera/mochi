@@ -1,10 +1,6 @@
 # Lockable
 module Mochi::Controllers::UnlockController
-  include Mochi::Helpers
-
   macro unlock_update
-    contract = Contract.new(self)
-
     unless user
       contract.flash.danger("Invalid authenticity token.")
       return contract.redirect.to("/")

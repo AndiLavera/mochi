@@ -1,4 +1,6 @@
 module Mochi::Helpers
-  class SessionHandler < Session
+  module Lucky
+    module SessionHandler
+    end
   end
 end

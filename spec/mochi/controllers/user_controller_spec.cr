@@ -3,6 +3,7 @@ require "../../spec_helper"
 class UserController < Amber::Controller::Base
   include Mochi::Controllers::UserController
   include Mochi::Helpers::Contract::Amber
+  include Mochi::Helpers::Contract::Granite
 
   def new
     user_new
@@ -21,8 +22,8 @@ class UserController < Amber::Controller::Base
   end
 
   def update
-    email = fetch("email")
-    user = User.where { _email == email }
+    user = find_by_email
+    return unless user
     user_update
   end
 
@@ -62,7 +63,7 @@ describe Mochi::Controllers::UserController do
       it "should make a new user" do
         # Setup controller info
         user_count = User.all.size
-        email = "test#{UUID.random}@email.xyz"
+        email = "uc0_test#{UUID.random}@email.xyz"
         context = build_post_request("/?email=#{email}&password=password123")
 
         UserController.new(context).create
@@ -76,7 +77,7 @@ describe Mochi::Controllers::UserController do
       it "password should be too short to create user" do
         # Setup controller info
         user_count = User.all.size
-        email = "test#{UUID.random}@email.xyz"
+        email = "uc1_test#{UUID.random}@email.xyz"
         context = build_post_request("/?email=#{email}&password=p")
 
         UserController.new(context).create
@@ -84,6 +85,7 @@ describe Mochi::Controllers::UserController do
         user = User.find_by(email: email)
         user.should be_nil
         User.all.size.should eq(user_count) # assert user saved
+        #pp context.flash[:danger]
         context.flash[:danger].should eq("Could not create Resource!")
       end
     end
@@ -91,17 +93,15 @@ describe Mochi::Controllers::UserController do
     context "update" do
       it "should update a user" do
         # Setup controller info
-        User.create({:email => "test@email.com", :password => "Password123"})
-        user_count = User.all.size
-        email = "test#{UUID.random}@email.xyz"
+        email = "uc2_test#{UUID.random}@email.com"
+        User.create({:email => email, :password => "Password123"})
         context = build_post_request("/?email=#{email}&password=Aassword123")
 
         UserController.new(context).update
 
         user = User.find_by(email: email)
         user.valid?.should be_true if user
-        User.all.size.should eq(user_count + 1) # assert user saved
-        context.flash[:success].should eq("Please Check Your Email For The Activation Link")
+        context.flash[:success].should eq("User has been updated.")
       end
     end
 

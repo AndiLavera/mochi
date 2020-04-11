@@ -1,7 +1,9 @@
 module Mochi::Helpers
-  class RedirectHandler < Redirect
-    def to(path)
-      redirect path
+  module Lucky
+    module RedirectHandler
+      def to(path)
+        redirect path
+      end
     end
   end
 end

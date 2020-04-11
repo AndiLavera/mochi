@@ -1,11 +1,13 @@
 module Mochi::Helpers
-  class ParamsHandler < Params
-    def validate
-      resource_params
-    end
+  module Lucky
+    module ParamsHandler
+      def validate
+        resource_params
+      end
 
-    def fetch(param)
-      validate[param]
+      def fetch(param)
+        validate[param]
+      end
     end
   end
 end

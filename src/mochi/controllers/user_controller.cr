@@ -19,7 +19,7 @@ module Mochi::Controllers::UserController
 
     user.email = email if email
     user.password = password if password
-    if user.valid? && user.save!
+    if user.save
       flash_success(success_message(user))
       to("/")
     else

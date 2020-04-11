@@ -1,4 +1,6 @@
 module Mochi::Helpers
-  class SessionHandler < Session
+  module Athena
+    module SessionHandler
+    end
   end
 end
