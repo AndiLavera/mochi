@@ -6,7 +6,7 @@ module Mochi::Helpers
       end
 
       def fetch(param)
-        validate[param]
+        validate[param]?
       end
     end
   end

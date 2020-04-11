@@ -30,9 +30,14 @@ module Mochi::Controllers
     end
 
     macro user_update
+      user = find_by_email
+      unless user
+        flash_danger("Could not update User!")
+        return to("/")
+      end
+
       email = fetch("email")
       password = fetch("password")
-
       user.email = email if email
       user.password = password if password
 

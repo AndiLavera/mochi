@@ -22,8 +22,6 @@ class UserController < Amber::Controller::Base
   end
 
   def update
-    user = find_by_email
-    return unless user
     user_update
   end
 
