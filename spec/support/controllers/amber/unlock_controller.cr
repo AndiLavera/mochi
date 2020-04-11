@@ -1,5 +1,5 @@
-class Amber::UserController < Amber::Controller::Base
-  include Mochi::Controllers::UserController
+class Amber::UnlockController < Amber::Controller::Base
+  include Mochi::Controllers::UnlockController
   include Mochi::Helpers::Contract::Amber
   include Mochi::Helpers::Contract::Granite
 

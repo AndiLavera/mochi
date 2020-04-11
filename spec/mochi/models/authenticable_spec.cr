@@ -31,7 +31,7 @@ describe Mochi::Models::Authenticable do
 
     it "should be a valid user email" do
       user = user_class.new({
-        "email" => "au1_test#{rand(0..500)}@email.com"
+        "email" => "au1_test#{rand(0..500)}@email.com",
       })
 
       user.password = "Password123"
@@ -40,7 +40,7 @@ describe Mochi::Models::Authenticable do
 
     it "should be a invalid user email" do
       user = user_class.new({
-        "email" => "au2_test#{rand(0..500)}emailcom"
+        "email" => "au2_test#{rand(0..500)}emailcom",
       })
 
       user.password = "Password123"

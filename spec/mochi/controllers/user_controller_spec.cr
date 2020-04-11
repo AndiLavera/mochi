@@ -47,7 +47,7 @@ describe Mochi::Controllers::UserController do
           user = User.find_by(email: email)
           user.should be_nil
           User.all.size.should eq(user_count) # assert user saved
-          #pp context.flash[:danger]
+          # pp context.flash[:danger]
           context.flash[:danger].should eq("Could not create Resource!")
         end
       end

@@ -1,22 +1,30 @@
-class Amber::InvitableController < Amber::Controller::Base
-  include Mochi::Controllers::InvitableController
+class Amber::Omniauthable::UserController < Amber::Controller::Base
+  include Mochi::Controllers::Omniauthable::UserController
   include Mochi::Helpers::Contract::Amber
   include Mochi::Helpers::Contract::Granite
 
   def new
-    invite_new
+    user_new
+  end
+
+  def show
+    user_show
   end
 
   def edit
-    invite_edit
+    user_edit
   end
 
   def create
-    invite_create
+    user_create
   end
 
   def update
-    invite_update
+    user_update
+  end
+
+  def destroy
+    user_destroy
   end
 
   def resource_params
