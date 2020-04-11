@@ -17,8 +17,7 @@ require "../src/mochi/omniauth"
 require "./support/mailers/*"
 require "./support/models"
 require "./support/helpers"
-
-require "../src/mochi/controllers/**"
+require "./support/controllers/**"
 
 # require "../src/mochi/cli"
 
