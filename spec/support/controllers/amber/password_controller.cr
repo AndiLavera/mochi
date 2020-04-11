@@ -17,8 +17,7 @@ class Amber::PasswordController < Amber::Controller::Base
 
   def resource_params
     params.validation do
-      required :email
-      required :password
+      required :unlock_token
     end
   end
 end

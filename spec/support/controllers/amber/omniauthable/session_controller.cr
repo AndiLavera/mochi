@@ -4,33 +4,17 @@ class Amber::Omniauthable::SessionController < Amber::Controller::Base
   include Mochi::Helpers::Contract::Granite
 
   def new
-    user_new
-  end
-
-  def show
-    user_show
-  end
-
-  def edit
-    user_edit
+    omniauth_session_new
   end
 
   def create
-    user_create
-  end
-
-  def update
-    user_update
-  end
-
-  def destroy
-    user_destroy
+    omniauth_session_create
   end
 
   def resource_params
     params.validation do
-      required :email
-      required :password
+      required :provider
+      optional :code
     end
   end
 end

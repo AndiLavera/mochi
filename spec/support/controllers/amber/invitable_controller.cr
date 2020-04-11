@@ -21,8 +21,9 @@ class Amber::InvitableController < Amber::Controller::Base
 
   def resource_params
     params.validation do
-      required :email
-      required :password
+      optional :email
+      optional :invite_token
+      optional :password
     end
   end
 end

@@ -30,7 +30,7 @@ class Amber::UserController < Amber::Controller::Base
   def resource_params
     params.validation do
       required :email
-      required :password
+      optional :password
     end
   end
 end

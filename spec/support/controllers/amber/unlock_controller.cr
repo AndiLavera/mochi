@@ -9,8 +9,7 @@ class Amber::UnlockController < Amber::Controller::Base
 
   def resource_params
     params.validation do
-      required :email
-      required :password
+      required :reset_token
     end
   end
 end

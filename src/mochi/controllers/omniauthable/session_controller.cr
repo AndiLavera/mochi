@@ -1,10 +1,10 @@
 module Mochi::Controllers::Omniauthable::SessionController
   # TODO: Amber.settings.host - Probably need a settings handler for contract
-  macro omniauth_session_create
+  macro omniauth_session_new
     to(Mochi::Omniauthable::Provider.authorize_uri(fetch("provider"), "#{Amber.settings.host}/omniauth/#{fetch("provider")}/callback"))
   end
 
-  macro omniauth_session_callback
+  macro omniauth_session_create
     if user
       session_create(:user_id, user.uid)
       flash_success("Successfully logged in")
