@@ -1,8 +1,8 @@
 require "../../spec_helper"
-require "../../../src/mochi/helpers/amber"
 
 class UserController < Amber::Controller::Base
   include Mochi::Controllers::UserController
+  include Mochi::Helpers::Contract::Amber
 
   def new
     user_new
@@ -21,6 +21,8 @@ class UserController < Amber::Controller::Base
   end
 
   def update
+    email = fetch("email")
+    user = User.where { _email == email }
     user_update
   end
 
@@ -38,19 +40,22 @@ end
 
 describe Mochi::Controllers::UserController do
   context "controller" do
-    context "new" do
-      it "should display new" do
-      end
+    it "should display new" do
+      context = build_get_request("/")
+
+      UserController.new(context).new.should eq("")
     end
 
-    context "show" do
-      it "should display show" do
-      end
+    it "should display show" do
+      context = build_get_request("/")
+
+      UserController.new(context).show.should eq("")
     end
 
-    context "edit" do
-      it "should display edit" do
-      end
+    it "should display edit" do
+      context = build_get_request("/")
+
+      UserController.new(context).edit.should eq("")
     end
 
     context "create" do
@@ -63,11 +68,7 @@ describe Mochi::Controllers::UserController do
         UserController.new(context).create
 
         user = User.find_by(email: email)
-        if user.nil?
-          false.should eq("Could not find user. User not valid") # throw error if we can't find user
-        else
-          user.valid?.should be_true
-        end
+        user.valid?.should be_true if user
         User.all.size.should eq(user_count + 1) # assert user saved
         context.flash[:success].should eq("Please Check Your Email For The Activation Link")
       end
@@ -89,6 +90,18 @@ describe Mochi::Controllers::UserController do
 
     context "update" do
       it "should update a user" do
+        # Setup controller info
+        User.create({:email => "test@email.com", :password => "Password123"})
+        user_count = User.all.size
+        email = "test#{UUID.random}@email.xyz"
+        context = build_post_request("/?email=#{email}&password=Aassword123")
+
+        UserController.new(context).update
+
+        user = User.find_by(email: email)
+        user.valid?.should be_true if user
+        User.all.size.should eq(user_count + 1) # assert user saved
+        context.flash[:success].should eq("Please Check Your Email For The Activation Link")
       end
     end
 

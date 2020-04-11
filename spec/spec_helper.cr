@@ -11,7 +11,6 @@ require "amber"
 
 require "./support/databases"
 
-require "../src/mochi/helpers/amber"
 require "../src/mochi"
 require "../src/mochi/omniauth"
 
@@ -20,7 +19,6 @@ require "./support/models"
 require "./support/helpers"
 
 require "../src/mochi/controllers/**"
-require "../src/mochi/helpers/amber"
 
 # require "../src/mochi/cli"
 

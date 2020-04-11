@@ -27,5 +27,23 @@ describe Mochi::Models::Authenticable do
 
       user.valid_password_size?.should be_false
     end
+
+    it "should be a valid user email" do
+      user = user_class.new({
+        "email" => "test@email.com"
+      })
+
+      user.password = "Password123"
+      user.valid?.should be_true
+    end
+
+    it "should be a invalid user email" do
+      user = user_class.new({
+        "email" => "testemailcom"
+      })
+
+      user.password = "Password123"
+      user.valid?.should be_false
+    end
   end
 end

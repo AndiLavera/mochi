@@ -1,17 +1,15 @@
 # Authenticable
 module Mochi::Controllers::UserController
-  include Mochi::Helpers::Contract
-
   macro user_show
-    render_user_show
+    display("user/show.ecr")
   end
 
   macro user_new
-    render_user_new
+    display("user/new.ecr")
   end
 
   macro user_edit
-    render_user_edit
+    display("user/edit.ecr")
   end
 
   macro user_create
@@ -26,18 +24,23 @@ module Mochi::Controllers::UserController
       to("/")
     else
       flash_danger("Could not create Resource!")
-      render_user_new
+      display("user/new.ecr")
     end
   end
 
   macro user_update
-    resource_params.validate!
+    email = fetch("email")
+    password = fetch("password")
+
+    user.email = email if email
+    user.password = password if password
+
     if user.save
       flash_success("User has been updated.")
       to("/")
     else
       flash_danger("Could not update User!")
-      render_user_new
+      display("user/show.ecr")
     end
   end
 
