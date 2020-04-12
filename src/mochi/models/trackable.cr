@@ -15,7 +15,7 @@ module Mochi::Models
       return if new_record?
 
       update_tracked_fields(request)
-      self.save
+      self.save # (skip_validation: true)
     end
 
     def update_tracked_fields(request)

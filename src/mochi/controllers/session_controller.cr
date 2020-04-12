@@ -6,6 +6,8 @@ module Mochi::Controllers
     end
 
     macro session_create
+      user = find_klass_by(User, :email, :email)
+
       unless user
         flash_danger("Invalid email or password")
         user = User.new
@@ -32,9 +34,9 @@ module Mochi::Controllers
         return display("session/new.ecr")
       end
 
-      if user.valid_password?(contract.params.fetch("password"))
+      if user.valid_password?(fetch("password"))
         session_create(:user_id, user.id)
-        flash_info("Successfully logged in")
+        flash_success("Successfully logged in")
         user.update_tracked_fields!(request) if user.is_a? Mochi::Models::Trackable
         to("/")
       else
@@ -46,6 +48,7 @@ module Mochi::Controllers
     end
 
     macro session_delete
+      user = find_klass_by(User, :email, :email)
       session_destroy(:user_id)
       flash_info("Logged out. See ya later!")
       to("/")

@@ -30,7 +30,7 @@ module Mochi::Controllers
     end
 
     macro user_update
-      user = find_by_email
+      user = find_klass_by(User, :email, :email)
       unless user
         flash_danger("Could not update User!")
         return to("/")
@@ -51,9 +51,12 @@ module Mochi::Controllers
     end
 
     macro user_destroy
-      user.destroy
-      flash_success("User has been deleted.")
-      to("/")
+      user = find_klass_by(User, :id, :id)
+      if user && user.destroy
+        flash_success("User has been deleted.")
+        to("/")
+      else
+      end
     end
 
     private def success_message(user)

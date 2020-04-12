@@ -98,6 +98,18 @@ class User < Granite::Base
   column invited_by : Int64?
   column invitation_sent_at : Time?
   timestamps
+
+  def self.build(params : NamedTuple | Hash)
+    u = User.new(params.to_h)
+    u.password = params[:password]?
+    u
+  end
+
+  def self.build!(params : NamedTuple | Hash)
+    u = User.build(params)
+    u.save
+    u
+  end
 end
 
 # Some tests require a ConfirmationMailer class

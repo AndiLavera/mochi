@@ -67,9 +67,20 @@ describe Mochi::Controllers::UserController do
         end
       end
 
-      context "destroy" do
-        it "should destory a user" do
-        end
+      it "should destory a user" do
+        email = "uc0_test#{UUID.random}@email.xyz"
+        context = build_post_request("/?email=#{email}&password=password123")
+        controller = controller_class.new(context)
+        controller.create
+
+        usr = User.find_by(email: email)
+        raise "Unkown Error" unless usr
+        context = build_post_request("/?id=#{usr.id}")
+        controller = controller_class.new(context)
+        controller.destroy
+
+        usr = User.find_by(email: email)
+        usr.should be_nil
       end
     end
   end
