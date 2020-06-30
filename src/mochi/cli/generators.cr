@@ -1,7 +1,7 @@
 require "teeplate"
 require "random/secure"
 require "inflector"
-require "logger"
+require "log"
 
 require "./helpers/helpers"
 require "./generators/**"
@@ -238,8 +238,7 @@ module Mochi::CLI
         info "Generating #{gen_class}"
         gen_class.new(name, fields, orm).render(directory, list: true, interactive: !options.assume_yes?, color: options.no_color?)
       else
-        log = Logger.new(STDOUT)
-        log.info("Generator for #{command} not found")
+        Log.info { "Generator for #{command} not found" }
       end
     end
 
@@ -248,13 +247,11 @@ module Mochi::CLI
     end
 
     def info(msg)
-      log = Logger.new(STDOUT)
-      log.info(msg)
+      Log.info { msg }
     end
 
     def error(msg)
-      log = Logger.new(STDOUT)
-      log.error(msg)
+      log.error { msg } 
     end
   end
 end
@@ -277,8 +274,7 @@ class Teeplate::RenderingEntry
   end
 
   def list(s, color)
-    log = Logger.new(STDOUT)
-    log.info(s.to_s + local_path)
+    Log.info { s.to_s + local_path }
   end
 end
 

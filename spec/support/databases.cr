@@ -8,4 +8,4 @@ end
 require "granite"
 require "granite/adapter/pg"
 Granite::Connections << Granite::Adapter::Pg.new(name: "postgres", url: "postgresql://postgres:@localhost/mochi_test")
-Granite.settings.logger.not_nil!.progname = "Granite"
+#Granite.settings.logger.not_nil!.progname = "Granite"

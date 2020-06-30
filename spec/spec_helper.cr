@@ -28,6 +28,7 @@ end
 
 include Helpers
 
+# Source of 2 Logger warnings
 Spec.before_each do
   Jennifer::Adapter.adapter.begin_transaction
 end

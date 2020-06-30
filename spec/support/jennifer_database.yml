@@ -1,8 +1,8 @@
 defaults : &defaults
   host: localhost
   adapter: postgres
-  user: postgres
-  password: ""
+  user: mochi
+  password: mochi
   migration_files_path: db/migrations # this is the default location for all migrations
 
 test:
