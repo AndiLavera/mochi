@@ -16,7 +16,6 @@ class JenniferUser < Jennifer::Model::Base
     :lockable,
     :invitable
   )
-  include Mochi::Models::Authenticable::Validations::Jennifer
 
   with_timestamps
   mapping(
@@ -69,7 +68,6 @@ class User < Granite::Base
     :lockable,
     :invitable
   )
-  include Mochi::Models::Authenticable::Validations::Granite
 
   connection postgres
   table jennifer_users
@@ -100,6 +98,18 @@ class User < Granite::Base
   column invited_by : Int64?
   column invitation_sent_at : Time?
   timestamps
+
+  def self.build(params : NamedTuple | Hash)
+    u = User.new(params.to_h)
+    u.password = params[:password]?
+    u
+  end
+
+  def self.build!(params : NamedTuple | Hash)
+    u = User.build(params)
+    u.save
+    u
+  end
 end
 
 # Some tests require a ConfirmationMailer class

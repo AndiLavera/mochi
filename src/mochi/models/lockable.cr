@@ -58,7 +58,6 @@ module Mochi
         if_access_locked { send_unlock_instructions }
       end
 
-      # Overwrites valid_for_authentication? from Devise::Models::Authenticatable
       # for verifying whether a user is allowed to sign in or not. If the user
       # is locked, it should never be allowed.
       def valid_for_authentication?

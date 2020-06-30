@@ -1,25 +1,43 @@
-class <%= class_name %>Controller < Mochi::Controllers::Authenticable::UserController
+class <%= class_name %>Controller < ApplicationController
+  include Mochi::Controllers::UserController
+  getter user = User.new
+
+  before_action do
+    only [:show, :edit, :update, :destroy] { set_user }
+  end
+
   def show
-    super
+    user_show()
   end
 
   def new
-    super
+    user_new()
   end
 
   def edit
-    super
+    user_edit()
   end
 
   def create
-    super
+    user_create()
   end
 
   def update
-    super
+    user_update()
   end
 
   def destroy
-    super
+    user_destroy()
+  end
+
+  private def set_user
+    @user = current_user.not_nil!
+  end
+
+  def resource_params
+    params.validation do
+      required :email
+      optional :password
+    end
   end
 end

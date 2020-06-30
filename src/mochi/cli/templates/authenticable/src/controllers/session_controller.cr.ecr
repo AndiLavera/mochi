@@ -1,6 +1,8 @@
-class SessionController < Mochi::Controllers::Authenticable::SessionController
+class SessionController < ApplicationController
+  include Mochi::Controllers::SessionController
+
   def new
-    super
+    session_new()
   end
 
   def create
@@ -10,14 +12,14 @@ class SessionController < Mochi::Controllers::Authenticable::SessionController
 <% if @orm == "jennifer" -%>
     user = User.where { _email == params["email"].to_s }.first
 <% end -%>
-    super(user)
+    session_create()
   end
 
-  def delete
-    super
+  def destroy
+    session_delete()
   end
 
-  private def user_params
+  def resource_params
     params.validation do
       required :email
       required :password

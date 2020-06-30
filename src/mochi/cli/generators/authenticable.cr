@@ -36,7 +36,7 @@ module Mochi::CLI
           get "/profile", #{class_name}Controller, :show
           get "/profile/edit", #{class_name}Controller, :edit
           patch "/profile", #{class_name}Controller, :update
-          get "/signout", SessionController, :delete
+          get "/signout", SessionController, :destroy
       ROUTES
     end
 

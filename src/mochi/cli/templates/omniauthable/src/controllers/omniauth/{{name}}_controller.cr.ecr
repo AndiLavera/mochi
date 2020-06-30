@@ -1,9 +1,18 @@
-class Omniauthable::<%= class_name %>Controller < Mochi::Controllers::Omniauthable::UserController
+class Omniauthable::<%= class_name %>Controller < ApplicationController
+  include Mochi::Controllers::Omniauthable::UserController
+
   def create
-    super
+    omniauth_user_create
   end
 
   def callback
-    super
+    omniauth_user_callback
+  end
+
+  def resource_params
+    params.validation do
+      required :provider
+      optional :code
+    end
   end
 end

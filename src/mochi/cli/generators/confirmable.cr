@@ -23,7 +23,7 @@ module Mochi::CLI
 
     private def add_routes
       add_routes :web, <<-ROUTES
-        get "/registration/confirm", RegistrationController, :confirm
+        get "/registration/confirm", RegistrationController, :update
       ROUTES
     end
 

@@ -31,8 +31,19 @@ module Mochi::Models
     end
 
     # Verifies whether a password (ie from sign in) is the user password.
-    def valid_password?(password : String)
+    def valid_password?(password : String?)
+      return if password.is_a?(Nil)
       (bcrypt_pass = password_hash) ? bcrypt_pass.verify(password) : false
+    end
+
+    # Verify email matches regex
+    def valid_email?
+      if (em = self.email)
+        match = em.match /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+        match ? (match.string == em) : invalid_email()
+      else
+        invalid_email()
+      end
     end
 
     private getter new_password : String?

@@ -13,11 +13,11 @@ require "./support/databases"
 
 require "../src/mochi"
 require "../src/mochi/omniauth"
+
 require "./support/mailers/*"
 require "./support/models"
 require "./support/helpers"
-
-require "../src/mochi/controllers/**"
+require "./support/controllers/**"
 
 # require "../src/mochi/cli"
 
@@ -28,6 +28,7 @@ end
 
 include Helpers
 
+# Source of 2 Logger warnings
 Spec.before_each do
   Jennifer::Adapter.adapter.begin_transaction
 end
