@@ -57,9 +57,10 @@ describe Mochi::Controllers::Authenticable::UserController do
         it "should update a user" do
           # build user
           email = "uc2_test#{UUID.random}@email.com"
-          user = User.new({:email => email})
-          user.password = "Password123"
-          user.save
+          user = User.build!({
+            email:    email,
+            password: "Password123",
+          })
 
           # Setup controller info
           context = build_post_request("/?email=#{email}&password=Aassword123")

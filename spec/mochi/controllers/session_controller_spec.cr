@@ -12,9 +12,10 @@ describe Mochi::Controllers::Authenticable::SessionController do
     # Also tests trackable fields
     it "should create & destroy a new session" do
       email = "sc0_test#{UUID.random}@email.xyz"
-      usr = User.new({:email => email})
-      usr.password = "Password123"
-      usr.save
+      usr = User.build!({
+        email:    email,
+        password: "Password123",
+      })
 
       context = build_post_request("/?email=#{email}&password=Password123")
       controller = controller_class.new(context)
@@ -42,9 +43,10 @@ describe Mochi::Controllers::Authenticable::SessionController do
 
     it "should fail to find user" do
       email = "sc1_test#{UUID.random}@email.xyz"
-      usr = User.new({:email => email})
-      usr.password = "Password123"
-      usr.save
+      User.build!({
+        email:    email,
+        password: "Password123",
+      })
 
       context = build_post_request("/?email=sc0_test@gmail.com&password=Password123")
       controller = controller_class.new(context)
@@ -55,9 +57,10 @@ describe Mochi::Controllers::Authenticable::SessionController do
 
     it "password should be invalid" do
       email = "sc1_test#{UUID.random}@email.xyz"
-      usr = User.new({:email => email})
-      usr.password = "Password123"
-      usr.save
+      User.build!({
+        email:    email,
+        password: "Password123",
+      })
 
       context = build_post_request("/?email=#{email}&password=assword123")
       controller = controller_class.new(context)
@@ -74,9 +77,10 @@ describe Mochi::Controllers::Authenticable::SessionController do
       # Ensure `Confirmable#confirmation_period_valid?` returns false
       Mochi.configuration.allow_unconfirmed_access_for = 0
       email = "sc1_test#{UUID.random}@email.xyz"
-      usr = User.new({:email => email})
-      usr.password = "Password123"
-      usr.save
+      User.build!({
+        email:    email,
+        password: "Password123",
+      })
 
       context = build_post_request("/?email=#{email}&password=Password123")
       controller = controller_class.new(context)
@@ -88,10 +92,10 @@ describe Mochi::Controllers::Authenticable::SessionController do
     it "should tell user account is locked" do
       Mochi.configuration.allow_unconfirmed_access_for = nil
       email = "sc1_test#{UUID.random}@email.xyz"
-      usr = User.new({:email => email})
-      usr.password = "Password123"
-      usr.save
-      usr.lock_access!
+      User.build!({
+        email:    email,
+        password: "Password123",
+      }).lock_access!
 
       context = build_post_request("/?email=#{email}&password=Password123")
       controller = controller_class.new(context)
