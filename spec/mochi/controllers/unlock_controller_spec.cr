@@ -1,7 +1,7 @@
 require "../../spec_helper"
 
-describe Mochi::Controllers::Lockable::UnlockController do
-  [Mochi::Controllers::Lockable::UnlockController].each do |controller_class|
+describe Mochi::Controllers::UnlockController do
+  [Mochi::Controllers::UnlockController].each do |controller_class|
     it "should unlock the user & sign in" do
       email = "unc0_test#{UUID.random}@email.xyz"
       user = User.new({

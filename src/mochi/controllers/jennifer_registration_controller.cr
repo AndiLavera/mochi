@@ -1,4 +1,4 @@
-class Mochi::Controllers::Confirmable::Jennifer::RegistrationController < Mochi::Controllers::ApplicationController
+class Mochi::Controllers::Jennifer::RegistrationController < Mochi::Controllers::ApplicationController
   def confirm
     # JENNIFER USERS:
     user = User.where { _confirmation_token == params[:confirmation_token] }.first

@@ -1,4 +1,4 @@
-class Mochi::Controllers::Authenticable::UserController < Mochi::Controllers::ApplicationController
+class Mochi::Controllers::UserController < Mochi::Controllers::ApplicationController
   getter user = User.new
 
   before_action do

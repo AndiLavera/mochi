@@ -1,4 +1,4 @@
-class Mochi::Controllers::Recoverable::Granite::PasswordController < Mochi::Controllers::ApplicationController
+class Mochi::Controllers::Granite::PasswordController < Mochi::Controllers::ApplicationController
   getter user = User.new
 
   def new

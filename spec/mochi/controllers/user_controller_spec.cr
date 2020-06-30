@@ -1,7 +1,7 @@
 require "../../spec_helper"
 
-describe Mochi::Controllers::Authenticable::UserController do
-  [Mochi::Controllers::Authenticable::UserController].each do |controller_class|
+describe Mochi::Controllers::UserController do
+  [Mochi::Controllers::UserController].each do |controller_class|
     context "controller" do
       it "should display new" do
         context = build_get_request("/")
