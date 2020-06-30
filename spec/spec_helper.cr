@@ -19,6 +19,10 @@ require "./support/helpers"
 
 require "../src/mochi/controllers/**"
 
+class HTTP::Server::Context
+  property current_user : User?
+end
+
 # require "../src/mochi/cli"
 
 # Used to name tests

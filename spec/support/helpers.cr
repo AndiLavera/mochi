@@ -5,5 +5,6 @@ require "./helpers/render_helper"
 
 module Helpers
   include ControllerHelper
+  include RenderHelper
   # include CLIHelper
 end
