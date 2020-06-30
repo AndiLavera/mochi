@@ -17,8 +17,6 @@ require "./support/mailers/*"
 require "./support/models"
 require "./support/helpers"
 
-require "../src/mochi/controllers/**"
-
 class HTTP::Server::Context
   # Amber adds this property,
   # mochi needs it for controllers that invoke current_user method
