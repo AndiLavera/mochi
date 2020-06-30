@@ -32,7 +32,7 @@ class Mochi::Controllers::Authenticable::SessionController < Mochi::Controllers:
 
     if user.valid_password?(user_params[:password])
       session[:user_id] = user.id
-      flash[:info] = "Successfully logged in"
+      flash[:success] = "Successfully logged in"
       user.update_tracked_fields!(request) if user.is_a? Mochi::Models::Trackable
       redirect_to "/"
     else

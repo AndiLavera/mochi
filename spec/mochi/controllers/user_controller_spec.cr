@@ -7,19 +7,19 @@ describe Mochi::Controllers::Authenticable::UserController do
       it "should display new" do
         context = build_get_request("/")
 
-        controller_class.new(context).new.should eq(nil)
+        controller_class.new(context).new.should be_true
       end
 
       it "should display show" do
         context = build_get_request("/")
 
-        controller_class.new(context).show.should eq(nil)
+        controller_class.new(context).show.should be_true
       end
 
       it "should display edit" do
         context = build_get_request("/")
 
-        controller_class.new(context).edit.should eq(nil)
+        controller_class.new(context).edit.should be_true
       end
 
       context "create" do
