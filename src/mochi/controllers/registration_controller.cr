@@ -1,7 +1,6 @@
-class Mochi::Controllers::Granite::RegistrationController < Mochi::Controllers::ApplicationController
-  def confirm
-    user = User.find_by(confirmation_token: params[:confirmation_token])
-    return redirect_to "/", flash: {"danger" => "Invalid authenticity token."} if user.nil?
+class Mochi::Controllers::RegistrationController < Mochi::Controllers::ApplicationController
+  def confirm(user)
+    return redirect_to "/", flash: {"error" => "Invalid authenticity token."} if user.nil?
 
     if user.confirm! && user.save
       redirect_to "/", flash: {"success" => "User has been confirmed."}
