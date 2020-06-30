@@ -1,8 +1,7 @@
 require "../../spec_helper"
-require "../../support/controllers/user_controller"
 
 describe Mochi::Controllers::Authenticable::UserController do
-  [Amber::UserController].each do |controller_class|
+  [Mochi::Controllers::Authenticable::UserController].each do |controller_class|
     context "controller" do
       it "should display new" do
         context = build_get_request("/")
@@ -48,7 +47,7 @@ describe Mochi::Controllers::Authenticable::UserController do
           user = User.find_by(email: email)
           user.should be_nil
           User.all.size.should eq(user_count) # assert user saved
-          # pp context.flash[:danger]
+
           context.flash[:danger].should eq("Could not create Resource!")
         end
       end

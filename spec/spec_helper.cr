@@ -20,10 +20,17 @@ require "./support/helpers"
 require "../src/mochi/controllers/**"
 
 class HTTP::Server::Context
+  # Amber adds this property,
+  # mochi needs it for controllers that invoke current_user method
   property current_user : User?
 end
 
-# require "../src/mochi/cli"
+class Mochi::Controllers::ApplicationController < Amber::Controller::Base
+  # Mock render method
+  def render(path)
+    return true
+  end
+end
 
 # Used to name tests
 def name_formatter(name : Granite::Base.class | Jennifer::Model::Base.class)

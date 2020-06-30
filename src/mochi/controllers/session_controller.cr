@@ -37,7 +37,6 @@ class Mochi::Controllers::Authenticable::SessionController < Mochi::Controllers:
       redirect_to "/"
     else
       failed_sign_in(user) if user.is_a? Mochi::Models::Lockable
-
       flash[:danger] = "Invalid email or password"
       render("session/new.ecr")
     end

@@ -1,8 +1,7 @@
 require "../../spec_helper"
-require "../../support/controllers/session_controller"
 
 describe Mochi::Controllers::Authenticable::SessionController do
-  [Amber::SessionController].each do |controller_class|
+  [Mochi::Controllers::Authenticable::SessionController].each do |controller_class|
     it "should display new session" do
       context = build_get_request("/")
 
@@ -19,7 +18,7 @@ describe Mochi::Controllers::Authenticable::SessionController do
 
       context = build_post_request("/?email=#{email}&password=Password123")
       controller = controller_class.new(context)
-      controller.create
+      controller.create(usr)
 
       context.flash[:success].should eq("Successfully logged in")
       context.session[:user_id].should eq(usr.id.to_s)
@@ -43,28 +42,28 @@ describe Mochi::Controllers::Authenticable::SessionController do
 
     it "should fail to find user" do
       email = "sc1_test#{UUID.random}@email.xyz"
-      User.build!({
+      usr = User.build!({
         email:    email,
         password: "Password123",
       })
 
-      context = build_post_request("/?email=sc0_test@gmail.com&password=Password123")
+      context = build_post_request("/?email=#{email}&password=Pssword123")
       controller = controller_class.new(context)
-      controller.create
+      controller.create(usr)
 
       context.flash[:danger].should eq("Invalid email or password")
     end
 
     it "password should be invalid" do
       email = "sc1_test#{UUID.random}@email.xyz"
-      User.build!({
+      usr = User.build!({
         email:    email,
         password: "Password123",
       })
 
       context = build_post_request("/?email=#{email}&password=assword123")
       controller = controller_class.new(context)
-      controller.create
+      controller.create(usr)
 
       context.flash[:danger].should eq("Invalid email or password")
 
@@ -77,14 +76,14 @@ describe Mochi::Controllers::Authenticable::SessionController do
       # Ensure `Confirmable#confirmation_period_valid?` returns false
       Mochi.configuration.allow_unconfirmed_access_for = 0
       email = "sc1_test#{UUID.random}@email.xyz"
-      User.build!({
+      usr = User.build!({
         email:    email,
         password: "Password123",
       })
 
       context = build_post_request("/?email=#{email}&password=Password123")
       controller = controller_class.new(context)
-      controller.create
+      controller.create(usr)
 
       context.flash[:warning].should eq("Please activate your account")
     end
@@ -92,14 +91,15 @@ describe Mochi::Controllers::Authenticable::SessionController do
     it "should tell user account is locked" do
       Mochi.configuration.allow_unconfirmed_access_for = nil
       email = "sc1_test#{UUID.random}@email.xyz"
-      User.build!({
+      usr = User.build!({
         email:    email,
         password: "Password123",
-      }).lock_access!
+      })
+      usr.lock_access!
 
       context = build_post_request("/?email=#{email}&password=Password123")
       controller = controller_class.new(context)
-      controller.create
+      controller.create(usr)
 
       context.flash[:warning].should eq("Your account is locked. Please unlock it before signing in")
     end
