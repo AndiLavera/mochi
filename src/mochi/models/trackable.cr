@@ -23,9 +23,10 @@ module Mochi::Models
       self.last_sign_in_at = old_current || new_current
       self.current_sign_in_at = new_current
 
-      old_current, new_current = self.current_sign_in_ip, extract_ip_from(request)
-      self.last_sign_in_ip = old_current || new_current
-      self.current_sign_in_ip = new_current
+      # TODO: Find new method of getting ip address from amber framework
+      # old_current, new_current = self.current_sign_in_ip, extract_ip_from(request)
+      # self.last_sign_in_ip = old_current || new_current
+      # self.current_sign_in_ip = new_current
 
       self.sign_in_count ||= 0
       self.sign_in_count += 1
