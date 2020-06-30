@@ -1,12 +1,12 @@
-class Mochi::Controllers::Lockable::UnlockController < Mochi::Controllers::ApplicationController
+class Mochi::Controllers::UnlockController < Mochi::Controllers::ApplicationController
   def update(user)
-    return redirect_to "/", flash: {"error" => "Invalid authenticity token."} if user.nil?
+    return redirect_to "/", flash: {"danger" => "Invalid authenticity token."} if user.nil?
 
     if user.unlock_access!
       session[:user_id] = user.id if Mochi.configuration.sign_in_after_unlocking
       redirect_to "/", flash: {"success" => "Account has been unlocked"}
     else
-      redirect_to "/", flash: {"error" => "Token has expired."}
+      redirect_to "/", flash: {"danger" => "Token has expired."}
     end
   end
 

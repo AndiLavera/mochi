@@ -1,4 +1,4 @@
-class Mochi::Controllers::Authenticable::UserController < Mochi::Controllers::ApplicationController
+class Mochi::Controllers::UserController < Mochi::Controllers::ApplicationController
   getter user = User.new
 
   before_action do
@@ -31,7 +31,9 @@ class Mochi::Controllers::Authenticable::UserController < Mochi::Controllers::Ap
   end
 
   def update
+    user = current_user.not_nil!
     user.set_attributes user_params.validate!
+
     if user.save
       redirect_to "/", flash: {"success" => "User has been updated."}
     else
@@ -41,6 +43,7 @@ class Mochi::Controllers::Authenticable::UserController < Mochi::Controllers::Ap
   end
 
   def destroy
+    user = current_user.not_nil!
     user.destroy
     redirect_to "/", flash: {"success" => "User has been deleted."}
   end
