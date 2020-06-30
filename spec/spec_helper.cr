@@ -28,7 +28,7 @@ end
 class Mochi::Controllers::ApplicationController < Amber::Controller::Base
   # Mock render method
   def render(path)
-    return true
+    true
   end
 end
 
