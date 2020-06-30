@@ -1,7 +1,7 @@
 require "../../spec_helper"
 
-describe Mochi::Controllers::SessionController do
-  [Mochi::Controllers::SessionController].each do |controller_class|
+[Mochi::Controllers::SessionController].each do |controller_class|
+  describe Mochi::Controllers::SessionController do
     it "should display new session" do
       context = build_get_request("/")
 
