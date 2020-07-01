@@ -1,5 +1,5 @@
 class Mochi::Controllers::RegistrationController < ApplicationController
-  def confirm(user)
+  def update(user)
     return redirect_to "/", flash: {"danger" => "Invalid authenticity token."} if user.nil?
 
     if user.confirm! && user.save

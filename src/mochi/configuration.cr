@@ -69,12 +69,7 @@ module Mochi
   end
 end
 
-require "./models/authenticable"
-require "./models/confirmable"
-require "./models/trackable"
-require "./models/recoverable"
-require "./models/lockable"
-require "./models/invitable"
+require "./models/*"
 
 require "./mailers/mochi_mailer"
 require "./controllers/application_controller"

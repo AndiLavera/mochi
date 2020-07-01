@@ -42,7 +42,7 @@ class Mochi::Controllers::SessionController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     session.delete(:user_id)
     flash[:info] = "Logged out. See ya later!"
     redirect_to "/"

@@ -1,11 +1,11 @@
 class RegistrationController < Mochi::Controllers::RegistrationController
-  def confirm
+  def update
 <% if @orm == "granite" -%>
     user = User.find_by(confirmation_token: params[:confirmation_token])
 <% end -%>
 <% if @orm == "jennifer" -%>
     user = User.where { _confirmation_token == params[:confirmation_token] }.first
 <% end -%>
-    super
+    super(user)
   end
 end
