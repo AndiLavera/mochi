@@ -21,7 +21,6 @@ module Mochi
 
       {% if i.id == :confirmable %}
         include Mochi::Models::Confirmable
-        with_confirmation
       {% end %}
 
       {% if i.id == :trackable %}
@@ -55,7 +54,6 @@ module Mochi
 
       {% if i.id == :confirmable %}
         include Mochi::Models::Confirmable
-        with_confirmation # TODO: included?
       {% end %}
 
       {% if i.id == :trackable %}

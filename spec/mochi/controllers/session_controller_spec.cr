@@ -34,7 +34,7 @@ require "../../spec_helper"
       # Destroy
       context = build_post_request("/?email=#{email}&password=Password123")
       controller = controller_class.new(context)
-      controller.delete
+      controller.destroy
 
       context.flash[:info].should eq("Logged out. See ya later!")
       context.session[:user_id]?.should be_nil
