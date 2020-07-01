@@ -9,14 +9,6 @@ dependencies:
     github: amberframework/quartz-mailer
     branch: master
 
-  cli:
-    github: drujensen/cli
-    version: ~> 0.9.1
-
-  teeplate:
-    github: mosop/teeplate
-    version: ~> 0.10.1
-
 development_dependencies:
   granite:
     github: amberframework/granite
