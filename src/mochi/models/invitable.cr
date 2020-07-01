@@ -90,15 +90,15 @@ module Mochi::Models
 
     # Main method for inviting
     # Reset invitation token and send invitation again
-    def invite!(invited_by = nil, skip_invitation = false)
+    def invite!(invited_by : Int32 | Nil = nil, skip_invitation : Bool = false)
       # was_invited = invited_to_sign_up?
 
       self.invitation_created_at = Time.utc
       self.invitation_sent_at = self.invitation_created_at unless skip_invitation
-      self.invited_by = invited_by if invited_by
+      self.invited_by = invited_by
       self.invitation_token = generate_invitation_token
 
-      if save! # (validate: false)
+      if save # (validate: false)
         (token = invitation_token) ? (return unless token) : return
 
         (mailer_class = Mochi.configuration.mailer_class) ? (return unless mailer_class) : return

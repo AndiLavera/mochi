@@ -109,7 +109,7 @@ class User < Granite::Base
   column invitation_accepted_at : Time?
   column invitation_created_at : Time?
   column invitation_token : String?
-  column invited_by : Int64?
+  column invited_by : Int32?
   column invitation_sent_at : Time?
   timestamps
 

@@ -4,7 +4,7 @@ class AddInvitableToJenniferUser < Jennifer::Migration::Base
       t.add_column(:invitation_accepted_at, :timestamp)
       t.add_column(:invitation_created_at, :timestamp)
       t.add_column(:invitation_token, :string)
-      t.add_column(:invited_by, :bigint)
+      t.add_column(:invited_by, :integer)
       t.add_column(:invitation_sent_at, :timestamp)
     end
   end
