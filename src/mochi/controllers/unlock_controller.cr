@@ -1,6 +1,6 @@
 class Mochi::Controllers::UnlockController < ApplicationController
   def update
-    user = find_klass_by(User, :unlock_token, :unlock_token)
+    user = User.find_by(resource_params, :unlock_token, :unlock_token)
     return redirect_to "/", flash: {"danger" => "Invalid authenticity token."} if user.nil?
 
     if user.unlock_access!

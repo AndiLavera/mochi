@@ -31,7 +31,7 @@ class Mochi::Controllers::InvitableController < ApplicationController
 
   # Used to confirm & reactive a user account
   def update
-    user = find_klass_by(User, :invitation_token, :invite_token)
+    user = User.find_by(resource_params, :invitation_token, :invite_token)
     return redirect_to "/", flash: {"danger" => "Invalid."} if user.nil?
 
     user.password = params[:password]

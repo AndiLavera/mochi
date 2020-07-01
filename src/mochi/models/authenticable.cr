@@ -1,5 +1,4 @@
 require "crypto/bcrypt/password"
-require "./validations/*"
 
 module Mochi::Models
   # Authenticatable Module, responsible for hashing the password and
