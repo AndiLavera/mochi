@@ -1,4 +1,3 @@
-require "../../../src/mochi/ext/granite"
 require "../../spec_helper"
 
 [Mochi::Controllers::RegistrationController].each do |controller_class|

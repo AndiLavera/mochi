@@ -17,6 +17,7 @@ module Mochi
       {% if i.id == :authenticable %}
         include Mochi::Models::Authenticable::Validations::Granite
         include Mochi::Models::Authenticable
+        include Mochi::Models::Query::Granite
       {% end %}
 
       {% if i.id == :confirmable %}
@@ -50,6 +51,7 @@ module Mochi
       {% if i.id == :authenticable %}
         include Mochi::Models::Authenticable::Validations::Jennifer
         include Mochi::Models::Authenticable
+        include Mochi::Models::Query::Jennifer
       {% end %}
 
       {% if i.id == :confirmable %}

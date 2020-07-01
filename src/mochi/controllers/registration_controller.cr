@@ -1,6 +1,6 @@
 class Mochi::Controllers::RegistrationController < ApplicationController
   def update
-    user = find_klass_by(User, :confirmation_token, :confirmation_token)
+    user = User.find_by(resource_params, :confirmation_token, :confirmation_token)
     return redirect_to "/", flash: {"danger" => "Invalid authenticity token."} if user.nil?
 
     if user.confirm!
