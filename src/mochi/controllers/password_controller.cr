@@ -1,4 +1,4 @@
-class Mochi::Controllers::Jennifer::PasswordController < Mochi::Controllers::ApplicationController
+class Mochi::Controllers::PasswordController < Mochi::Controllers::ApplicationController
   getter user = User.new
 
   def new
@@ -6,10 +6,10 @@ class Mochi::Controllers::Jennifer::PasswordController < Mochi::Controllers::App
   end
 
   # Used to create a new password recovery
-  def create
-    user = User.where { _email == recovery_params["email"].to_s }.first
+  def create(user)
+    # user = User.where { _email == recovery_params["email"].to_s }.first
     if user
-      if user.reset_password(recovery_params["new_password"]) && user.send_reset_password_instructions
+      if user.reset_password(recovery_params[:new_password]) && user.send_reset_password_instructions
         redirect_to "/", flash: {"success" => "Password reset. Please check your email"}
       else
         flash[:danger] = "Some error occurred. Please try again."
@@ -24,8 +24,8 @@ class Mochi::Controllers::Jennifer::PasswordController < Mochi::Controllers::App
   end
 
   # Used to confirm & reactive a user account
-  def update
-    user = User.where { _reset_password_token == recovery_params["reset_token"].to_s }.first
+  def update(user)
+    # user = User.where { _reset_password_token == recovery_params["reset_token"].to_s }.first
 
     unless user
       user = User.new

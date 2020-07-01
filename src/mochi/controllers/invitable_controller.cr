@@ -6,6 +6,7 @@ class Mochi::Controllers::InvitableController < Mochi::Controllers::ApplicationC
   end
 
   def edit(user)
+    # TODO: Just check current_user?
     unless user
       return redirect_to "/", flash: {"danger" => "Invalid authenticity token."}
     end
@@ -21,7 +22,7 @@ class Mochi::Controllers::InvitableController < Mochi::Controllers::ApplicationC
       invited_by = cur_usr.id
     end
 
-    if user.invite!(invited_by)
+    if invited_by && user.invite!(invited_by)
       redirect_to "/", flash: {"success" => "Invite successfully created & sent."}
     else
       flash[:danger] = "Could not create new invite. Please try again."
