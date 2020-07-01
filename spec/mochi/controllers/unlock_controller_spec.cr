@@ -1,3 +1,4 @@
+require "../../../src/mochi/ext/granite"
 require "../../spec_helper"
 
 [Mochi::Controllers::UnlockController].each do |controller_class|
@@ -10,19 +11,15 @@ require "../../spec_helper"
       user.password = "Password123"
       user.lock_access!
 
-      context = build_post_request("/?reset_token=#{user.unlock_token}")
+      context = build_post_request("/?unlock_token=#{user.unlock_token}")
 
-      controller_class.new(context).update(user)
-      user = User.find_by(email: email)
-      if user
-        user.unlock_token.should be_nil
-        user.failed_attempts.should eq(0)
-        user.locked_at.should be_nil
-        context.flash[:success]?.should eq("Account has been unlocked")
-        context.session[:user_id]?.should eq(user.id.to_s)
-      else
-        raise "Unkown Error"
-      end
+      controller_class.new(context).update
+      user = User.find_by(email: email).not_nil!
+      user.unlock_token.should be_nil
+      user.failed_attempts.should eq(0)
+      user.locked_at.should be_nil
+      context.flash[:success]?.should eq("Account has been unlocked")
+      context.session[:user_id]?.should eq(user.id.to_s)
     end
 
     it "should unlock the user without signing in" do
@@ -35,17 +32,16 @@ require "../../spec_helper"
       user.password = "Password123"
       user.lock_access!
 
-      context = build_post_request("/?reset_token=#{user.unlock_token}")
+      context = build_post_request("/?unlock_token=#{user.unlock_token}")
 
-      controller_class.new(context).update(user)
-      user = User.find_by(email: email)
-      if user
-        user.unlock_token.should be_nil
-        user.failed_attempts.should eq(0)
-        user.locked_at.should be_nil
-        context.flash[:success]?.should eq("Account has been unlocked")
-        context.session[:user_id]?.should eq(nil)
-      end
+      controller_class.new(context).update
+      user = User.find_by(email: email).not_nil!
+
+      user.unlock_token.should be_nil
+      user.failed_attempts.should eq(0)
+      user.locked_at.should be_nil
+      context.flash[:success]?.should eq("Account has been unlocked")
+      context.session[:user_id]?.should eq(nil)
     end
 
     it "should be an invalid reset token" do
@@ -60,15 +56,14 @@ require "../../spec_helper"
 
       token = user.unlock_token
 
-      context = build_post_request("/?reset_token=555-5555-555")
+      context = build_post_request("/?unlock_token=555-5555-555")
 
-      controller_class.new(context).update(User.find_by(unlock_token: "555-5555-555"))
-      user = User.find_by(email: email)
-      if user
-        user.unlock_token.should eq(token)
-        context.flash[:danger].should eq("Invalid authenticity token.")
-        context.session[:user_id]?.should eq(nil)
-      end
+      controller_class.new(context).update
+      user = User.find_by(email: email).not_nil!
+
+      user.unlock_token.should eq(token)
+      context.flash[:danger].should eq("Invalid authenticity token.")
+      context.session[:user_id]?.should eq(nil)
     end
   end
 end

@@ -1,3 +1,4 @@
+require "../../../../src/mochi/ext/granite"
 require "../../../spec_helper"
 
 describe Mochi::Controllers::Omniauthable::UserController do
