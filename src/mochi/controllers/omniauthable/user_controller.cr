@@ -1,4 +1,4 @@
-class Mochi::Controllers::Omniauthable::UserController < Mochi::Controllers::ApplicationController
+class Mochi::Controllers::Omniauthable::UserController < ApplicationController
   def create
     redirect_to Mochi::Omniauthable::Provider.authorize_uri(params[:provider], "#{Amber.settings.host}/omniauth/user/#{params[:provider]}/callback")
   end

@@ -17,10 +17,6 @@ dependencies:
     github: mosop/teeplate
     version: ~> 0.10.1
 
-  jasper_helpers:
-    github: amberframework/jasper-helpers
-    version: ~> 0.2.5
-
 development_dependencies:
   granite:
     github: amberframework/granite

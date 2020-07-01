@@ -1,4 +1,4 @@
-class Mochi::Controllers::UnlockController < Mochi::Controllers::ApplicationController
+class Mochi::Controllers::UnlockController < ApplicationController
   def update(user)
     return redirect_to "/", flash: {"danger" => "Invalid authenticity token."} if user.nil?
 
