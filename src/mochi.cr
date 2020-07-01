@@ -17,12 +17,10 @@ module Mochi
       {% if i.id == :authenticable %}
         include Mochi::Models::Authenticable::Validations::Granite
         include Mochi::Models::Authenticable
-        with_validations
       {% end %}
 
       {% if i.id == :confirmable %}
         include Mochi::Models::Confirmable
-        with_confirmation
       {% end %}
 
       {% if i.id == :trackable %}
@@ -52,12 +50,10 @@ module Mochi
       {% if i.id == :authenticable %}
         include Mochi::Models::Authenticable::Validations::Jennifer
         include Mochi::Models::Authenticable
-        jennifer_validations
       {% end %}
 
       {% if i.id == :confirmable %}
         include Mochi::Models::Confirmable
-        with_confirmation
       {% end %}
 
       {% if i.id == :trackable %}

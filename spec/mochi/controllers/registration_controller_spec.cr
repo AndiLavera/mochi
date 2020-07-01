@@ -5,7 +5,7 @@ require "../../spec_helper"
     it "should handle not finding user" do
       context = build_get_request("/")
 
-      controller_class.new(context).confirm(nil)
+      controller_class.new(context).update(nil)
       context.flash[:danger].should eq("Invalid authenticity token.")
     end
 
@@ -17,7 +17,7 @@ require "../../spec_helper"
         password: "Password123",
       })
       context = build_post_request("/?confirmation_token=#{usr.confirmation_token}")
-      controller_class.new(context).confirm(usr)
+      controller_class.new(context).update(usr)
       context.flash[:success].should eq("User has been confirmed.")
       usr.confirmed.should be_true
       usr.confirmed_at.should_not be_nil
@@ -31,7 +31,7 @@ require "../../spec_helper"
         password: "Password123",
       })
       context = build_post_request("/?confirmation_token=#{usr.confirmation_token}")
-      controller_class.new(context).confirm(usr)
+      controller_class.new(context).update(usr)
       context.flash[:danger].should eq("Token has expired.")
       usr.confirmed.should be_false
       usr.confirmed_at.should be_nil
