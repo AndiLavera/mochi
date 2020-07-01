@@ -1,4 +1,4 @@
-class Mochi::Controllers::PasswordController < Mochi::Controllers::ApplicationController
+class Mochi::Controllers::PasswordController < ApplicationController
   getter user = User.new
 
   def new

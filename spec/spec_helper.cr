@@ -23,7 +23,7 @@ class HTTP::Server::Context
   property current_user : User?
 end
 
-class Mochi::Controllers::ApplicationController < Amber::Controller::Base
+class ApplicationController < Amber::Controller::Base
   # Mock render method
   def render(path)
     true

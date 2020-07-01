@@ -1,4 +1,4 @@
-class Mochi::Controllers::SessionController < Mochi::Controllers::ApplicationController
+class Mochi::Controllers::SessionController < ApplicationController
   getter user = User.new
 
   def new

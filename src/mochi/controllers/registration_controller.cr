@@ -1,4 +1,4 @@
-class Mochi::Controllers::RegistrationController < Mochi::Controllers::ApplicationController
+class Mochi::Controllers::RegistrationController < ApplicationController
   def confirm(user)
     return redirect_to "/", flash: {"danger" => "Invalid authenticity token."} if user.nil?
 
