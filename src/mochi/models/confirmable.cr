@@ -33,6 +33,7 @@ module Mochi::Models
     # Adds methods to set token & send confirmation email.
     # - `before_create` - generates token and saves it to user;
     # - `after_create` - sends out user email
+    # TODO: included?
     macro with_confirmation(skip_validation = false)
       {% if !skip_validation %}
         before_create :generate_confirmation_token
