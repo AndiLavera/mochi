@@ -4,6 +4,7 @@ describe Mochi::Models::Invitable do
   USER_CLASSES.each do |user_class|
     describe "#{user_class}" do
       it "should invite new user & rollback" do
+        Mochi.configuration.accept_invitation_within = 7
         user = user_class.new
         user.email = "l0_test@email.com"
 
@@ -21,6 +22,7 @@ describe Mochi::Models::Invitable do
       end
 
       it "should invite user & accept invitation" do
+        Mochi.configuration.accept_invitation_within = 7
         user = user_class.new
         user.email = "l1_test@email.com"
 
@@ -35,6 +37,7 @@ describe Mochi::Models::Invitable do
       end
 
       it "should fail to accept invite & rollback properly" do
+        Mochi.configuration.accept_invitation_within = 7
         user = user_class.new
         user.email = "l1_test@email.com"
 
@@ -51,6 +54,7 @@ describe Mochi::Models::Invitable do
       end
 
       it "should be an expired invite token" do
+        Mochi.configuration.accept_invitation_within = 7
         user = user_class.new
         user.email = "l1_test@email.com"
 
