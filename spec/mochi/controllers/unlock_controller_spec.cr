@@ -3,6 +3,8 @@ require "../../spec_helper"
 [Mochi::Controllers::UnlockController].each do |controller_class|
   describe Mochi::Controllers::UnlockController do
     it "should unlock the user & sign in" do
+      Mochi.configuration.sign_in_after_unlocking = true
+
       email = "unc0_test@email.xyz"
       user = User.new({
         :email => email,
