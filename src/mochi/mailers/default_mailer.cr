@@ -1,6 +1,4 @@
 class Mochi::DefaultMailer < Mochi::Mailer
-  # include Mochi::Helpers::Mailer
-
   def confirmation_instructions(record : User, token : String, *opts)
     ConfirmationMailer.new(
       (record.responds_to?(:name) ? record.name : "friend"),
