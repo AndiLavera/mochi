@@ -16,7 +16,8 @@ require "../../spec_helper"
       })
 
       context = build_post_request("/")
-      controller_class.new(context).edit(usr).should be_true
+      context.current_user = usr
+      controller_class.new(context).edit.should be_true
     end
 
     it "should successfully invite a new user" do
@@ -49,11 +50,11 @@ require "../../spec_helper"
       usr.invite!
       token = usr.invitation_token
 
-      context = build_post_request("/?password=Password123")
-      controller_class.new(context).update(usr)
+      context = build_post_request("/?password=Password123&invite_token=#{token}")
+      controller_class.new(context).update
+      usr = User.find(usr.id).not_nil!
 
       context.flash[:success].should eq("Invite accepted.")
-      usr.invitation_token_was.should eq(token)
       usr.invitation_token.should be_nil
       usr.invitation_accepted_at.should_not be_nil
       usr.confirmed_at.should eq(usr.invitation_accepted_at)
@@ -64,8 +65,8 @@ require "../../spec_helper"
       usr = User.new({:email => "ic6_test#{UUID.random}@email.xyz"})
       usr.invite!
 
-      context = build_post_request("/?password=Password123")
-      controller_class.new(context).update(usr)
+      context = build_post_request("/?password=Password123&invite_token=#{usr.invitation_token}")
+      controller_class.new(context).update
 
       context.flash[:danger].should eq("Could accept invite. Please try again.")
       usr.invitation_token.should_not be_nil

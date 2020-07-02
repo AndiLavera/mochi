@@ -8,20 +8,23 @@ require "../../spec_helper"
     end
 
     it "should not find user and give error message" do
-      context = build_get_request("/")
-      controller_class.new(context).create(nil)
+      context = build_post_request("/?email=1234@gmail.com")
+      controller_class.new(context).create
       context.flash[:danger].should eq("Could not find user with that email.")
     end
 
     it "should reset password" do
-      context = build_post_request("/?new_password=Passwordabc123")
       email = "pc0_test#{UUID.random}@email.com"
       usr = User.build!({
         email:    email,
         password: "Password123",
       })
+      context = build_post_request("/?new_password=Passwordabc123&email=#{email}")
 
-      controller_class.new(context).create(usr)
+      controller_class.new(context).create
+
+      usr = User.find(usr.id).not_nil!
+
       context.flash[:success].should eq("Password reset. Please check your email")
       usr.reset_password_token.should_not be_nil
       usr.password_reset_in_progress.should be_true
@@ -39,7 +42,9 @@ require "../../spec_helper"
       usr.send_reset_password_instructions
 
       context = build_post_request("/?reset_token=#{usr.reset_password_token}")
-      controller_class.new(context).update(usr)
+      controller_class.new(context).update
+
+      usr = User.find(usr.id).not_nil!
 
       usr.reset_password_token.should be_nil
       usr.reset_password_sent_at.should be_nil
@@ -58,7 +63,9 @@ require "../../spec_helper"
       usr.send_reset_password_instructions
 
       context = build_post_request("/?reset_token=#{usr.reset_password_token}")
-      controller_class.new(context).update(usr)
+      controller_class.new(context).update
+
+      usr = User.find(usr.id).not_nil!
 
       usr.reset_password_token.should be_nil
       usr.reset_password_sent_at.should be_nil

@@ -15,8 +15,9 @@ module Mochi
   macro mochi_granite(*modules)
     {% for i in modules %}
       {% if i.id == :authenticable %}
-        include Mochi::Models::Authenticable::Validations::Granite
+        include Mochi::Models::Validations::Granite
         include Mochi::Models::Authenticable
+        include Mochi::Models::Query::Granite
       {% end %}
 
       {% if i.id == :confirmable %}
@@ -48,8 +49,9 @@ module Mochi
   macro mochi_jennifer(*modules)
     {% for i in modules %}
       {% if i.id == :authenticable %}
-        include Mochi::Models::Authenticable::Validations::Jennifer
+        include Mochi::Models::Validations::Jennifer
         include Mochi::Models::Authenticable
+        include Mochi::Models::Query::Jennifer
       {% end %}
 
       {% if i.id == :confirmable %}

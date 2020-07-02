@@ -5,7 +5,9 @@ class Mochi::Controllers::SessionController < ApplicationController
     render("session/new.ecr")
   end
 
-  def create(user) # ameba:disable Metrics/CyclomaticComplexity
+  def create # ameba:disable Metrics/CyclomaticComplexity
+    user = User.find_by(resource_params, :email, :email)
+
     unless user
       flash[:danger] = "Invalid email or password"
       user = User.new
@@ -30,7 +32,7 @@ class Mochi::Controllers::SessionController < ApplicationController
       return render("session/new.ecr")
     end
 
-    if user.valid_password?(user_params[:password])
+    if user.valid_password?(resource_params[:password])
       session[:user_id] = user.id
       flash[:success] = "Successfully logged in"
       user.update_tracked_fields!(request) if user.is_a? Mochi::Models::Trackable
@@ -48,7 +50,7 @@ class Mochi::Controllers::SessionController < ApplicationController
     redirect_to "/"
   end
 
-  private def user_params
+  private def resource_params
     params.validation do
       required :email
       required :password

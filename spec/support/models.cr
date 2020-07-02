@@ -16,7 +16,6 @@ class JenniferUser < Jennifer::Model::Base
     :lockable,
     :invitable
   )
-  include Mochi::Models::Authenticable::Validations::Jennifer
 
   with_timestamps
   mapping(
@@ -81,7 +80,6 @@ class User < Granite::Base
     :lockable,
     :invitable
   )
-  include Mochi::Models::Authenticable::Validations::Granite
 
   connection postgres
   table jennifer_users

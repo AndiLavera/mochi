@@ -22,7 +22,7 @@ module Mochi::Models
   module Invitable
     # Returns true if `accept_invitation` was invoked
     property accepting_invitation : Bool = false
-    property invitation_token_was : String = ""
+    property invitation_token_was : String?
 
     # Accept an invitation by clearing invitation token and and setting invitation_accepted_at
     def accept_invitation

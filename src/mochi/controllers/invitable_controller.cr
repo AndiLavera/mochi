@@ -5,11 +5,10 @@ class Mochi::Controllers::InvitableController < ApplicationController
     render("invitable/new.ecr")
   end
 
-  def edit(user)
+  def edit
+    user = current_user
     # TODO: Just check current_user?
-    unless user
-      return redirect_to "/", flash: {"danger" => "Invalid authenticity token."}
-    end
+    return redirect_to "/", flash: {"danger" => "Invalid authenticity token."} if user.nil?
     render("invitable/edit.ecr")
   end
 
@@ -31,10 +30,9 @@ class Mochi::Controllers::InvitableController < ApplicationController
   end
 
   # Used to confirm & reactive a user account
-  def update(user)
-    unless user
-      return redirect_to "/", flash: {"danger" => "Invalid."}
-    end
+  def update
+    user = User.find_by(resource_params, :invitation_token, :invite_token)
+    return redirect_to "/", flash: {"danger" => "Invalid."} if user.nil?
 
     user.password = params[:password]
 
@@ -46,7 +44,7 @@ class Mochi::Controllers::InvitableController < ApplicationController
     end
   end
 
-  private def recovery_params
+  private def resource_params
     params.validation do
       optional :email
       optional :invite_token
