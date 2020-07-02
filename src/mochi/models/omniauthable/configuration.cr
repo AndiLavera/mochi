@@ -1,3 +1,5 @@
+require "json_mapping"
+
 module Mochi
   module Omniauthable
     @@configuration = Mochi::Omniauthable::Configuration.new

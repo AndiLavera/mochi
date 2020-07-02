@@ -9,6 +9,9 @@ dependencies:
     github: amberframework/quartz-mailer
     branch: master
 
+  json_mapping:
+    github: crystal-lang/json_mapping.cr
+
 development_dependencies:
   granite:
     github: amberframework/granite
