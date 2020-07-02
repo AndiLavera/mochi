@@ -9,13 +9,13 @@ The Mochi CLI makes installation easy. Please give a thanks to the amber core te
 
 ## Documentation
 ### API Docs
-[API Documentation](https://gitlato.github.io/mochi/)
+[API Documentation](https://andrewc910.github.io/mochi/)
 
 ### Gitbook
 [Gitbook](https://awcrotwell.gitbook.io/mochi/)
 
 ## Mochi Modules
-> **Note:** Only the class 'User' is supported. This probably will not change due to crystal being staticly typed. I am open to changing this if i find a solid implementation.
+> **Note:** Only the class 'User' is supported.
 
 Currently, Mochi has 7 modules:  
 
