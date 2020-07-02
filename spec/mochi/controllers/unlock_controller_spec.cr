@@ -3,7 +3,7 @@ require "../../spec_helper"
 [Mochi::Controllers::UnlockController].each do |controller_class|
   describe Mochi::Controllers::UnlockController do
     it "should unlock the user & sign in" do
-      email = "unc0_test#{UUID.random}@email.xyz"
+      email = "unc0_test@email.xyz"
       user = User.new({
         :email => email,
       })
@@ -24,7 +24,7 @@ require "../../spec_helper"
     it "should unlock the user without signing in" do
       Mochi.configuration.sign_in_after_unlocking = false
 
-      email = "unc1_test#{UUID.random}@email.xyz"
+      email = "unc1_test@email.xyz"
       user = User.new({
         :email => email,
       })
@@ -46,7 +46,7 @@ require "../../spec_helper"
     it "should be an invalid reset token" do
       Mochi.configuration.sign_in_after_unlocking = false
 
-      email = "unc2_test#{UUID.random}@email.xyz"
+      email = "unc2_test@email.xyz"
       user = User.new({
         :email => email,
       })

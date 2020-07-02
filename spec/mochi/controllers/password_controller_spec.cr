@@ -14,7 +14,7 @@ require "../../spec_helper"
     end
 
     it "should reset password" do
-      email = "pc0_test#{UUID.random}@email.com"
+      email = "pc0_test@email.com"
       usr = User.build!({
         email:    email,
         password: "Password123",
@@ -34,7 +34,7 @@ require "../../spec_helper"
     it "should complete a password reset without signing in" do
       Mochi.configuration.sign_in_after_reset_password = false
 
-      email = "pc0_test#{UUID.random}@email.com"
+      email = "pc0_test@email.com"
       usr = User.build!({
         email:    email,
         password: "Password123",
@@ -55,7 +55,7 @@ require "../../spec_helper"
     it "should complete a password reset with signing in" do
       Mochi.configuration.sign_in_after_reset_password = true
 
-      email = "pc0_test#{UUID.random}@email.com"
+      email = "pc0_test@email.com"
       usr = User.build!({
         email:    email,
         password: "Password123",
