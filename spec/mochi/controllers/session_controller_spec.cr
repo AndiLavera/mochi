@@ -18,7 +18,7 @@ require "../../spec_helper"
 
       context = build_post_request("/?email=#{email}&password=Password123")
       controller = controller_class.new(context)
-      controller.create(usr)
+      controller.create
 
       context.flash[:success].should eq("Successfully logged in")
       context.session[:user_id].should eq(usr.id.to_s)
@@ -49,7 +49,7 @@ require "../../spec_helper"
 
       context = build_post_request("/?email=#{email}&password=Pssword123")
       controller = controller_class.new(context)
-      controller.create(usr)
+      controller.create
 
       context.flash[:danger].should eq("Invalid email or password")
     end
@@ -63,7 +63,7 @@ require "../../spec_helper"
 
       context = build_post_request("/?email=#{email}&password=assword123")
       controller = controller_class.new(context)
-      controller.create(usr)
+      controller.create
 
       context.flash[:danger].should eq("Invalid email or password")
 
@@ -83,7 +83,7 @@ require "../../spec_helper"
 
       context = build_post_request("/?email=#{email}&password=Password123")
       controller = controller_class.new(context)
-      controller.create(usr)
+      controller.create
 
       context.flash[:warning].should eq("Please activate your account")
     end
@@ -99,7 +99,7 @@ require "../../spec_helper"
 
       context = build_post_request("/?email=#{email}&password=Password123")
       controller = controller_class.new(context)
-      controller.create(usr)
+      controller.create
 
       context.flash[:warning].should eq("Your account is locked. Please unlock it before signing in")
     end
