@@ -10,6 +10,7 @@ describe Mochi::Models::Confirmable do
     end
 
     it "should confirm user for #{name_formatter(user_class)}" do
+      Mochi.configuration.confirm_within = 7
       user = user_class.new
       user.email = "co0_test#{rand(0..500)}@email.com"
       user.password = "password123"
@@ -23,6 +24,7 @@ describe Mochi::Models::Confirmable do
     end
 
     it "should not confirm user for #{name_formatter(user_class)}" do
+      Mochi.configuration.confirm_within = 7
       user = user_class.new
       user.email = "co1_test#{rand(0..500)}@email.com"
       user.password = "password123"
