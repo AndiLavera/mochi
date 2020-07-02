@@ -3,8 +3,8 @@ require "../../spec_helper"
 [Mochi::Controllers::RegistrationController].each do |controller_class|
   describe controller_class do
     it "should handle not finding user" do
-      email = "rc00_test#{UUID.random}@email.xyz"
-      usr = User.build!({
+      email = "rc00_test@email.xyz"
+      User.build!({
         email:    email,
         password: "Password123",
       })
@@ -16,7 +16,7 @@ require "../../spec_helper"
 
     it "should confirm a new user" do
       Mochi.configuration.confirm_within = 1
-      email = "rc0_test#{UUID.random}@email.xyz"
+      email = "rc0_test@email.xyz"
       usr = User.build!({
         email:    email,
         password: "Password123",
@@ -31,7 +31,7 @@ require "../../spec_helper"
 
     it "should be an expired token" do
       Mochi.configuration.confirm_within = 0
-      email = "rc0_test#{UUID.random}@email.xyz"
+      email = "rc0_test@email.xyz"
       usr = User.build!({
         email:    email,
         password: "Password123",

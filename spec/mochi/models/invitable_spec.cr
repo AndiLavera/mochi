@@ -5,7 +5,7 @@ describe Mochi::Models::Invitable do
     describe "#{user_class}" do
       it "should invite new user & rollback" do
         user = user_class.new
-        user.email = "l0_test#{UUID.random}@email.com"
+        user.email = "l0_test@email.com"
 
         user.invite!
         user.invitation_created_at.should_not be_nil
@@ -22,7 +22,7 @@ describe Mochi::Models::Invitable do
 
       it "should invite user & accept invitation" do
         user = user_class.new
-        user.email = "l1_test#{UUID.random}@email.com"
+        user.email = "l1_test@email.com"
 
         user.invite!
         user.accept_invitation!
@@ -36,7 +36,7 @@ describe Mochi::Models::Invitable do
 
       it "should fail to accept invite & rollback properly" do
         user = user_class.new
-        user.email = "l1_test#{UUID.random}@email.com"
+        user.email = "l1_test@email.com"
 
         user.invite!
         token = user.invitation_token
@@ -52,7 +52,7 @@ describe Mochi::Models::Invitable do
 
       it "should be an expired invite token" do
         user = user_class.new
-        user.email = "l1_test#{UUID.random}@email.com"
+        user.email = "l1_test@email.com"
 
         user.invite!
         user.invitation_sent_at = Time.utc - 8.days
@@ -63,7 +63,7 @@ describe Mochi::Models::Invitable do
 
       it "should be created by invite" do
         user = user_class.new
-        user.email = "l1_test#{UUID.random}@email.com"
+        user.email = "l1_test@email.com"
 
         user.invite!
         user.created_by_invite?.should be_true
@@ -71,7 +71,7 @@ describe Mochi::Models::Invitable do
 
       it "should not be accepting invite" do
         user = user_class.new
-        user.email = "l1_test#{UUID.random}@email.com"
+        user.email = "l1_test@email.com"
 
         user.invite!
         user.accepting_invitation?.should be_false

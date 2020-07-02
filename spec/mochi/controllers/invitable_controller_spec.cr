@@ -9,7 +9,7 @@ require "../../spec_helper"
     end
 
     it "should render the edit template" do
-      email = "ic0_test#{UUID.random}@email.xyz"
+      email = "ic0_test@email.xyz"
       usr = User.build!({
         email:    email,
         password: "Password123",
@@ -22,11 +22,11 @@ require "../../spec_helper"
 
     it "should successfully invite a new user" do
       usr = User.build!({
-        email:    "ic1_test#{UUID.random}@email.xyz",
+        email:    "ic1_test@email.xyz",
         password: "Password123",
       })
 
-      context = build_post_request("/?email=ic2_test#{UUID.random}@email.xyz")
+      context = build_post_request("/?email=ic2_test@email.xyz")
       context.current_user = usr
 
       controller_class.new(context).create
@@ -34,19 +34,19 @@ require "../../spec_helper"
     end
 
     it "should fail to invite a new user" do
-      usr = User.build!({
-        email:    "ic3_test#{UUID.random}@email.xyz",
+      User.build!({
+        email:    "ic3_test@email.xyz",
         password: "Password123",
       })
 
-      context = build_post_request("/?email=ic4_test#{UUID.random}@email.xyz")
+      context = build_post_request("/?email=ic4_test@email.xyz")
       controller_class.new(context).create
       context.flash[:danger].should eq("Could not create new invite. Please try again.")
     end
 
     it "should allow user to accept invitiation" do
       Mochi.configuration.accept_invitation_within = 1
-      usr = User.new({:email => "ic5_test#{UUID.random}@email.xyz"})
+      usr = User.new({:email => "ic5_test@email.xyz"})
       usr.invite!
       token = usr.invitation_token
 
@@ -62,7 +62,7 @@ require "../../spec_helper"
 
     it "should prevent user from accepting invitiation" do
       Mochi.configuration.accept_invitation_within = 0
-      usr = User.new({:email => "ic6_test#{UUID.random}@email.xyz"})
+      usr = User.new({:email => "ic6_test@email.xyz"})
       usr.invite!
 
       context = build_post_request("/?password=Password123&invite_token=#{usr.invitation_token}")

@@ -25,7 +25,7 @@ require "../../spec_helper"
         it "should make a new user" do
           # Setup controller info
           user_count = User.all.size
-          email = "uc0_test#{UUID.random}@email.xyz"
+          email = "uc0_test@email.xyz"
           context = build_post_request("/?email=#{email}&password=password123")
 
           controller_class.new(context).create
@@ -39,7 +39,7 @@ require "../../spec_helper"
         it "password should be too short to create user" do
           # Setup controller info
           user_count = User.all.size
-          email = "uc1_test#{UUID.random}@email.xyz"
+          email = "uc1_test@email.xyz"
           context = build_post_request("/?email=#{email}&password=p")
 
           controller_class.new(context).create
@@ -55,7 +55,7 @@ require "../../spec_helper"
       context "update" do
         it "should update a user" do
           # build user
-          email = "uc2_test#{UUID.random}@email.com"
+          email = "uc2_test@email.com"
           user = User.build!({
             email:    email,
             password: "Password123",
@@ -76,7 +76,7 @@ require "../../spec_helper"
       end
 
       it "should destory a user" do
-        email = "uc0_test#{UUID.random}@email.xyz"
+        email = "uc0_test@email.xyz"
         context = build_post_request("/?email=#{email}&password=password123")
         controller = controller_class.new(context)
         controller.create
