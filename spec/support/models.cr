@@ -120,21 +120,3 @@ class User < Granite::Base
 
   extend Builder
 end
-
-# Some tests require a ConfirmationMailer class
-# This is just an empty class to prevent undefined errors
-macro define_mailer_classes(mailers)
-  {% for name in mailers.resolve %}
-  class {{name.id}}
-    def initialize(name : String, email : String, token : String)
-    end
-
-    def deliver
-      true
-    end
-  end
-  {% end %}
-end
-
-# Create all the required mailer classes
-define_mailer_classes(MAILER_CLASSES)
