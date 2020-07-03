@@ -6,9 +6,7 @@ describe Mochi::Models::Lockable do
   USER_CLASSES.each do |user_class|
     describe "#{name_formatter(user_class)}" do
       it "should lock access and unlock access" do
-        user = user_class.new
-        user.email = "l0_test@email.com"
-        user.password = "password123"
+        user = user_class.build!
         user.increment_failed_attempts!
         user.lock_access!
 
@@ -23,9 +21,7 @@ describe Mochi::Models::Lockable do
       end
 
       it "access should be locked" do
-        user = user_class.new
-        user.email = "l1_test@email.com"
-        user.password = "password123"
+        user = user_class.build!
 
         user.lock_access!
         user.access_locked?.should be_true
@@ -33,9 +29,7 @@ describe Mochi::Models::Lockable do
       end
 
       it "lock should expire" do
-        user = user_class.new
-        user.email = "l1_test@email.com"
-        user.password = "password123"
+        user = user_class.build!
 
         user.lock_access!
         user.access_locked?.should be_true
@@ -45,9 +39,7 @@ describe Mochi::Models::Lockable do
       end
 
       it "should increment failed attempts" do
-        user = user_class.new
-        user.email = "l1_test@email.com"
-        user.password = "password123"
+        user = user_class.build!
 
         2.times { user.increment_failed_attempts! }
         user.failed_attempts.should eq(2)

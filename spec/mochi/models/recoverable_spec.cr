@@ -5,9 +5,7 @@ describe Mochi::Models::Recoverable do
 
   USER_CLASSES.each do |user_class|
     it "should generate reset_password_token #{name_formatter(user_class)}" do
-      user = user_class.new
-      user.email = "jr0_test#{rand(0..500)}@email.com"
-      user.password = "password123"
+      user = user_class.build!
       user.set_reset_password_token!
 
       user.reset_password_token.should_not be_nil
@@ -16,9 +14,7 @@ describe Mochi::Models::Recoverable do
     end
 
     it "should change user password #{name_formatter(user_class)}" do
-      user = user_class.new
-      user.email = "jr1_test#{rand(0..500)}@email.com"
-      user.password = "password123"
+      user = user_class.build!
       password_digest = user.password_digest
 
       user.reset_password("123Password")
@@ -26,9 +22,7 @@ describe Mochi::Models::Recoverable do
     end
 
     it "should send reset password email #{name_formatter(user_class)}" do
-      user = user_class.new
-      user.email = "jr2_test#{rand(0..500)}@email.com"
-      user.password = "password123"
+      user = user_class.build!
       token = user.send_reset_password_instructions
 
       user.reset_password_token.should eq(token)
@@ -41,9 +35,7 @@ describe Mochi::Models::Recoverable do
     end
 
     it "should send reset password email #{name_formatter(user_class)}" do
-      user = user_class.new
-      user.email = "jr3_test#{rand(0..500)}@email.com"
-      user.password = "password123"
+      user = user_class.build!
       user.send_reset_password_instructions
 
       user.reset_password_period_valid?.should be_true
