@@ -72,5 +72,6 @@ end
 require "./models/*"
 
 require "./mailers/mochi_mailer"
+require "./mailers/default_mailer"
 require "./controllers/application_controller"
 require "./controllers/*"
