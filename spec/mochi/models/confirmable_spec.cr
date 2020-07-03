@@ -3,9 +3,8 @@ require "../../spec_helper"
 describe Mochi::Models::Confirmable do
   USER_CLASSES.each do |user_class|
     it "should generate uuid token for #{name_formatter(user_class)}" do
-      user = user_class.build
+      user = user_class.build!
       user.generate_confirmation_token
-
       user.confirmation_token.should_not be_nil
     end
 
@@ -23,8 +22,9 @@ describe Mochi::Models::Confirmable do
 
     it "should not confirm user for #{name_formatter(user_class)}" do
       Mochi.configuration.confirm_within = 7
-      user = user_class.build
-      user.confirmation_sent_at = Time.utc - 8.days
+      user = user_class.build!
+
+      user.confirmation_sent_at = Time.utc - 10.days
       user.confirm!
 
       user.confirmed.should be_falsey
@@ -42,7 +42,6 @@ describe Mochi::Models::Confirmable do
 
     it "should not allow unconfirmed access for #{name_formatter(user_class)}" do
       Mochi.configuration.allow_unconfirmed_access_for = 1
-
       user = user_class.build!
 
       user.confirmation_sent_at.should be_truthy
