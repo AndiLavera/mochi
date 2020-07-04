@@ -14,12 +14,8 @@ require "../../spec_helper"
     end
 
     it "should reset password" do
-      email = "pc0_test@email.com"
-      usr = User.build!({
-        email:    email,
-        password: "Password123",
-      })
-      context = build_post_request("/?new_password=Passwordabc123&email=#{email}")
+      usr = User.build!
+      context = build_post_request("/?new_password=Passwordabc123&email=#{usr.email}")
 
       controller_class.new(context).create
 
@@ -34,11 +30,7 @@ require "../../spec_helper"
     it "should complete a password reset without signing in" do
       Mochi.configuration.sign_in_after_reset_password = false
 
-      email = "pc0_test@email.com"
-      usr = User.build!({
-        email:    email,
-        password: "Password123",
-      })
+      usr = User.build!
       usr.send_reset_password_instructions
 
       context = build_post_request("/?reset_token=#{usr.reset_password_token}")
@@ -55,11 +47,7 @@ require "../../spec_helper"
     it "should complete a password reset with signing in" do
       Mochi.configuration.sign_in_after_reset_password = true
 
-      email = "pc0_test@email.com"
-      usr = User.build!({
-        email:    email,
-        password: "Password123",
-      })
+      usr = User.build!
       usr.send_reset_password_instructions
 
       context = build_post_request("/?reset_token=#{usr.reset_password_token}")

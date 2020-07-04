@@ -1,3 +1,20 @@
+module Builder
+  def build(params : NamedTuple | Hash | Nil = nil)
+    params = params.nil? ? Hash(Symbol, String).new : params
+
+    u = User.new(params.to_h)
+    u.email = params[:email]? || "#{UUID.random}@email.com"
+    u.password = params[:password]? || "Password123"
+    u
+  end
+
+  def build!(params : NamedTuple | Hash | Nil = nil)
+    u = User.build(params)
+    u.save
+    u
+  end
+end
+
 # User class for testing Jennifer ORM
 class JenniferUser < Jennifer::Model::Base
   @password : String?
@@ -48,17 +65,7 @@ class JenniferUser < Jennifer::Model::Base
     invitation_sent_at: {type: Time?},
   )
 
-  def self.build(params : NamedTuple | Hash)
-    u = User.new(params.to_h)
-    u.password = params[:password]?
-    u
-  end
-
-  def self.build!(params : NamedTuple | Hash)
-    u = User.build(params)
-    u.save
-    u
-  end
+  extend Builder
 end
 
 # User class for testing Granite ORM
@@ -85,7 +92,7 @@ class User < Granite::Base
   table jennifer_users
 
   column id : Int32, primary: true
-  column email : String?
+  column email : String = ""
   column password_digest : String?
   column confirmation_token : String?
   column confirmed : Bool? = false
@@ -111,33 +118,5 @@ class User < Granite::Base
   column invitation_sent_at : Time?
   timestamps
 
-  def self.build(params : NamedTuple | Hash)
-    u = User.new(params.to_h)
-    u.password = params[:password]?
-    u
-  end
-
-  def self.build!(params : NamedTuple | Hash)
-    u = User.build(params)
-    u.save
-    u
-  end
+  extend Builder
 end
-
-# Some tests require a ConfirmationMailer class
-# This is just an empty class to prevent undefined errors
-macro define_mailer_classes(mailers)
-  {% for name in mailers.resolve %}
-  class {{name.id}}
-    def initialize(name : String, email : String, token : String)
-    end
-
-    def deliver
-      true
-    end
-  end
-  {% end %}
-end
-
-# Create all the required mailer classes
-define_mailer_classes(MAILER_CLASSES)

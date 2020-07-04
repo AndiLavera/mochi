@@ -4,18 +4,13 @@ require "../../spec_helper"
   describe Mochi::Controllers::UnlockController do
     it "should unlock the user & sign in" do
       Mochi.configuration.sign_in_after_unlocking = true
-
-      email = "unc0_test@email.xyz"
-      user = User.new({
-        :email => email,
-      })
-      user.password = "Password123"
+      user = User.build!
       user.lock_access!
 
       context = build_post_request("/?unlock_token=#{user.unlock_token}")
 
       controller_class.new(context).update
-      user = User.find_by(email: email).not_nil!
+      user = User.find_by(email: user.email).not_nil!
       user.unlock_token.should be_nil
       user.failed_attempts.should eq(0)
       user.locked_at.should be_nil
@@ -26,17 +21,13 @@ require "../../spec_helper"
     it "should unlock the user without signing in" do
       Mochi.configuration.sign_in_after_unlocking = false
 
-      email = "unc1_test@email.xyz"
-      user = User.new({
-        :email => email,
-      })
-      user.password = "Password123"
+      user = User.build!
       user.lock_access!
 
       context = build_post_request("/?unlock_token=#{user.unlock_token}")
 
       controller_class.new(context).update
-      user = User.find_by(email: email).not_nil!
+      user = User.find_by(email: user.email).not_nil!
 
       user.unlock_token.should be_nil
       user.failed_attempts.should eq(0)
@@ -48,11 +39,7 @@ require "../../spec_helper"
     it "should be an invalid reset token" do
       Mochi.configuration.sign_in_after_unlocking = false
 
-      email = "unc2_test@email.xyz"
-      user = User.new({
-        :email => email,
-      })
-      user.password = "Password123"
+      user = User.build!
       user.lock_access!
 
       token = user.unlock_token
@@ -60,7 +47,7 @@ require "../../spec_helper"
       context = build_post_request("/?unlock_token=555-5555-555")
 
       controller_class.new(context).update
-      user = User.find_by(email: email).not_nil!
+      user = User.find_by(email: user.email).not_nil!
 
       user.unlock_token.should eq(token)
       context.flash[:danger].should eq("Invalid authenticity token.")

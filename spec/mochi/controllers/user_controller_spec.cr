@@ -54,22 +54,17 @@ require "../../spec_helper"
 
       context "update" do
         it "should update a user" do
-          # build user
-          email = "uc2_test@email.com"
-          user = User.build!({
-            email:    email,
-            password: "Password123",
-          })
+          user = User.build!
 
           # Setup controller info
-          context = build_post_request("/?email=#{email}&password=Aassword123")
+          context = build_post_request("/?email=#{user.email}&password=Aassword123")
 
           context.current_user = user
 
           # invoke controller method update
           controller_class.new(context).update
 
-          user = User.find_by(email: email)
+          user = User.find_by(email: user.email)
           user.valid?.should be_true if user
           context.flash[:success].should eq("User has been updated.")
         end
@@ -81,8 +76,7 @@ require "../../spec_helper"
         controller = controller_class.new(context)
         controller.create
 
-        user = User.find_by(email: email)
-        raise "Unkown Error" unless user
+        user = User.find_by(email: email).not_nil!
         context = build_post_request("/?id=#{user.id}")
 
         context.current_user = user

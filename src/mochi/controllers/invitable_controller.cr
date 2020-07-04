@@ -17,7 +17,7 @@ class Mochi::Controllers::InvitableController < ApplicationController
     user = User.new
     user.email = params[:email]
 
-    if cur_usr = current_user
+    if (cur_usr = current_user)
       invited_by = cur_usr.id
     end
 
