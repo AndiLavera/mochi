@@ -10,13 +10,9 @@ require "../../spec_helper"
 
     # Also tests trackable fields
     it "should create & destroy a new session" do
-      email = "sc0_test@email.xyz"
-      usr = User.build!({
-        email:    email,
-        password: "Password123",
-      })
+      usr = User.build!
 
-      context = build_post_request("/?email=#{email}&password=Password123")
+      context = build_post_request("/?email=#{usr.email}&password=Password123")
       controller = controller_class.new(context)
       controller.create
 
@@ -24,15 +20,14 @@ require "../../spec_helper"
       context.session[:user_id].should eq(usr.id.to_s)
       controller.response.headers["location"]?.should eq("/")
 
-      usr = User.find_by(email: email)
-      raise "Unkown error" unless usr # Get rid of `nil`
+      usr = User.find_by(email: usr.email).not_nil!
 
       usr.last_sign_in_at.should_not be_nil
       usr.current_sign_in_at.should_not be_nil
       usr.sign_in_count.should eq(1)
 
       # Destroy
-      context = build_post_request("/?email=#{email}&password=Password123")
+      context = build_post_request("/?email=#{usr.email}&password=Password123")
       controller = controller_class.new(context)
       controller.destroy
 
@@ -41,11 +36,7 @@ require "../../spec_helper"
     end
 
     it "should fail to find user" do
-      email = "sc1_test@email.xyz"
-      User.build!({
-        email:    email,
-        password: "Password123",
-      })
+      email = User.build!.email
 
       context = build_post_request("/?email=#{email}&password=Pssword123")
       controller = controller_class.new(context)
@@ -55,11 +46,7 @@ require "../../spec_helper"
     end
 
     it "password should be invalid" do
-      email = "sc1_test@email.xyz"
-      User.build!({
-        email:    email,
-        password: "Password123",
-      })
+      email = User.build!.email
 
       context = build_post_request("/?email=#{email}&password=assword123")
       controller = controller_class.new(context)
@@ -67,19 +54,14 @@ require "../../spec_helper"
 
       context.flash[:danger].should eq("Invalid email or password")
 
-      usr = User.find_by(email: email)
-      raise "Unkown Error" unless usr
+      usr = User.find_by(email: email).not_nil!
       usr.failed_attempts.should eq(1)
     end
 
     it "should tell user to activate account" do
       # Ensure `Confirmable#confirmation_period_valid?` returns false
       Mochi.configuration.allow_unconfirmed_access_for = 0
-      email = "sc1_test@email.xyz"
-      User.build!({
-        email:    email,
-        password: "Password123",
-      })
+      email = User.build!.email
 
       context = build_post_request("/?email=#{email}&password=Password123")
       controller = controller_class.new(context)
@@ -90,14 +72,10 @@ require "../../spec_helper"
 
     it "should tell user account is locked" do
       Mochi.configuration.allow_unconfirmed_access_for = nil
-      email = "sc1_test@email.xyz"
-      usr = User.build!({
-        email:    email,
-        password: "Password123",
-      })
+      usr = User.build!
       usr.lock_access!
 
-      context = build_post_request("/?email=#{email}&password=Password123")
+      context = build_post_request("/?email=#{usr.email}&password=Password123")
       controller = controller_class.new(context)
       controller.create
 
