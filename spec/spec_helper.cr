@@ -5,7 +5,6 @@ MAILER_CLASSES = [ConfirmationMailer, RecoveryMailer, UnlockMailer, InviteMailer
 TEST_APP_NAME = "test_app"
 CURRENT_DIR   = Dir.current
 
-require "uuid"
 require "spec"
 require "amber"
 
@@ -13,8 +12,7 @@ require "./support/databases"
 
 require "../src/mochi"
 require "../src/mochi/omniauth"
-require "./support/mailers/*"
-require "./support/models"
+require "./support/fixtures/*"
 require "./support/helpers"
 
 class HTTP::Server::Context

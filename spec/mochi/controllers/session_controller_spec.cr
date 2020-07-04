@@ -38,7 +38,7 @@ require "../../spec_helper"
     it "should fail to find user" do
       email = User.build!.email
 
-      context = build_post_request("/?email=#{email}&password=Pssword123")
+      context = build_post_request("/?email=#{email}&password=Pssord123")
       controller = controller_class.new(context)
       controller.create
 
