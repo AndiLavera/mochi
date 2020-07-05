@@ -4,6 +4,9 @@ module Mochi::Models
   # Authenticatable Module, responsible for hashing the password and
   # validating the authenticity of a user while signing in.
   module Authenticable
+    @password : String?
+    getter password
+
     def password_to_short?
       password_changed? ? valid_password_size? : true
     end

@@ -8,8 +8,11 @@ class Mochi::Controllers::SessionController < ApplicationController
   def create
     user = User.find_by(resource_params, :email, :email)
 
-    flash[:danger] = "Invalid email or password" unless user
-    return render("session/new.ecr") unless user
+    if !user
+      flash[:danger] = "Invalid email or password"
+      user = User.new
+      return render("session/new.ecr")
+    end
 
     return render("session/new.ecr") if password_reset_in_progress(user)
 
