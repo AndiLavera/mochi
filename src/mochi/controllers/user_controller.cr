@@ -19,10 +19,9 @@ class Mochi::Controllers::UserController < ApplicationController
 
   def create
     user = User.new user_params.validate!
-    user.password = params[:password]
+    user.password = user_params[:password]?.to_s
 
     if user.valid? && user.save
-      session[:user_id] = user.id
       redirect_to "/", flash: {"success" => success_message(user)}
     else
       flash[:danger] = "Could not create Resource!"
