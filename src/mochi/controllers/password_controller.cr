@@ -6,7 +6,7 @@ class Mochi::Controllers::PasswordController < ApplicationController
   end
 
   def edit
-    confirmation_token = resource_params[:reset_token]
+    reset_token = resource_params[:reset_token]
     user = User.find_by(resource_params, :reset_password_token, :reset_token)
 
     unless user
@@ -26,8 +26,8 @@ class Mochi::Controllers::PasswordController < ApplicationController
       render("recovery/new.ecr")
     end
 
-    if user.reset_password(resource_params[:new_password]) && user.send_reset_password_instructions
-      redirect_to "/", flash: {"success" => "Password reset. Please check your email"}
+    if user.send_reset_password_instructions
+      redirect_to "/", flash: {"success" => "Password reset in progress. Please check your email"}
     else
       flash[:danger] = "Some error occurred. Please try again."
       user = User.new
@@ -44,7 +44,7 @@ class Mochi::Controllers::PasswordController < ApplicationController
       return redirect_to "/reset/password", flash: {"danger" => "Invalid authenticity token."}
     end
 
-    if user.reset_password_by_token!(resource_params["reset_token"]) && user.errors.empty?
+    if user.reset_password(resource_params[:new_password]) && user.reset_password_by_token!(resource_params[:reset_token])
       # user.unlock_access! if user.is_a? Mochi::Models::Lockable
       if Mochi.configuration.sign_in_after_reset_password
         if user.is_a? Mochi::Models::Trackable
