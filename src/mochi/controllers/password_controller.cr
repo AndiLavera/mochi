@@ -5,19 +5,23 @@ class Mochi::Controllers::PasswordController < ApplicationController
     render("recovery/new.ecr")
   end
 
+  def edit
+    # TODO: https://github.com/andrewc910/mochi/issues/24
+  end
+
   # Create a new password recovery
   def create
     user = User.find_by(resource_params, :email, :email)
-    if user
-      if user.reset_password(resource_params[:new_password]) && user.send_reset_password_instructions
-        redirect_to "/", flash: {"success" => "Password reset. Please check your email"}
-      else
-        flash[:danger] = "Some error occurred. Please try again."
-        user = User.new
-        render("recovery/new.ecr")
-      end
-    else
+    unless user
       flash[:danger] = "Could not find user with that email."
+      user = User.new
+      render("recovery/new.ecr")
+    end
+
+    if user.reset_password(resource_params[:new_password]) && user.send_reset_password_instructions
+      redirect_to "/", flash: {"success" => "Password reset. Please check your email"}
+    else
+      flash[:danger] = "Some error occurred. Please try again."
       user = User.new
       render("recovery/new.ecr")
     end
