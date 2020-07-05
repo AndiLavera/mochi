@@ -5,8 +5,8 @@ module ControllerHelper
     create_context(request)
   end
 
-  def build_get_request(referer = "")
-    build_request(method: "GET", referer: referer)
+  def build_get_request(route, referer = "")
+    build_request(method: "GET", route: route, referer: referer)
   end
 
   def build_post_request(route = "/", referer = "")
