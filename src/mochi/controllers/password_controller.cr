@@ -6,7 +6,15 @@ class Mochi::Controllers::PasswordController < ApplicationController
   end
 
   def edit
-    # TODO: https://github.com/andrewc910/mochi/issues/24
+    confirmation_token = resource_params[:reset_token]
+    user = User.find_by(resource_params, :reset_password_token, :reset_token)
+
+    unless user
+      user = User.new
+      return redirect_to "/reset/password", flash: {"danger" => "Invalid authenticity token."}
+    end
+
+    render("recovery/edit.ecr")
   end
 
   # Create a new password recovery
