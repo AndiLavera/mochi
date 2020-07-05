@@ -34,6 +34,7 @@ require "../../spec_helper"
           user.valid?.should be_true if user
           User.all.size.should eq(user_count + 1) # assert user saved
           context.flash.fetch("success").should eq("Please Check Your Email For The Activation Link")
+          context.session[:user_id].should be_nil
         end
 
         it "password should be too short to create user" do
