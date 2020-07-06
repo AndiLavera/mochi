@@ -11,11 +11,11 @@ describe Mochi::Models::Authenticable do
     end
 
     it "user should be able to authenticate for #{name_formatter(user_class)}" do
-      user = user_class.build!.valid_password?("Password123").should be_true
+      user_class.build!.valid_password?("Password123").should be_true
     end
 
     it "password should be too short for #{name_formatter(user_class)}" do
-      user = user_class.build!({password: "Pass"}).valid_password_size?.should be_false
+      user_class.build!({password: "Pass"}).valid_password_size?.should be_false
     end
 
     it "should be a valid user email" do
@@ -23,7 +23,7 @@ describe Mochi::Models::Authenticable do
     end
 
     it "should be a invalid user email" do
-      user = user_class.build!({email: "testemailcom"}).valid?.should be_false
+      user_class.build!({email: "testemailcom"}).valid?.should be_false
     end
   end
 end

@@ -6,7 +6,10 @@ class Mochi::Controllers::PasswordController < ApplicationController
   end
 
   def edit
+    # This variable is used in the view
+    # ameba:disable Lint/UselessAssign
     reset_token = resource_params[:reset_token]
+    # ameba:enable Lint/UselessAssign
     user = User.find_by(resource_params, :reset_password_token, :reset_token)
 
     unless user
