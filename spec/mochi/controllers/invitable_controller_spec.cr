@@ -10,9 +10,9 @@ require "../../spec_helper"
 
     it "should render the edit template" do
       usr = User.build
+      usr.invite!
 
-      context = build_post_request("/")
-      context.current_user = usr
+      context = build_post_request("/?invite_token=#{usr.invitation_token}")
       controller_class.new(context).edit.should be_true
     end
 
@@ -37,9 +37,8 @@ require "../../spec_helper"
       Mochi.configuration.accept_invitation_within = 1
       usr = User.build!
       usr.invite!
-      token = usr.invitation_token
 
-      context = build_post_request("/?password=Password123&invite_token=#{token}")
+      context = build_post_request("/?password=Password123&email=#{usr.email}")
       controller_class.new(context).update
       usr = User.find(usr.id).not_nil!
 
@@ -54,7 +53,7 @@ require "../../spec_helper"
       usr = User.build
       usr.invite!
 
-      context = build_post_request("/?password=Password123&invite_token=#{usr.invitation_token}")
+      context = build_post_request("/?password=Password123&email=#{usr.email}")
       controller_class.new(context).update
 
       context.flash[:danger].should eq("Could accept invite. Please try again.")
