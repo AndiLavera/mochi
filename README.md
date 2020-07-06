@@ -1,20 +1,29 @@
 # Mochi
-[![Build Status](https://travis-ci.org/gitlato/mochi.svg?branch=master)](https://travis-ci.org/sundaecr/mochi)
+<!-- [![Build Status](https://travis-ci.org/gitlato/mochi.svg?branch=master)](https://travis-ci.org/sundaecr/mochi) -->
 
-![Image of Mochi](https://image.shutterstock.com/image-vector/mochi-character-design-wallpaper-free-260nw-1572610879.jpg)
+Mochi is a authentication shard inspired by devise. Mochi is designed for the Amber framework with support for both Granite & Jennifer ORM's.
 
-Mochi is a shard inspired by devise for ruby. Mochi handles everything authentication. Currently amber is the only supported framework with both granite and jennifer orms being supported. I am open to other frameworks being supported, such as lucky, but there is a lot to do before that. If you want this to work with lucky asap, you'll have to open a pull request right now.
+## Installation
 
-The Mochi CLI makes installation easy. Please give a thanks to the amber core team for their CLI. I have pulled it out of amber to use as a base. 
+1. Add the dependency to your `shard.yml`:  
+
+   ```yaml
+   dependencies:
+     mochi:
+       github: andrewc910/mochi
+       version: ~> 0.3.1
+   ```
+
+2. Run `shards install`  
+
+3. Please checkout mochi-cli for automatic installation of modules:
+[mochi-cli](https://github.com/andrewc910/mochi-cli)
 
 ## Documentation
 ### API Docs
 [API Documentation](https://andrewc910.github.io/mochi/)
 
-### Gitbook
-[Gitbook](https://awcrotwell.gitbook.io/mochi/)
-
-## Mochi Modules
+## About Mochi
 > **Note:** Only the class 'User' is supported.
 
 Currently, Mochi has 7 modules:  
@@ -72,3 +81,15 @@ Currently, Mochi has 7 modules:
     - `invitation_token`: String? - UUID verification token
     - `invited_by`: Integer? - Inviter user id
     - `invitation_sent_at`: Timestamp? - Time invite email was sent (same as `invitiation_created_at`)
+
+## Contributing
+
+1. Fork it (<https://github.com/andrewc910/mochi/fork>)
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
+
+## Contributors
+
+- [andrewc910](https://github.com/andrewc910) - creator and maintainer
