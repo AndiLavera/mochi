@@ -379,13 +379,31 @@
   </svg>
 </a>Mochi</h1>
 
-<p><a href="https://travis-ci.org/sundaecr/mochi" target="_blank"><img src="https://travis-ci.org/gitlato/mochi.svg?branch=master" alt="Build Status"/></a></p>
+<p>&lt;!-- <a href="https://travis-ci.org/sundaecr/mochi" target="_blank"><img src="https://travis-ci.org/gitlato/mochi.svg?branch=master" alt="Build Status"/></a> --></p>
 
-<p><img src="https://image.shutterstock.com/image-vector/mochi-character-design-wallpaper-free-260nw-1572610879.jpg" alt="Image of Mochi"/></p>
+<p>Mochi is a authentication shard inspired by devise. Mochi is designed for the Amber framework with support for both Granite & Jennifer ORM's.</p>
 
-<p>Mochi is a shard inspired by devise for ruby. Mochi handles everything authentication. Currently amber is the only supported framework with both granite and jennifer orms being supported. I am open to other frameworks being supported, such as lucky, but there is a lot to do before that. If you want this to work with lucky asap, you'll have to open a pull request right now.</p>
+<h2><a id="installation" class="anchor" href="#installation">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Installation</h2>
 
-<p>The Mochi CLI makes installation easy. Please give a thanks to the amber core team for their CLI. I have pulled it out of amber to use as a base. </p>
+<ol><li>Add the dependency to your <code>shard.yml</code>:  </li></ol>
+
+<p><code></code>`yaml
+   dependencies:</p>
+
+<pre><code> mochi:
+   github: andrewc910<span class="s">/mochi
+   version: ~&gt; 0.3.1</span></code></pre>
+
+<p><code></code>`</p>
+
+<ol><li>Run <code>shards install</code>  </li></ol>
+
+<ol><li>Please checkout mochi-cli for automatic installation of modules:
+<a href="https://github.com/andrewc910/mochi-cli" target="_blank">mochi-cli</a></li></ol>
 
 <h2><a id="documentation" class="anchor" href="#documentation">
   <svg class="octicon-link" aria-hidden="true">
@@ -401,19 +419,11 @@
 
 <p><a href="https://andrewc910.github.io/mochi/" target="_blank">API Documentation</a></p>
 
-<h3><a id="gitbook" class="anchor" href="#gitbook">
+<h2><a id="about-mochi" class="anchor" href="#about-mochi">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Gitbook</h3>
-
-<p><a href="https://awcrotwell.gitbook.io/mochi/" target="_blank">Gitbook</a></p>
-
-<h2><a id="mochi-modules" class="anchor" href="#mochi-modules">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>Mochi Modules</h2>
+</a>About Mochi</h2>
 
 <blockquote><strong>Note:</strong> Only the class 'User' is supported.</blockquote>
 
@@ -448,6 +458,22 @@
 <ol><li><strong><a href="https://awcrotwell.gitbook.io/mochi/guides/invitable" target="_blank">Invitable</a></strong></li></ol>
 
 <ul><li>User's can invite other users. Inviter inputs email, email sent out, invitee inputs password, account is confirmed if confirmable is active.</li><li>Mandatory columns:</li><li><code>invitation_accepted_at</code>: Timestamp? - Time invitee accepted invite</li><li><code>invitation_created_at</code>: Timestamp? - Time inviter created invite</li><li><code>invitation_token</code>: String? - UUID verification token</li><li><code>invited_by</code>: Integer? - Inviter user id</li><li><code>invitation_sent_at</code>: Timestamp? - Time invite email was sent (same as <code>invitiation_created_at</code>)</li></ul></ul>
+
+<h2><a id="contributing" class="anchor" href="#contributing">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Contributing</h2>
+
+<ol><li>Fork it (&lt;https://github.com/andrewc910/mochi/fork>)</li><li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li><li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li><li>Push to the branch (<code>git push origin my-new-feature</code>)</li><li>Create a new Pull Request</li></ol>
+
+<h2><a id="contributors" class="anchor" href="#contributors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Contributors</h2>
+
+<ul><li><a href="https://github.com/andrewc910" target="_blank">andrewc910</a> - creator and maintainer</li></ul>
 </div>
 </body>
 </html>
