@@ -1,20 +1,3 @@
-module Builder
-  def build(params : NamedTuple | Hash | Nil = nil)
-    params = params.nil? ? Hash(Symbol, String).new : params
-
-    u = User.new(params.to_h)
-    u.email = params[:email]? || "#{UUID.random}@email.com"
-    u.password = params[:password]? || "Password123"
-    u
-  end
-
-  def build!(params : NamedTuple | Hash | Nil = nil)
-    u = User.build(params)
-    u.save
-    u
-  end
-end
-
 # User class for testing Jennifer ORM
 class JenniferUser < Jennifer::Model::Base
   include Mochi
@@ -59,7 +42,20 @@ class JenniferUser < Jennifer::Model::Base
     invitation_sent_at: {type: Time?},
   )
 
-  extend Builder
+  def self.build(params : NamedTuple | Hash | Nil = nil)
+    params = params.nil? ? Hash(Symbol, String).new : params
+
+    user = JenniferUser.new(params.to_h)
+    user.email = params[:email]? || "#{UUID.random}@email.com"
+    user.password = params[:password]? || "Password123"
+    user
+  end
+
+  def self.build!(params : NamedTuple | Hash | Nil = nil)
+    user = JenniferUser.build(params)
+    user.save
+    user
+  end
 end
 
 # User class for testing Granite ORM
@@ -106,5 +102,18 @@ class User < Granite::Base
   column invitation_sent_at : Time?
   timestamps
 
-  extend Builder
+  def self.build(params : NamedTuple | Hash | Nil = nil)
+    params = params.nil? ? Hash(Symbol, String).new : params
+
+    user = User.new(params.to_h)
+    user.email = params[:email]? || "#{UUID.random}@email.com"
+    user.password = params[:password]? || "Password123"
+    user
+  end
+
+  def self.build!(params : NamedTuple | Hash | Nil = nil)
+    user = User.build(params)
+    user.save
+    user
+  end
 end

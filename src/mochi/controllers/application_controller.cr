@@ -1,5 +1,3 @@
-require "amber"
-
 # Main Controller for Amber. All other controller inherit from here.
 # This opens up the class to insert this method
 #
