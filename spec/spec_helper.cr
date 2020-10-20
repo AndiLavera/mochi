@@ -14,10 +14,10 @@ require "./support/helpers"
 include Helpers
 
 Spec.before_each do
-  # Jennifer::Adapter.default_adapter.begin_transaction
+  Jennifer::Adapter.default_adapter.begin_transaction
+  User.clear
 end
 
 Spec.after_each do
-  # Jennifer::Adapter.default_adapter.rollback_transaction
-  User.all.each &.destroy
+  Jennifer::Adapter.default_adapter.rollback_transaction
 end
