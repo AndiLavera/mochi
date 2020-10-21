@@ -1,4 +1,5 @@
 class Mochi::Controllers::PasswordController < ApplicationController
+  include Mochi::Controllers::Helpers
   getter user = User.new
 
   def new
@@ -50,9 +51,8 @@ class Mochi::Controllers::PasswordController < ApplicationController
     if user.reset_password(resource_params[:new_password]) && user.reset_password_by_token!(resource_params[:reset_token])
       # user.unlock_access! if user.is_a? Mochi::Models::Lockable
       if Mochi.configuration.sign_in_after_reset_password
-        if user.is_a? Mochi::Models::Trackable
-          user.update_tracked_fields!(request)
-        end
+        user.update_tracked_fields!(request) if trackable?
+
         session[:user_id] = user.id
         redirect_to "/", flash: {"success" => "Successfully reset password."}
       else
