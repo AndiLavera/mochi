@@ -7,17 +7,24 @@ Mochi is a authentication shard inspired by devise. Mochi is designed for the Am
 
 1. Add the dependency to your `shard.yml`:  
 
-   ```yaml
-   dependencies:
-     mochi:
-       github: andrewc910/mochi
-       version: ~> 0.3.1
-   ```
+    ```yaml
+    dependencies:
+      mochi:
+        github: andrewc910/mochi
+        version: ~> 0.3.1
+    ```
 
 2. Run `shards install`  
 
-3. Please checkout mochi-cli for automatic installation of modules:
-[mochi-cli](https://github.com/andrewc910/mochi-cli)
+3. Install amber plugin:
+
+  * Granite
+
+    `amber plugin mochi granite sql`
+
+  * Jennifer
+
+    `amber plugin mochi jennifer cr`
 
 ## Documentation
 ### API Docs
