@@ -13,7 +13,7 @@ ALTER TABLE users DROP COLUMN confirmed_at TIMESTAMP NULL;
 ALTER TABLE users DROP COLUMN confirmation_sent_at TIMESTAMP NULL;
 ALTER TABLE users DROP COLUMN unconfirmed_email VARCHAR NULL;
 {% elsif args.orm == "jennifer" -%}
-class AddConfirmableTo<%= class_name %> < Jennifer::Migration::Base
+class AddConfirmableToUser < Jennifer::Migration::Base
   def up
     change_table(:users) do |t|
       t.add_column(:confirmed, :bool)
