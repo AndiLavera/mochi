@@ -11,9 +11,9 @@ class CurrentUser < Amber::Pipe::Base
 
     # Omniauthable
     if User.new.responds_to?(:uid)
-{% if args.a == "granite" -%}
+{% if args.orm == "granite" -%}
       user ||= User.find_by(uid: user_id)
-{% elsif args.a == "jennifer" -%}
+{% elsif args.orm == "jennifer" -%}
       user ||= User.where { _uid == user_id }.first
 {% endif -%}
     end

@@ -1,0 +1,4 @@
+routes:
+args: 
+  - orm
+  - migration_extension

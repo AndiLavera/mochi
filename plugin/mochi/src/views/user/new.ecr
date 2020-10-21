@@ -1,17 +1,17 @@
 <h1>Sign Up</h1>
 
-<%="<"%>%- if user %>
-  <%="<"%>%- if <%= @name %>.errors %>
+<%- if user %>
+  <%- if user.errors %>
     <ul class="errors">
-    <%="<"%>%- <%= @name %>.errors.each do |error| %>
-      <li><%="<"%>%= error.to_s %></li>
-    <%="<"%>%- end %>
+    <%- user.errors.each do |error| %>
+      <li><%= error.to_s %></li>
+    <%- end %>
     </ul>
-  <%="<"%>%- end %>
-<%="<"%>%- end %>
+  <%- end %>
+<%- end %>
 
 <form action="/registration" method="post">
-  <%="<"%>%= csrf_tag %>
+  <%= csrf_tag %>
   <div class="form-group">
     <input class="form-control" type="email" name="email" placeholder="Email"/>
   </div>
@@ -21,4 +21,4 @@
   <button class="btn btn-success btn-sm" type="submit">Register</button>
 </form>
 <hr/>
-<%="<"%>%= link_to("Already have an account?", "/signin") -%>
+<%= link_to("Already have an account?", "/signin") -%>

@@ -1,4 +1,4 @@
-{% if args.a == "granite" -%}
+{% if args.orm == "granite" -%}
 class User < Granite::Base
   include Mochi
   mochi_granite(
@@ -53,7 +53,7 @@ class User < Granite::Base
   # column invitation_sent_at : Time?
   timestamps
 end
-{% elsif args.a == "jennifer" -%}
+{% elsif args.orm == "jennifer" -%}
 class User < Jennifer::Model::Base
   include Mochi
   mochi_jennifer(
