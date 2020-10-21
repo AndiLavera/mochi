@@ -30,10 +30,8 @@ Mochi is a authentication shard inspired by devise. Mochi is designed for the Am
 ### API Docs
 [API Documentation](https://andrewc910.github.io/mochi/)
 
-## About Mochi
+## Mochi Modules
 > **Note:** Only the class 'User' is supported.
-
-Currently, Mochi has 7 modules:  
 
 1. **[Authenticable](https://awcrotwell.gitbook.io/mochi/guides/authenticable)**
   - Basic authentication. Sign up, sign in, sign out.  

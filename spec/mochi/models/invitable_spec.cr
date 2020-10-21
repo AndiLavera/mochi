@@ -5,7 +5,7 @@ describe Mochi::Models::Invitable do
     describe "#{user_class}" do
       it "should invite new user & rollback" do
         Mochi.configuration.accept_invitation_within = 7
-        user = user_class.build!
+        user = user_class.build
 
         user.invite!
         user.invitation_created_at.should_not be_nil
@@ -22,7 +22,7 @@ describe Mochi::Models::Invitable do
 
       it "should invite user & accept invitation" do
         Mochi.configuration.accept_invitation_within = 7
-        user = user_class.build!
+        user = user_class.build
 
         user.invite!
         user.accept_invitation!
@@ -34,7 +34,7 @@ describe Mochi::Models::Invitable do
 
       it "should fail to accept invite & rollback properly" do
         Mochi.configuration.accept_invitation_within = 7
-        user = user_class.build!
+        user = user_class.build
 
         user.invite!
         token = user.invitation_token
@@ -48,7 +48,7 @@ describe Mochi::Models::Invitable do
 
       it "should be an expired invite token" do
         Mochi.configuration.accept_invitation_within = 7
-        user = user_class.build!
+        user = user_class.build
 
         user.invite!
         user.invitation_sent_at = Time.utc - 8.days
@@ -58,13 +58,13 @@ describe Mochi::Models::Invitable do
       end
 
       it "should be created by invite" do
-        user = user_class.build!
+        user = user_class.build
         user.invite!
         user.created_by_invite?.should be_true
       end
 
       it "should not be accepting invite" do
-        user = user_class.build!
+        user = user_class.build
         user.invite!
         user.accepting_invitation?.should be_false
       end

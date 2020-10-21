@@ -4,7 +4,7 @@ require "http/request"
 describe Mochi::Models::Trackable do
   USER_CLASSES.each do |user_class|
     it "should update tracked fields" do
-      user = user_class.build!
+      user = user_class.build
       request = HTTP::Request.new("get", "/")
 
       # TODO: Find better way of creating a request with an IP address

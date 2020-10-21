@@ -1,4 +1,5 @@
 class Mochi::Controllers::SessionController < ApplicationController
+  include Mochi::Controllers::Helpers
   getter user = User.new
 
   def new
@@ -42,24 +43,21 @@ class Mochi::Controllers::SessionController < ApplicationController
   end
 
   private def password_reset_in_progress(user)
-    if user.is_a? Mochi::Models::Recoverable &&
-       user.password_reset_in_progress
+    if recoverable? && user.password_reset_in_progress
       flash[:warning] = "Please finish resetting your password"
     end
     false
   end
 
   private def account_activated?(user)
-    if user.is_a? Mochi::Models::Confirmable &&
-       !user.confirmation_period_valid? &&
-       !user.confirmed?
+    if confirmable? && !user.confirmation_period_valid? && !user.confirmed?
       flash[:warning] = "Please activate your account"
     end
     true
   end
 
   private def account_is_locked?(user)
-    if user.is_a? Mochi::Models::Lockable && !user.valid_for_authentication?
+    if lockable? && !user.valid_for_authentication?
       flash[:warning] = "Your account is locked. Please unlock it before signing in"
     end
     false
@@ -68,12 +66,12 @@ class Mochi::Controllers::SessionController < ApplicationController
   private def sign_in(user)
     session[:user_id] = user.id
     flash[:success] = "Successfully logged in"
-    user.update_tracked_fields!(request) if user.is_a? Mochi::Models::Trackable
+    user.update_tracked_fields!(request) if trackable?
     redirect_to "/"
   end
 
   private def invalid_sign_in(user)
-    failed_sign_in(user) if user.is_a? Mochi::Models::Lockable
+    failed_sign_in(user) if lockable?
     flash[:danger] = "Invalid email or password"
     render("session/new.ecr")
   end
