@@ -1,10 +1,8 @@
-# Mochi
-
-Mochi is a authentication shard inspired by devise. Mochi is designed for the Amber framework with support for both Granite & Jennifer ORM's.
-
 <p align="center">
   <img src="./logo.svg" width="800">
 </p>
+
+Mochi is a authentication shard inspired by devise. Mochi is designed for the Amber framework with support for both Granite & Jennifer ORM's.
 
 ## Installation
 
