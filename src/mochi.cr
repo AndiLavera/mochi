@@ -1,17 +1,30 @@
 require "./mochi/configuration"
 
-# TODO: Write documentation for `Mochi`
 module Mochi
   @@configuration = Mochi::Configuration.new
 
+  # Access mochi configurations.
+  #
+  # `Mochi.configuration.reconfirmable # => true`
   def self.configuration
     @@configuration
   end
 
+  # Main method for configuring mochi.
+  # Usage:
+  #
+  # ```
+  # Mochi.setup do |config|
+  #   config.property = X
+  # end
+  # ```
   def self.setup
     yield @@configuration
   end
 
+  # Macro method for easily including all neccessary files for a particular module.
+  #
+  # `mochi_granite(:authenticable, :confirmable)`
   macro mochi_granite(*modules)
     {% for i in modules %}
       {% if i.id == :authenticable %}
@@ -46,6 +59,9 @@ module Mochi
     {% end %}
   end
 
+  # Macro method for easily including all neccessary files for a particular module.
+  #
+  # `mochi_jennifer(:authenticable, :confirmable)`
   macro mochi_jennifer(*modules)
     {% for i in modules %}
       {% if i.id == :authenticable %}

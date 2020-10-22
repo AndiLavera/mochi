@@ -6,20 +6,21 @@ module Mochi::Models
   # Confirmation instructions are sent to the user email after creating a
   # record and when manually requested by a new confirmation instruction request.
   #
-  # Confirmable tracks the following columns:
+  # Columns:
   #
-  # * confirmation_token   - A unique random token
-  # * confirmed_at         - A timestamp when the user clicked the confirmation link
-  # * confirmation_sent_at - A timestamp when the confirmation_token was generated (not sent)
-  # * unconfirmed_email    - An email address copied from the email attr after confirmation. This value is copied to the email attr then cleared
+  # - `confirmation_token : String` - Token used for email activation & verification
+  # - `confirmed : Bool` - True if user account is activated
+  # - `confirmed_at : Timestamp?` - Time user confirmed account
+  # - `confirmation_sent_at : Timestamp?` - Time confirmation email sent
+  # - `unconfirmed_email : String?` - An email address copied from the email attr after confirmation.
   #
-  # == Options
+  # Configuration:
   #
-  # Confirmable adds the following options to mochi:
+  # - `allow_unconfirmed_access_for`: the time you want to allow the user to access their account before confirming it. After this period, the user access is denied. You can use this to let your user access some features of your application without confirming the account, but blocking it after a certain period (ie 7 days). By default `allow_unconfirmed_access_for` is zero, it means users always have to confirm to sign in.
   #
-  #   * `allow_unconfirmed_access_for`: the time you want to allow the user to access their account before confirming it. After this period, the user access is denied. You can use this to let your user access some features of your application without confirming the account, but blocking it after a certain period (ie 7 days). By default `allow_unconfirmed_access_for` is zero, it means users always have to confirm to sign in.
-  #   * `reconfirmable`: requires any email changes to be confirmed (exactly the same way as initial account confirmation) to be applied. Requires additional unconfirmed_email db field to be set up (t.reconfirmable in migrations). Until confirmed, new email is stored in unconfirmed email column, and copied to email column on successful confirmation. Also, when used in conjunction with `send_email_changed_notification`, the notification is sent to the original email when the change is requested,  not when the unconfirmed email is confirmed.
-  #   * `confirm_within`: the time before a sent confirmation token becomes invalid. You can use this to force the user to confirm within a set period of time. Confirmable will not generate a new token if a repeat confirmation is requested during this time frame, unless the user's email changed too.
+  # - `reconfirmable`: requires any email changes to be confirmed (exactly the same way as initial account confirmation) to be applied. Requires additional unconfirmed_email db field to be set up (t.reconfirmable in migrations). Until confirmed, new email is stored in unconfirmed email column, and copied to email column on successful confirmation. Also, when used in conjunction with `send_email_changed_notification`, the notification is sent to the original email when the change is requested,  not when the unconfirmed email is confirmed.
+  #
+  # - `confirm_within`: the time before a sent confirmation token becomes invalid. You can use this to force the user to confirm within a set period of time. Confirmable will not generate a new token if a repeat confirmation is requested during this time frame, unless the user's email changed too.
   #
   # Examples
   #

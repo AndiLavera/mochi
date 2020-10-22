@@ -1,4 +1,5 @@
 module Mochi::Models
+  # :nodoc:
   module Query
     module Granite
       macro included

@@ -1,8 +1,21 @@
 require "crypto/bcrypt/password"
 
 module Mochi::Models
-  # Authenticatable Module, responsible for hashing the password and
-  # validating the authenticity of a user while signing in.
+  # Authenticatable is responsible for hashing passwords and validating the authenticity of a user while signing in.
+  #
+  # Columns:
+  # - `email : String` - User's sign up email
+  # - `password_digest : String?` - User's password stored as a bcrypt digest
+  #
+  # **Note:** Mochi also puts `password` and `new_password` in as attributes, however we don't want these saved in plain text so do NOT add them as columns.
+  #
+  # Configuration:
+  #
+  # TODO
+  #
+  # Examples:
+  #
+  # TODO
   module Authenticable
     @password : String?
     getter password
