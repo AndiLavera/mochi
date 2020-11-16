@@ -3,7 +3,7 @@ defaults : &defaults
   adapter: postgres
   user: mochi
   password: "mochi"
-  migration_files_path: db/migrations # this is the default location for all migrations
+  migration_files_path: ./spec/db/migrations
 
 test:
   db: mochi_test

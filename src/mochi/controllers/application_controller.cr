@@ -1,4 +1,4 @@
-require "amber"
+require "./helpers"
 
 # Main Controller for Amber. All other controller inherit from here.
 # This file opens up the class to inserts the following methods.
