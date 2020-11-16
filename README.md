@@ -103,6 +103,14 @@ Tracks information about your user sign in events.
 ```crystal
 ```
 
+## Mochi Controllers
+
+As stated above, Mochi is specifically designed for Amber. Default controllers are available. To view the available controllers, [please look here](https://github.com/andrewc910/mochi/tree/master/src/mochi/controllers). If you install via the amber plugin method, these will be used by default. You are welcome to copy/paste the code into a custom controller for modification if you need to. 
+
+## Amber Framework Plugin
+
+Mochi can be installed via the Amber framework CLI. This will install the `User` model, controllers, mailers, routes, plugs & the initializer. Unfortunately, Amber's plugin cli is an all or nothing. Because of this, when you run the plugin installer, all files for all modules will be installed. However, Mochi installs with only authentication activated. You will have to uncomment any other modules/columns/routes you would like activated.
+
 ## Testing
 
 All specs use Postgres as the database.
