@@ -5,7 +5,8 @@ class Mochi::Controllers::Omniauthable::SessionController < ApplicationControlle
 
   def callback
     url = "#{Amber.settings.host}/omniauth/#{params[:provider]}/callback"
-    fakeuser = Mochi::Omniauthable::Provider.user(params[:provider], {"code" => params[:code]}, url)
+    # TODO
+    # fakeuser = Mochi::Omniauthable::Provider.user(params[:provider], {"code" => params[:code]}, url)
 
     user = User.find_by(resource_params, :email, :email)
     if user
