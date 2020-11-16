@@ -1,0 +1,48 @@
+args: 
+  - orm
+  - extension
+routes:
+  plugs:
+    web:
+      - "# Mochi Authenticable"
+      - plug CurrentUser.new
+    auth:
+      - "# Mochi Authenticable"
+      - plug Authenticate.new
+  pipelines:
+    web:
+      - "# Mochi Authenticable"
+      - get "/signin", SessionController, :new
+      - post "/session", SessionController, :create
+      - get "/signup", UserController, :new
+      - post "/signup", UserController, :create
+      - ""
+      - "# Mochi Confirmable"
+      - "# get \"/registration/update\", RegistrationController, :update"
+      - ""
+      - "# Mochi Invitable"
+      - "# get \"/invite/new\", InvitableController, :new"
+      - "# get \"/invite/edit\", InvitableController, :edit"
+      - "# post \"/invite\", InvitableController, :create"
+      - "# patch \"/invite\", InvitableController, :update"
+      - ""
+      - "# Mochi Lockable"
+      - "# get \"/unlock\", UnlockableController, :update"
+      - ""
+      - "# Mochi Omniauthable"
+      - "# get \"/omniauth/user/:provider\", Omniauthable::UserController, :create"
+      - "# get \"/omniauth/user/:provider/callback\", Omniauthable::UserController, :callback"
+      - "# get \"/omniauth/:provider\", Omniauthable::SessionController, :create"
+      - "# get \"/omniauth/:provider/callback\", Omniauthable::SessionController, :callback"
+      - ""
+      - "# Mochi Recoverable"
+      - "# get \"/reset/password\", RecoverableController, :new"
+      - "# get \"/reset/password/edit\", RecoverableController, :edit"
+      - "# post \"/reset/password\", RecoverableController, :create"
+      - "# patch \"/reset/password/:id\", RecoverableController, :update"
+    auth:
+      - "# Mochi Authenticable"
+      - get "/profile", UserController, :show
+      - get "/profile/edit", UserController, :edit
+      - patch "/profile", UserController, :update
+      - get "/signout", SessionController, :destroy

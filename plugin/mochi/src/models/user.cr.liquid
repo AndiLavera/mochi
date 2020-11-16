@@ -1,0 +1,113 @@
+{% if args.orm == "granite" -%}
+class User < Granite::Base
+  include Mochi
+  mochi_granite(
+    :authenticable,
+    # :confirmable,
+    # :trackable,
+    # :omniauthable,
+    # :recoverable,
+    # :lockable,
+    # :invitable
+  )
+
+  connection YOUR_DATABASE
+  table users
+
+  column id : Int32, primary: true
+  column email : String = ""
+  column password_digest : String?
+
+  # Uncomment these for the Confirmable
+  # column confirmation_token : String
+  # column confirmed : Bool = false
+  # column confirmed_at : Time?
+  # column confirmation_sent_at : Time?
+  # column unconfirmed_email : String?
+
+  # Uncomment for Omniauthable
+  # column uid : String?
+
+  # Uncomment for Trackable
+  # column sign_in_count : Int32 = 0
+  # column current_sign_in_ip : String?
+  # column last_sign_in_ip : String?
+  # column current_sign_in_at : Time?
+  # column last_sign_in_at : Time?
+
+  # Uncomment for recoverable
+  # column reset_password_sent_at : Time?
+  # column reset_password_token : String?
+  # column password_reset_in_progress : Bool = false
+
+  # Uncomment for lockable
+  # column locked_at : Time?
+  # column failed_attempts : Int32 = 0
+  # column unlock_token : String?
+
+  # Uncomment for Invitable
+  # column invitation_accepted_at : Time?
+  # column invitation_created_at : Time?
+  # column invitation_token : String?
+  # column invited_by : Int32?
+  # column invitation_sent_at : Time?
+  timestamps
+end
+{% elsif args.orm == "jennifer" -%}
+class User < Jennifer::Model::Base
+  include Mochi
+  mochi_jennifer(
+    :authenticable,
+    # :confirmable,
+    # :trackable,
+    # :omniauthable,
+    # :recoverable,
+    # :lockable,
+    # :invitable
+  )
+
+  with_timestamps
+  mapping(
+    id: { type: Int32, primary: true },
+    created_at: { type: Time, null: true },
+    updated_at: { type: Time, null: true },
+    email: { type: String, default: ""},
+    password_digest: { type: String? },
+    password: {type: String?, virtual: true, setter: false}
+
+    # Uncomment these for the Confirmable
+    # confirmation_token: { type: String?, null: true },
+    # confirmed: { type: Bool, null: true },
+    # confirmed_at: { type: Time, null: true },
+    # confirmation_sent_at: { type: Time, null: true },
+    # unconfirmed_email: { type: String? },
+
+    # Uncomment for Omniauthable
+    # uid: { type: String? },
+
+    # Uncomment for Trackable
+    # sign_in_count: { type: Int32, default: 0, null: false },
+    # current_sign_in_ip: { type: String? },
+    # last_sign_in_ip: { type: String? },
+    # current_sign_in_at: { type: Time?, null: true },
+    # last_sign_in_at: { type: Time?, null: true },
+
+    # Uncomment for recoverable
+    # reset_password_sent_at: { type: Time? },
+    # reset_password_token: { type: String? },
+    # password_reset_in_progress: { type: Bool?, default: false },
+
+    # Uncomment for lockable
+    # locked_at: { type: Time? },
+    # failed_attempts: { type: Int32, default: 0, null: false  },
+    # unlock_token: { type: String? },
+
+    # Uncomment for Invitable
+    # invitation_accepted_at: { type: Time? },
+    # invitation_created_at: { type: Time? },
+    # invitation_token: { type: String? },
+    # invited_by: { type: Int32? },
+    # invitation_sent_at: { type: Time? },
+  )
+end
+{% endif -%}

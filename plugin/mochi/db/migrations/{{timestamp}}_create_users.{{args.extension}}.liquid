@@ -1,0 +1,28 @@
+{% if args.orm == "granite" -%}
+-- +micrate Up
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR,
+  password_digest VARCHAR,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+);
+
+-- +micrate Down
+DROP TABLE IF EXISTS users;
+{% elsif args.orm == "jennifer" -%}
+class Create<% class_name %> < Jennifer::Migration::Base
+  def up
+    create_table(:users) do |t|
+      t.string :email
+      t.string :password_digest
+      t.timestamp :created_at
+      t.timestamp :updated_at
+    end
+  end
+
+  def down
+    drop_table(:users)
+  end
+end
+{% endif -%}
