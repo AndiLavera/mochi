@@ -3,20 +3,27 @@ require "uuid"
 module Mochi::Models
   # Recoverable takes care of resetting the user password and send reset instructions.
   #
-  # Options
+  # Columns:
   #
-  # Recoverable adds the following options:
+  # - `reset_password_sent_at : Timestamp?` - Time password reset email was sent at
+  # - `reset_password_token : String?` - UUID token for verification
+  # - `password_reset_in_progress : Bool` - returns true when a password reset was initialized but not confirmed & completed.
   #
-  #   * +reset_password_within+: the time period within which the password must be reset or the token expires.
-  #   * +sign_in_after_reset_password+: whether or not to sign in the user automatically after a password reset.
+  # Configuration:
   #
-  # == Examples
+  # - `reset_password_within`: The time period within which the password must be reset or the token expires.
+  # - `sign_in_after_reset_password`: Whether or not to sign in the user automatically after a password reset.
   #
-  #   # resets the user password and save the record, true if valid passwords are given, otherwise false
-  #   User.find(1).reset_password('password123')
+  # Examples:
   #
-  #   # creates a new token and send it with instructions about how to reset the password
-  #   User.find(1).send_reset_password_instructions
+  # ```
+  # user = User.new({email: "demo@email.com"})
+  # # resets the user password and save the record, `true` if valid passwords are given, otherwise false
+  # user.reset_password("password123") # => true
+  #
+  # # creates a new token and send it with instructions about how to reset the password
+  # user.send_reset_password_instructions # => true
+  # ```
   #
   module Recoverable
     # Update password saving the record and clearing token. Returns true if

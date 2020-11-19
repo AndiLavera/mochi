@@ -1,3 +1,4 @@
+# :nodoc:
 module Mochi::Models::Validations
   module Granite
     macro included

@@ -2,23 +2,29 @@ module Mochi::Models
   # Invitable is responsible for sending invitation emails.
   # When an invitation is sent to an email address, an account is created for it.
   # Invitation email contains a link allowing the user to accept the invitation
-  # by setting a password (as reset password from Devise's recoverable module).
+  # by setting a password.
+  #
+  # Columns:
+  # - `invitation_accepted_at : Timestamp?` - Time invitee accepted invite
+  # - `invitation_created_at : Timestamp?` - Time inviter created invite
+  # - `invitation_token : String?` - UUID verification token
+  # - `invited_by : Integer?` - Inviter user id
+  # - `invitation_sent_at : Timestamp?` - Time invite email was sent (same as `invitiation_created_at`)
   #
   # Configuration:
   #
-  #   accept_invitation_within: The period the generated invitation token is valid. After this period, the invited resource won't be able to accept the invitation. When accept_invitation_within is 0 (the default), the invitation won't expire.
+  # - `accept_invitation_within`: The period the generated invitation token is valid. After this period, the invited resource won't be able to accept the invitation. When accept_invitation_within is 0 (the default), the invitation won't expire.
   #
   # Examples:
-  #
-  #   `User.find(1).invited_to_sign_up?      # => true/false`
-  #
-  #   `User.invite!                          # => send invitation`
-  #
-  #   `User.accept_invitation!               # => accept invitation with a token`
-  #
-  #   `User.find(1).accept_invitation!       # => accept invitation`
-  #
-  #   `User.find(1).invite!                  # => reset invitation status and send invitation again`
+  # ```
+  # user = User.new({email: "demo@email.com"})
+  # user.invited_to_sign_up? # => false
+  # user.invite!             # => send invitation
+  # user.accept_invitation!  # => accept invitation with a token
+  # user.accept_invitation!  # => accept invitation
+  # user.invited_to_sign_up? # => true
+  # user.invite!             # => reset invitation status and send invitation again
+  # ```
   module Invitable
     # Returns true if `accept_invitation` was invoked
     property accepting_invitation : Bool = false

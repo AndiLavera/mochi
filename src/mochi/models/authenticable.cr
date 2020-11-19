@@ -1,12 +1,29 @@
 require "crypto/bcrypt/password"
 
 module Mochi::Models
-  # Authenticatable Module, responsible for hashing the password and
-  # validating the authenticity of a user while signing in.
+  # Authenticatable is responsible for hashing passwords and validating the authenticity of a user while signing in.
+  #
+  # Columns:
+  # - `email : String` - User's sign up email
+  # - `password_digest : String?` - User's password stored as a bcrypt digest
+  #
+  # **Note:** Mochi also puts `password` and `new_password` in as attributes, however we don't want these saved in plain text so do NOT add them as columns.
+  #
+  # Examples:
+  #
+  # ```
+  # user = User.new({email: "demo@email.com"})
+  # user.password = "password"       # => sets & returns password_digest
+  # user.password_changed?           # => true
+  # user.password_to_short?          # => false
+  # user.valid_password?("Password") # => false
+  # user.valid_password?("password") # => true
+  # ```
   module Authenticable
     @password : String?
     getter password
 
+    # Ensures the supplied password is greater than or equal to 6
     def password_to_short?
       password_changed? ? valid_password_size? : true
     end
@@ -29,6 +46,7 @@ module Mochi::Models
 
     # Ensures the given password is atleast 6 characters
     def valid_password_size?
+      # TODO: Make this number configurable
       (pass = new_password) ? pass.size >= 6 : false
     end
 
