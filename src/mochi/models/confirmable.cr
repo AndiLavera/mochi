@@ -25,9 +25,10 @@ module Mochi::Models
   # Examples:
   #
   # ```
-  # User.find(1).confirm                        # returns true unless it's already confirmed
-  # User.find(1).confirmed?                     # true/false
-  # User.find(1).send_confirmation_instructions # manually send instructions
+  # user = User.new({email: "demo@email.com"})
+  # user.confirm                        # returns true unless it's already confirmed
+  # user.confirmed?                     # true/false
+  # user.send_confirmation_instructions # manually send instructions
   # ```
   #
   module Confirmable

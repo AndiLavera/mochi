@@ -18,7 +18,25 @@ module Mochi::Models
   #
   # Examples:
   #
-  # TODO
+  # ```
+  # Mochi.configuration.maximum_attempts = 2
+  #
+  # user = User.new({email: "demo@email.com"})
+  # user.increment_failed_attempts! # => 1
+  # user.last_attempt?              # => true
+  # user.attempts_exceeded?         # => false
+  #
+  # user.increment_failed_attempts! # => 2
+  # user.attempts_exceeded?         # => true
+  # user.lock_access!               # => true
+  #
+  # user.access_locked?            # => true
+  # user.valid_for_authentication? # => false
+  #
+  # user.unlock_access!            # => true
+  # user.access_locked?            # => false
+  # user.valid_for_authentication? # => true
+  # ```
   module Lockable
     # Lock a user setting its `locked_at` to actual time.
     # when you lock access, you could pass the
