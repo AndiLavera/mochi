@@ -15,7 +15,9 @@ Mochi is a authentication shard inspired by devise. Mochi is designed for the Am
         version: ~> 0.3.1
     ```
 
-2. Run `shards install`  
+2. Run `shards install`
+
+### Amber Plugin
 
 3. Install amber plugin:
 
@@ -26,6 +28,12 @@ Mochi is a authentication shard inspired by devise. Mochi is designed for the Am
   * Jennifer
 
     `amber plugin mochi jennifer cr`
+
+> Note: The final argument is stating the file extension for migrations. Amber doesn't support expressions in file names.
+
+### Manual
+
+TODO
 
 ## Documentation
 
@@ -43,6 +51,12 @@ Authenticatable is responsible for hashing passwords and validating the authenti
 **Examples:**
 
 ```crystal
+user = User.new({email: "demo@email.com"})
+user.password = "password"       # => sets & returns password_digest
+user.password_changed?           # => true
+user.password_to_short?          # => false
+user.valid_password?("Password") # => false
+user.valid_password?("password") # => true
 ```
 
 ### Confirmable
@@ -52,9 +66,10 @@ Confirmable is responsible to verify if an account is already confirmed to sign 
 **Examples:**
 
 ```crystal
-User.find(1).confirm                        # returns true unless it's already confirmed
-User.find(1).confirmed?                     # true/false
-User.find(1).send_confirmation_instructions # manually send instructions
+user = User.new({email: "demo@email.com"})
+user.confirm                        # returns true unless it's already confirmed
+user.confirmed?                     # true/false
+user.send_confirmation_instructions # manually send instructions
 ```
 
 ### Invitable
@@ -64,11 +79,13 @@ Invitable is responsible for sending invitation emails. When an invitation is se
 **Examples:**
 
 ```crystal
-User.find(1).invited_to_sign_up?      # => true/false
-User.invite!                          # => send invitation
-User.accept_invitation!               # => accept invitation with a token
-User.find(1).accept_invitation!       # => accept invitation
-User.find(1).invite!                  # => reset invitation status and send invitation again
+user = User.new({email: "demo@email.com"})
+user.invited_to_sign_up? # => false
+user.invite!             # => send invitation
+user.accept_invitation!  # => accept invitation with a token
+user.accept_invitation!  # => accept invitation
+user.invited_to_sign_up? # => true
+user.invite!             # => reset invitation status and send invitation again
 ```
 
 ### Lockable
@@ -78,6 +95,7 @@ Lockable is responsible blocking a user access after a certain number of attempt
 **Examples:**
 
 ```crystal
+user = User.new({email: "demo@email.com"})
 ```
 
 ### Recoverable
@@ -87,8 +105,12 @@ Recoverable takes care of resetting the user password and send reset instruction
 **Examples:**
 
 ```crystal
-User.find(1).reset_password('password123')     # => true
-User.find(1).send_reset_password_instructions  # => true
+user = User.new({email: "demo@email.com"})
+# resets the user password and save the record, `true` if valid passwords are given, otherwise false
+user.reset_password("password123") # => true
+
+# creates a new token and send it with instructions about how to reset the password
+user.send_reset_password_instructions # => true
 ```
 
 ### Trackable
@@ -98,25 +120,34 @@ Tracks information about your user sign in events.
 **Examples:**
 
 ```crystal
+request = Http::Request.new
+
+user = User.new({email: "demo@email.com"})
+# Updates last_sign_in_at,
+#         current_sign_in_at,
+#         last_sign_in_ip,
+#         current_sign_in_ip,
+#         sign_in_count
+# and saves the record
+user.update_tracked_fields!(request) # => true
 ```
 
-
 ### Omniauthable
-
-
 
 **Examples:**
 
 ```crystal
+user = User.new({email: "demo@email.com"})
+# TODO
 ```
 
 ## Mochi Controllers
 
-As stated above, Mochi is specifically designed for Amber. Default controllers are available. To view the available controllers, [please look here](https://github.com/andrewc910/mochi/tree/master/src/mochi/controllers). If you install via the amber plugin method, these will be used by default. You are welcome to copy/paste the code into a custom controller for modification if you need to. 
+As stated above, Mochi is specifically designed for Amber. Default controllers are available. To view the available controllers, [please look here](https://github.com/andrewc910/mochi/tree/master/src/mochi/controllers). If you install via the plugin method, these will be used by default. You are welcome to copy/paste the code into a custom controller for modification if you need to. It's not recommended to edit plugin files directly. If you install an update, you may accidently overwrite your changes with the incoming ones.
 
 ## Amber Framework Plugin
 
-Mochi can be installed via the Amber framework CLI. This will install the `User` model, controllers, mailers, routes, plugs & the initializer. Unfortunately, Amber's plugin cli is an all or nothing. Because of this, when you run the plugin installer, all files for all modules will be installed. However, Mochi installs with only authentication activated. You will have to uncomment any other modules/columns/routes you would like activated.
+Mochi can be installed via the Amber framework CLI. This will install the `User` model, controllers, mailers, routes, plugs & the initializer. Unfortunately, Amber's plugin cli is an all or nothing. Because of this, when you run the plugin installer, all files for all modules will be installed. However, Mochi installs with only authentication activated. You will have to uncomment any other modules/columns/routes you would like activated or delete files/commented code you do not want or need.
 
 ## Testing
 

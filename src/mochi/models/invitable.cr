@@ -16,16 +16,15 @@ module Mochi::Models
   # - `accept_invitation_within`: The period the generated invitation token is valid. After this period, the invited resource won't be able to accept the invitation. When accept_invitation_within is 0 (the default), the invitation won't expire.
   #
   # Examples:
-  #
-  #   `User.find(1).invited_to_sign_up?      # => true/false`
-  #
-  #   `User.invite!                          # => send invitation`
-  #
-  #   `User.accept_invitation!               # => accept invitation with a token`
-  #
-  #   `User.find(1).accept_invitation!       # => accept invitation`
-  #
-  #   `User.find(1).invite!                  # => reset invitation status and send invitation again`
+  # ```
+  # user = User.new({email: "demo@email.com"})
+  # user.invited_to_sign_up? # => false
+  # user.invite!             # => send invitation
+  # user.accept_invitation!  # => accept invitation with a token
+  # user.accept_invitation!  # => accept invitation
+  # user.invited_to_sign_up? # => true
+  # user.invite!             # => reset invitation status and send invitation again
+  # ```
   module Invitable
     # Returns true if `accept_invitation` was invoked
     property accepting_invitation : Bool = false

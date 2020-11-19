@@ -16,11 +16,14 @@ module Mochi::Models
   #
   # Examples:
   #
-  #   # resets the user password and save the record, true if valid passwords are given, otherwise false
-  #   User.find(1).reset_password('password123')
+  # ```
+  # user = User.new({email: "demo@email.com"})
+  # # resets the user password and save the record, `true` if valid passwords are given, otherwise false
+  # user.reset_password("password123") # => true
   #
-  #   # creates a new token and send it with instructions about how to reset the password
-  #   User.find(1).send_reset_password_instructions
+  # # creates a new token and send it with instructions about how to reset the password
+  # user.send_reset_password_instructions # => true
+  # ```
   #
   module Recoverable
     # Update password saving the record and clearing token. Returns true if

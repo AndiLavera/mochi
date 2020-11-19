@@ -1,5 +1,13 @@
 require "./helpers"
 
+# :nodoc:
+module Amber
+  module Controller
+    class Base
+    end
+  end
+end
+
 # Main Controller for Amber. All other controller inherit from here.
 # This file opens up the class to inserts the following methods.
 class ApplicationController < Amber::Controller::Base

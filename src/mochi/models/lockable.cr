@@ -20,9 +20,9 @@ module Mochi::Models
   #
   # TODO
   module Lockable
-    # Lock a user setting its locked_at to actual time.
-    #   when you lock access, you could pass the
-    #   `skip_email: true` as an option.
+    # Lock a user setting its `locked_at` to actual time.
+    # when you lock access, you could pass the
+    # `skip_email: true` as an option.
     def lock_access!(skip_email : Bool = false)
       self.locked_at = Time.utc
       self.unlock_token = UUID.random.to_s

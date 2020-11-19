@@ -10,6 +10,7 @@ module Mochi
   # end
   # ```
   class Configuration
+    # TODO: Can be removed
     # Set the view extension.
     # Useful if you use slang or someother
     # templating engine.

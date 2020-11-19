@@ -4,7 +4,7 @@ module Mochi::Models
   # Columns:
   #
   # - `sign_in_count : Integer` - Total amount of times a user has successfully signed in. Increased every time a sign in is made (by form, openid, oauth)
-  # - `current_sign_in_ip : String? - The most recent IP address used to sign in
+  # - `current_sign_in_ip : String?` - The most recent IP address used to sign in
   # - `last_sign_in_ip : String?` - The second most recent IP address used to sign in
   # - `current_sign_in_at : Timestamp?` - The time a user last signed in at
   # - `last_sign_in_at : Timestamp?` - The second most recent time a user signed in
@@ -15,7 +15,18 @@ module Mochi::Models
   #
   # Examples:
   #
-  # TODO
+  # ```
+  # request = Http::Request.new
+  #
+  # user = User.new({email: "demo@email.com"})
+  # # Updates last_sign_in_at,
+  # #         current_sign_in_at,
+  # #         last_sign_in_ip,
+  # #         current_sign_in_ip,
+  # #         sign_in_count
+  # # and saves the record
+  # user.update_tracked_fields!(request) # => true
+  # ```
   module Trackable
     def update_tracked_fields!(request)
       # We have to check if the user is already persisted before running
