@@ -71,18 +71,8 @@
       
         <ul>
   
-  <li class="parent " data-id="mochi/Mochi/Controllers/Helpers" data-name="mochi::controllers::helpers">
+  <li class=" " data-id="mochi/Mochi/Controllers/Helpers" data-name="mochi::controllers::helpers">
       <a href="../../Mochi/Controllers/Helpers.html">Helpers</a>
-      
-        <ul>
-  
-  <li class=" " data-id="mochi/Mochi/Controllers/Helpers/TypeRestrictions" data-name="mochi::controllers::helpers::typerestrictions">
-      <a href="../../Mochi/Controllers/Helpers/TypeRestrictions.html">TypeRestrictions</a>
-      
-    </li>
-  
-</ul>
-
       
     </li>
   
@@ -96,33 +86,8 @@
       
         <ul>
   
-  <li class="parent " data-id="mochi/Mochi/Controllers/Omniauthable/Granite" data-name="mochi::controllers::omniauthable::granite">
-      <a href="../../Mochi/Controllers/Omniauthable/Granite.html">Granite</a>
-      
-        <ul>
-  
-  <li class=" " data-id="mochi/Mochi/Controllers/Omniauthable/Granite/SessionController" data-name="mochi::controllers::omniauthable::granite::sessioncontroller">
-      <a href="../../Mochi/Controllers/Omniauthable/Granite/SessionController.html">SessionController</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
-  <li class="parent " data-id="mochi/Mochi/Controllers/Omniauthable/Jennifer" data-name="mochi::controllers::omniauthable::jennifer">
-      <a href="../../Mochi/Controllers/Omniauthable/Jennifer.html">Jennifer</a>
-      
-        <ul>
-  
-  <li class=" " data-id="mochi/Mochi/Controllers/Omniauthable/Jennifer/SessionController" data-name="mochi::controllers::omniauthable::jennifer::sessioncontroller">
-      <a href="../../Mochi/Controllers/Omniauthable/Jennifer/SessionController.html">SessionController</a>
-      
-    </li>
-  
-</ul>
-
+  <li class=" " data-id="mochi/Mochi/Controllers/Omniauthable/SessionController" data-name="mochi::controllers::omniauthable::sessioncontroller">
+      <a href="../../Mochi/Controllers/Omniauthable/SessionController.html">SessionController</a>
       
     </li>
   
@@ -201,26 +166,6 @@
       
     </li>
   
-  <li class="parent " data-id="mochi/Mochi/Models/Query" data-name="mochi::models::query">
-      <a href="../../Mochi/Models/Query.html">Query</a>
-      
-        <ul>
-  
-  <li class=" " data-id="mochi/Mochi/Models/Query/Granite" data-name="mochi::models::query::granite">
-      <a href="../../Mochi/Models/Query/Granite.html">Granite</a>
-      
-    </li>
-  
-  <li class=" " data-id="mochi/Mochi/Models/Query/Jennifer" data-name="mochi::models::query::jennifer">
-      <a href="../../Mochi/Models/Query/Jennifer.html">Jennifer</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
   <li class=" " data-id="mochi/Mochi/Models/Recoverable" data-name="mochi::models::recoverable">
       <a href="../../Mochi/Models/Recoverable.html">Recoverable</a>
       
@@ -228,26 +173,6 @@
   
   <li class=" " data-id="mochi/Mochi/Models/Trackable" data-name="mochi::models::trackable">
       <a href="../../Mochi/Models/Trackable.html">Trackable</a>
-      
-    </li>
-  
-  <li class="parent " data-id="mochi/Mochi/Models/Validations" data-name="mochi::models::validations">
-      <a href="../../Mochi/Models/Validations.html">Validations</a>
-      
-        <ul>
-  
-  <li class=" " data-id="mochi/Mochi/Models/Validations/Granite" data-name="mochi::models::validations::granite">
-      <a href="../../Mochi/Models/Validations/Granite.html">Granite</a>
-      
-    </li>
-  
-  <li class=" " data-id="mochi/Mochi/Models/Validations/Jennifer" data-name="mochi::models::validations::jennifer">
-      <a href="../../Mochi/Models/Validations/Jennifer.html">Jennifer</a>
-      
-    </li>
-  
-</ul>
-
       
     </li>
   
@@ -366,6 +291,11 @@
       
     </li>
   
+  <li class=" " data-id="mochi/TypeRestrictions" data-name="typerestrictions">
+      <a href="../../TypeRestrictions.html">TypeRestrictions</a>
+      
+    </li>
+  
 </ul>
 
   </div>
@@ -392,18 +322,36 @@
     Overview
   </h2>
 
-  <p>Handles blocking a user access after a certain number of attempts.
-Lockable accepts two different strategies to unlock a user after it's
-blocked: email and time. The former will send an email to the user when
-the lock happens, containing a link to unlock its account. The second
-will unlock the user automatically after some configured time (ie 2.hours).
-It's also possible to set up lockable to use both email and time strategies.</p>
+  <p>Lockable is responsible blocking a user access after a certain number of attempts and
+unlocking the account after a certain amount of time or the user resetting their password.</p>
 
-<p>Options</p>
+<p>Columns:</p>
 
-<p>Lockable adds the following options to +devise+:</p>
+<ul><li><code>locked_at : Timestamp?</code> - Time account was locked at</li><li><code>unlock_token : String?</code> - UUID token for verification</li><li><code>failed_attempts : Integer</code> - Number of attempts currently failed since last sign in</li></ul>
 
-<ul><li><code>maximum_attempts</code>: how many attempts should be accepted before blocking the user.</li><li><code>unlock_in</code>: the time you want to lock the user after to lock happens. Only available when unlock_strategy is :time or :both.</li><li><code>last_attempt_warning</code>: The message users recieve when they are on their final login attempt - WIP</li></ul></ul>
+<p>Configuration:</p>
+
+<ul><li><code>maximum_attempts</code>: How many attempts should be accepted before blocking the user.</li><li><code>unlock_in</code>: The time you want to lock the user after to lock happens.</li><li><code>last_attempt_warning</code>: The message users recieve when they are on their final login attempt - WIP</li></ul>
+
+<p>Examples:</p>
+
+<pre><code><span class="t">Mochi</span>.configuration.maximum_attempts <span class="o">=</span> <span class="n">2</span>
+
+user <span class="o">=</span> <span class="t">User</span>.<span class="k">new</span>({email: <span class="s">&quot;demo@email.com&quot;</span>})
+user.increment_failed_attempts! <span class="c"># =&gt; 1</span>
+user.last_attempt?              <span class="c"># =&gt; true</span>
+user.attempts_exceeded?         <span class="c"># =&gt; false</span>
+
+user.increment_failed_attempts! <span class="c"># =&gt; 2</span>
+user.attempts_exceeded?         <span class="c"># =&gt; true</span>
+user.lock_access!               <span class="c"># =&gt; true</span>
+
+user.access_locked?            <span class="c"># =&gt; true</span>
+user.valid_for_authentication? <span class="c"># =&gt; false</span>
+
+user.unlock_access!            <span class="c"># =&gt; true</span>
+user.access_locked?            <span class="c"># =&gt; false</span>
+user.valid_for_authentication? <span class="c"># =&gt; true</span></code></pre>
 
 
 
@@ -428,7 +376,7 @@ It's also possible to set up lockable to use both email and time strategies.</p>
   </h2>
   
     
-      <a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/lockable.cr#L20" target="_blank">
+      <a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/lockable.cr#L40" target="_blank">
         mochi/models/lockable.cr
       </a>
     
@@ -478,7 +426,7 @@ It's also possible to set up lockable to use both email and time strategies.</p>
       <li class="entry-summary">
         <a href="#lock_access!(skip_email:Bool=false)-instance-method" class="signature"><strong>#lock_access!</strong>(skip_email : Bool = <span class="n">false</span>)</a>
         
-          <div class="summary"><p>Lock a user setting its locked_at to actual time.</p></div>
+          <div class="summary"><p>Lock a user setting its <code>locked_at</code> to actual time.</p></div>
         
       </li>
     
@@ -550,7 +498,7 @@ It's also possible to set up lockable to use both email and time strategies.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/lockable.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/lockable.cr#L63" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -566,7 +514,7 @@ It's also possible to set up lockable to use both email and time strategies.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/lockable.cr#L92" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/lockable.cr#L112" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -582,7 +530,7 @@ It's also possible to set up lockable to use both email and time strategies.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/lockable.cr#L73" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/lockable.cr#L93" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -598,7 +546,7 @@ It's also possible to set up lockable to use both email and time strategies.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/lockable.cr#L96" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/lockable.cr#L116" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -613,15 +561,15 @@ It's also possible to set up lockable to use both email and time strategies.</p>
       
         <div class="doc">
           
-          <p>Lock a user setting its locked_at to actual time.
-  when you lock access, you could pass the
-  <code>skip_email: true</code> as an option.</p>
+          <p>Lock a user setting its <code>locked_at</code> to actual time.
+when you lock access, you could pass the
+<code>skip_email: true</code> as an option.</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/lockable.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/lockable.cr#L44" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -642,7 +590,7 @@ It's also possible to set up lockable to use both email and time strategies.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/lockable.cr#L57" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/lockable.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -663,7 +611,7 @@ It's also possible to set up lockable to use both email and time strategies.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/lockable.cr#L48" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/lockable.cr#L68" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -684,7 +632,7 @@ It's also possible to set up lockable to use both email and time strategies.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/lockable.cr#L35" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/lockable.cr#L55" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -707,7 +655,7 @@ is locked, it should never be allowed.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/lockable.cr#L64" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/lockable.cr#L84" target="_blank">View source</a>]
         
       </div>
     </div>

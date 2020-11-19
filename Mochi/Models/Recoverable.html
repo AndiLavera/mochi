@@ -71,18 +71,8 @@
       
         <ul>
   
-  <li class="parent " data-id="mochi/Mochi/Controllers/Helpers" data-name="mochi::controllers::helpers">
+  <li class=" " data-id="mochi/Mochi/Controllers/Helpers" data-name="mochi::controllers::helpers">
       <a href="../../Mochi/Controllers/Helpers.html">Helpers</a>
-      
-        <ul>
-  
-  <li class=" " data-id="mochi/Mochi/Controllers/Helpers/TypeRestrictions" data-name="mochi::controllers::helpers::typerestrictions">
-      <a href="../../Mochi/Controllers/Helpers/TypeRestrictions.html">TypeRestrictions</a>
-      
-    </li>
-  
-</ul>
-
       
     </li>
   
@@ -96,33 +86,8 @@
       
         <ul>
   
-  <li class="parent " data-id="mochi/Mochi/Controllers/Omniauthable/Granite" data-name="mochi::controllers::omniauthable::granite">
-      <a href="../../Mochi/Controllers/Omniauthable/Granite.html">Granite</a>
-      
-        <ul>
-  
-  <li class=" " data-id="mochi/Mochi/Controllers/Omniauthable/Granite/SessionController" data-name="mochi::controllers::omniauthable::granite::sessioncontroller">
-      <a href="../../Mochi/Controllers/Omniauthable/Granite/SessionController.html">SessionController</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
-  <li class="parent " data-id="mochi/Mochi/Controllers/Omniauthable/Jennifer" data-name="mochi::controllers::omniauthable::jennifer">
-      <a href="../../Mochi/Controllers/Omniauthable/Jennifer.html">Jennifer</a>
-      
-        <ul>
-  
-  <li class=" " data-id="mochi/Mochi/Controllers/Omniauthable/Jennifer/SessionController" data-name="mochi::controllers::omniauthable::jennifer::sessioncontroller">
-      <a href="../../Mochi/Controllers/Omniauthable/Jennifer/SessionController.html">SessionController</a>
-      
-    </li>
-  
-</ul>
-
+  <li class=" " data-id="mochi/Mochi/Controllers/Omniauthable/SessionController" data-name="mochi::controllers::omniauthable::sessioncontroller">
+      <a href="../../Mochi/Controllers/Omniauthable/SessionController.html">SessionController</a>
       
     </li>
   
@@ -201,26 +166,6 @@
       
     </li>
   
-  <li class="parent " data-id="mochi/Mochi/Models/Query" data-name="mochi::models::query">
-      <a href="../../Mochi/Models/Query.html">Query</a>
-      
-        <ul>
-  
-  <li class=" " data-id="mochi/Mochi/Models/Query/Granite" data-name="mochi::models::query::granite">
-      <a href="../../Mochi/Models/Query/Granite.html">Granite</a>
-      
-    </li>
-  
-  <li class=" " data-id="mochi/Mochi/Models/Query/Jennifer" data-name="mochi::models::query::jennifer">
-      <a href="../../Mochi/Models/Query/Jennifer.html">Jennifer</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
   <li class=" current" data-id="mochi/Mochi/Models/Recoverable" data-name="mochi::models::recoverable">
       <a href="../../Mochi/Models/Recoverable.html">Recoverable</a>
       
@@ -228,26 +173,6 @@
   
   <li class=" " data-id="mochi/Mochi/Models/Trackable" data-name="mochi::models::trackable">
       <a href="../../Mochi/Models/Trackable.html">Trackable</a>
-      
-    </li>
-  
-  <li class="parent " data-id="mochi/Mochi/Models/Validations" data-name="mochi::models::validations">
-      <a href="../../Mochi/Models/Validations.html">Validations</a>
-      
-        <ul>
-  
-  <li class=" " data-id="mochi/Mochi/Models/Validations/Granite" data-name="mochi::models::validations::granite">
-      <a href="../../Mochi/Models/Validations/Granite.html">Granite</a>
-      
-    </li>
-  
-  <li class=" " data-id="mochi/Mochi/Models/Validations/Jennifer" data-name="mochi::models::validations::jennifer">
-      <a href="../../Mochi/Models/Validations/Jennifer.html">Jennifer</a>
-      
-    </li>
-  
-</ul>
-
       
     </li>
   
@@ -366,6 +291,11 @@
       
     </li>
   
+  <li class=" " data-id="mochi/TypeRestrictions" data-name="typerestrictions">
+      <a href="../../TypeRestrictions.html">TypeRestrictions</a>
+      
+    </li>
+  
 </ul>
 
   </div>
@@ -394,19 +324,22 @@
 
   <p>Recoverable takes care of resetting the user password and send reset instructions.</p>
 
-<p>Options</p>
+<p>Columns:</p>
 
-<p>Recoverable adds the following options:</p>
+<ul><li><code>reset_password_sent_at : Timestamp?</code> - Time password reset email was sent at</li><li><code>reset_password_token : String?</code> - UUID token for verification</li><li><code>password_reset_in_progress : Bool</code> - returns true when a password reset was initialized but not confirmed & completed.</li></ul>
 
-<ul><li>+reset_password_within+: the time period within which the password must be reset or the token expires.</li><li>+sign_in_after_reset_password+: whether or not to sign in the user automatically after a password reset.</li></ul></ul>
+<p>Configuration:</p>
 
-<p>== Examples</p>
+<ul><li><code>reset_password_within</code>: The time period within which the password must be reset or the token expires.</li><li><code>sign_in_after_reset_password</code>: Whether or not to sign in the user automatically after a password reset.</li></ul>
 
-<p># resets the user password and save the record, true if valid passwords are given, otherwise false
-  User.find(1).reset_password('password123')</p>
+<p>Examples:</p>
 
-<p># creates a new token and send it with instructions about how to reset the password
-  User.find(1).send_reset_password_instructions</p>
+<pre><code>user <span class="o">=</span> <span class="t">User</span>.<span class="k">new</span>({email: <span class="s">&quot;demo@email.com&quot;</span>})
+<span class="c"># resets the user password and save the record, `true` if valid passwords are given, otherwise false</span>
+user.reset_password(<span class="s">&quot;password123&quot;</span>) <span class="c"># =&gt; true</span>
+
+<span class="c"># creates a new token and send it with instructions about how to reset the password</span>
+user.send_reset_password_instructions <span class="c"># =&gt; true</span></code></pre>
 
 
 
@@ -431,7 +364,7 @@
   </h2>
   
     
-      <a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/recoverable.cr#L21" target="_blank">
+      <a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/recoverable.cr#L28" target="_blank">
         mochi/models/recoverable.cr
       </a>
     
@@ -541,7 +474,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/recoverable.cr#L73" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/recoverable.cr#L80" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -563,7 +496,7 @@ the passwords are valid and the record was saved, false otherwise.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/recoverable.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/recoverable.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -587,7 +520,7 @@ Attributes must contain reset_password_token, password and confirmation</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/recoverable.cr#L100" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/recoverable.cr#L107" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -626,7 +559,7 @@ reset_password_within is a model configuration, must always be an integer value.
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/recoverable.cr#L62" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/recoverable.cr#L69" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -648,7 +581,7 @@ Returns the token sent in the e-mail.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/recoverable.cr#L35" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/recoverable.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -664,7 +597,7 @@ Returns the token sent in the e-mail.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/recoverable.cr#L88" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/recoverable.cr#L95" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -680,7 +613,7 @@ Returns the token sent in the e-mail.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/recoverable.cr#L79" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/recoverable.cr#L86" target="_blank">View source</a>]
         
       </div>
     </div>

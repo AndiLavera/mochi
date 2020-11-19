@@ -71,18 +71,8 @@
       
         <ul>
   
-  <li class="parent " data-id="mochi/Mochi/Controllers/Helpers" data-name="mochi::controllers::helpers">
+  <li class=" " data-id="mochi/Mochi/Controllers/Helpers" data-name="mochi::controllers::helpers">
       <a href="../../Mochi/Controllers/Helpers.html">Helpers</a>
-      
-        <ul>
-  
-  <li class=" " data-id="mochi/Mochi/Controllers/Helpers/TypeRestrictions" data-name="mochi::controllers::helpers::typerestrictions">
-      <a href="../../Mochi/Controllers/Helpers/TypeRestrictions.html">TypeRestrictions</a>
-      
-    </li>
-  
-</ul>
-
       
     </li>
   
@@ -96,33 +86,8 @@
       
         <ul>
   
-  <li class="parent " data-id="mochi/Mochi/Controllers/Omniauthable/Granite" data-name="mochi::controllers::omniauthable::granite">
-      <a href="../../Mochi/Controllers/Omniauthable/Granite.html">Granite</a>
-      
-        <ul>
-  
-  <li class=" " data-id="mochi/Mochi/Controllers/Omniauthable/Granite/SessionController" data-name="mochi::controllers::omniauthable::granite::sessioncontroller">
-      <a href="../../Mochi/Controllers/Omniauthable/Granite/SessionController.html">SessionController</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
-  <li class="parent " data-id="mochi/Mochi/Controllers/Omniauthable/Jennifer" data-name="mochi::controllers::omniauthable::jennifer">
-      <a href="../../Mochi/Controllers/Omniauthable/Jennifer.html">Jennifer</a>
-      
-        <ul>
-  
-  <li class=" " data-id="mochi/Mochi/Controllers/Omniauthable/Jennifer/SessionController" data-name="mochi::controllers::omniauthable::jennifer::sessioncontroller">
-      <a href="../../Mochi/Controllers/Omniauthable/Jennifer/SessionController.html">SessionController</a>
-      
-    </li>
-  
-</ul>
-
+  <li class=" " data-id="mochi/Mochi/Controllers/Omniauthable/SessionController" data-name="mochi::controllers::omniauthable::sessioncontroller">
+      <a href="../../Mochi/Controllers/Omniauthable/SessionController.html">SessionController</a>
       
     </li>
   
@@ -201,26 +166,6 @@
       
     </li>
   
-  <li class="parent " data-id="mochi/Mochi/Models/Query" data-name="mochi::models::query">
-      <a href="../../Mochi/Models/Query.html">Query</a>
-      
-        <ul>
-  
-  <li class=" " data-id="mochi/Mochi/Models/Query/Granite" data-name="mochi::models::query::granite">
-      <a href="../../Mochi/Models/Query/Granite.html">Granite</a>
-      
-    </li>
-  
-  <li class=" " data-id="mochi/Mochi/Models/Query/Jennifer" data-name="mochi::models::query::jennifer">
-      <a href="../../Mochi/Models/Query/Jennifer.html">Jennifer</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
   <li class=" " data-id="mochi/Mochi/Models/Recoverable" data-name="mochi::models::recoverable">
       <a href="../../Mochi/Models/Recoverable.html">Recoverable</a>
       
@@ -228,26 +173,6 @@
   
   <li class=" " data-id="mochi/Mochi/Models/Trackable" data-name="mochi::models::trackable">
       <a href="../../Mochi/Models/Trackable.html">Trackable</a>
-      
-    </li>
-  
-  <li class="parent " data-id="mochi/Mochi/Models/Validations" data-name="mochi::models::validations">
-      <a href="../../Mochi/Models/Validations.html">Validations</a>
-      
-        <ul>
-  
-  <li class=" " data-id="mochi/Mochi/Models/Validations/Granite" data-name="mochi::models::validations::granite">
-      <a href="../../Mochi/Models/Validations/Granite.html">Granite</a>
-      
-    </li>
-  
-  <li class=" " data-id="mochi/Mochi/Models/Validations/Jennifer" data-name="mochi::models::validations::jennifer">
-      <a href="../../Mochi/Models/Validations/Jennifer.html">Jennifer</a>
-      
-    </li>
-  
-</ul>
-
       
     </li>
   
@@ -366,6 +291,11 @@
       
     </li>
   
+  <li class=" " data-id="mochi/TypeRestrictions" data-name="typerestrictions">
+      <a href="../../TypeRestrictions.html">TypeRestrictions</a>
+      
+    </li>
+  
 </ul>
 
   </div>
@@ -397,23 +327,24 @@ sign in, and to send emails with confirmation instructions.
 Confirmation instructions are sent to the user email after creating a
 record and when manually requested by a new confirmation instruction request.</p>
 
-<p>Confirmable tracks the following columns:</p>
+<p>Columns:</p>
 
-<ul><li>confirmation_token   - A unique random token</li><li>confirmed_at         - A timestamp when the user clicked the confirmation link</li><li>confirmation_sent_at - A timestamp when the confirmation_token was generated (not sent)</li><li>unconfirmed_email    - An email address copied from the email attr after confirmation. This value is copied to the email attr then cleared</li></ul>
+<ul><li><code>confirmation_token : String</code> - Token used for email activation & verification</li><li><code>confirmed : Bool</code> - True if user account is activated</li><li><code>confirmed_at : Timestamp?</code> - Time user confirmed account</li><li><code>confirmation_sent_at : Timestamp?</code> - Time confirmation email sent</li><li><code>unconfirmed_email : String?</code> - An email address copied from the email attr after confirmation.</li></ul>
 
-<p>== Options</p>
+<p>Configuration:</p>
 
-<p>Confirmable adds the following options to mochi:</p>
+<ul><li><code>allow_unconfirmed_access_for</code> - the time you want to allow the user to access their account before confirming it. After this period, the user access is denied. You can use this to let your user access some features of your application without confirming the account, but blocking it after a certain period (ie 7 days). By default <code>allow_unconfirmed_access_for</code> is zero, it means users always have to confirm to sign in.</li></ul>
 
-<ul><li><code>allow_unconfirmed_access_for</code>: the time you want to allow the user to access their account before confirming it. After this period, the user access is denied. You can use this to let your user access some features of your application without confirming the account, but blocking it after a certain period (ie 7 days). By default <code>allow_unconfirmed_access_for</code> is zero, it means users always have to confirm to sign in.</li><li><code>reconfirmable</code>: requires any email changes to be confirmed (exactly the same way as initial account confirmation) to be applied. Requires additional unconfirmed_email db field to be set up (t.reconfirmable in migrations). Until confirmed, new email is stored in unconfirmed email column, and copied to email column on successful confirmation. Also, when used in conjunction with <code>send_email_changed_notification</code>, the notification is sent to the original email when the change is requested,  not when the unconfirmed email is confirmed.</li><li><code>confirm_within</code>: the time before a sent confirmation token becomes invalid. You can use this to force the user to confirm within a set period of time. Confirmable will not generate a new token if a repeat confirmation is requested during this time frame, unless the user's email changed too.</li></ul></ul>
+<ul><li><code>reconfirmable</code> - requires any email changes to be confirmed (exactly the same way as initial account confirmation) to be applied. Requires additional unconfirmed_email db field to be set up (t.reconfirmable in migrations). Until confirmed, new email is stored in unconfirmed email column, and copied to email column on successful confirmation. Also, when used in conjunction with <code>send_email_changed_notification</code>, the notification is sent to the original email when the change is requested,  not when the unconfirmed email is confirmed.</li></ul>
 
-<p>Examples</p>
+<ul><li><code>confirm_within</code> - the time before a sent confirmation token becomes invalid. You can use this to force the user to confirm within a set period of time. Confirmable will not generate a new token if a repeat confirmation is requested during this time frame, unless the user's email changed too.</li></ul>
 
-<p><code>User.find(1)<a href="../../Mochi/Models/Confirmable.html#confirm-instance-method">.confirm</a>       # returns true unless it's already confirmed</code></p>
+<p>Examples:</p>
 
-<p><code>User.find(1)<a href="../../Mochi/Models/Confirmable.html#confirmed?-instance-method">.confirmed?</a>    # true/false</code></p>
-
-<p><code>User.find(1)<a href="../../Mochi/Models/Confirmable.html#send_confirmation_instructions-instance-method">.send_confirmation_instructions</a> # manually send instructions</code></p>
+<pre><code>user <span class="o">=</span> <span class="t">User</span>.<span class="k">new</span>({email: <span class="s">&quot;demo@email.com&quot;</span>})
+user.confirm                        <span class="c"># returns true unless it&#39;s already confirmed</span>
+user.confirmed?                     <span class="c"># true/false</span>
+user.send_confirmation_instructions <span class="c"># manually send instructions</span></code></pre>
 
 
 
@@ -438,7 +369,7 @@ record and when manually requested by a new confirmation instruction request.</p
   </h2>
   
     
-      <a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/confirmable.cr#L32" target="_blank">
+      <a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/confirmable.cr#L34" target="_blank">
         mochi/models/confirmable.cr
       </a>
     
@@ -495,19 +426,21 @@ record and when manually requested by a new confirmation instruction request.</p
       <li class="entry-summary">
         <a href="#generate_confirmation_token-instance-method" class="signature"><strong>#generate_confirmation_token</strong></a>
         
-          <div class="summary"><p>Generates a new random token for confirmation, and stores the time this token is being generated in confirmation_sent_at</p></div>
+          <div class="summary"><p>Generates a new random token for confirmation, and stores the value in <code>self.confirmation_token</code></p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#generate_confirmation_token!-instance-method" class="signature"><strong>#generate_confirmation_token!</strong></a>
         
+          <div class="summary"><p>Generates a new random token for confirmation, stores the value in <code>self.confirmation_token</code> & then saves the user</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#send_confirmation_instructions-instance-method" class="signature"><strong>#send_confirmation_instructions</strong></a>
         
-          <div class="summary"><p>Send confirmation email.</p></div>
+          <div class="summary"><p>Send a confirmation email.</p></div>
         
       </li>
     
@@ -546,7 +479,7 @@ record and when manually requested by a new confirmation instruction request.</p
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/confirmable.cr#L73" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/confirmable.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -563,13 +496,13 @@ record and when manually requested by a new confirmation instruction request.</p
           
           <p>Confirm a user by setting it's confirmed_at to actual time. If the user
 is already confirmed, add an error to email field. If the user is invalid
-add errors</p>
+add errors. Saves the user once complete.</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/confirmable.cr#L62" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/confirmable.cr#L66" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -615,7 +548,7 @@ allow_unconfirmed_access_for is a model configuration, must always be an integer
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/confirmable.cr#L105" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/confirmable.cr#L109" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -631,7 +564,7 @@ allow_unconfirmed_access_for is a model configuration, must always be an integer
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/confirmable.cr#L55" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/confirmable.cr#L59" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -647,7 +580,7 @@ allow_unconfirmed_access_for is a model configuration, must always be an integer
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/confirmable.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/confirmable.cr#L55" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -663,13 +596,13 @@ allow_unconfirmed_access_for is a model configuration, must always be an integer
         <div class="doc">
           
           <p>Generates a new random token for confirmation, and stores
-the time this token is being generated in confirmation_sent_at</p>
+the value in <code>self.confirmation_token</code></p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/confirmable.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/confirmable.cr#L45" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -682,10 +615,16 @@ the time this token is being generated in confirmation_sent_at</p>
         <a class="method-permalink" href="#generate_confirmation_token!-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Generates a new random token for confirmation, stores
+the value in <code>self.confirmation_token</code> & then saves the user</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/confirmable.cr#L47" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/confirmable.cr#L51" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -700,9 +639,9 @@ the time this token is being generated in confirmation_sent_at</p>
       
         <div class="doc">
           
-          <p>Send confirmation email.</p>
+          <p>Send a confirmation email.</p>
 
-<p>Mutating Method.
+<p>Sets <code>self.confirmation_sent_at</code>
 Examples:</p>
 
 <ul><li><code>user<a href="../../Mochi/Models/Confirmable.html#send_confirmation_instructions-instance-method">.send_confirmation_instructions</a> # returns true/false</code></li></ul></ul>
@@ -711,7 +650,7 @@ Examples:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/mochi/blob/6737fee28dd3a8b740e7812145fb85fb096b7538/src/mochi/models/confirmable.cr#L147" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/mochi/blob/c02c7cf7b0f28c85466d284070322ab6baa2cd15/src/mochi/models/confirmable.cr#L151" target="_blank">View source</a>]
         
       </div>
     </div>
